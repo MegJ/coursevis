@@ -17,17 +17,7 @@ function drawHeatMap(svgClass) {
   let colorScale = d3.scaleSequential(d3.interpolateBlues)
     .domain([0, d3.max(heatmapData, function(d) {return d.total/collegeTotal[d.college]})]);
 
-  let tooltip = d3.select("body")
-    .append("div")
-    .attr("class", svgClass + "_tooltip")
-    .style("padding", 10)
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .attr("white-space", "pre-line")
-    .style("background-color", "#fbfbfb")
-    .style("border-radius", "5px")
-    .style("border", "1px solid #cdcdcd");
+  let tooltip = addTooltipToVis(svgClass + "_tooltip");
 
   heatmapSvg.selectAll(".heatMapRect")
     .data(heatmapData)
@@ -36,77 +26,76 @@ function drawHeatMap(svgClass) {
     .attr("class", "heatmap_rect")
     .attr("id", function(d) {return "heatmap_" + d.college + "_" + d.personality;})
     .attr("y", function(d, i) { return Math.floor(i/16) * gridSize })
-            .attr("x", function(d, i) { return (i % 16) * gridSize; })
-            .attr("rx", 4)
-            .attr("ry", 4)
-            .attr("width", gridSize-gridSpacing)
-            .attr("height", gridSize-gridSpacing)
-            .style("fill", function(d) {;return colorScale(d.total/collegeTotal[d.college]);})
-            .on("mousemove", function (d) {
-              var tooltipText = "<b>" + d.personality + " | " + pList[d.personality] + "</b>"
-                + "<br/> <b>college:</b> " + d.college
-                + "<br/> <b>total:</b> " + d.total;
+    .attr("x", function(d, i) { return (i % 16) * gridSize; })
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("width", gridSize-gridSpacing)
+    .attr("height", gridSize-gridSpacing)
+    .style("fill", function(d) {;return colorScale(d.total/collegeTotal[d.college]);})
+    .on("mousemove", function (d) {
+      var tooltipText = "<b>" + d.personality + " | " + pList[d.personality] + "</b>"
+        + "<br/> <b>college:</b> " + d.college
+        + "<br/> <b>total:</b> " + d.total;
 
-              // add tooltip to screen
-        tooltip
-           .html(tooltipText)
-           .style("font-family", "Montserrat")
-           .style("font-size", "12px")
-           .style("visibility", "visible")
-           .style("max-width", 150)
-           .style("top", function() { return event.pageY + 20 + "px"; })
-           .style("left", function() { 
-             if (d3.event.clientX < 500) {
-               return event.pageX;
-             } else {
-               return event.pageX - 110;
-             }
-           });
+      // add tooltip to screen
+      updateToolTipText(tooltip, tooltipText, -20, 110);
+      // tooltip
+      //     .html(tooltipText)
+      //     .style("font-family", "Montserrat")
+      //     .style("font-size", "12px")
+      //     .style("visibility", "visible")
+      //     .style("max-width", 150)
+      //     .style("top", function() { return event.pageY + 20 + "px"; })
+      //     .style("left", function() { 
+      //       if (d3.event.clientX < 500) {
+      //         return event.pageX;
+      //       } else {
+      //         return event.pageX - 110;
+      //       }
+      })
 
-         tooltip.style("visibility", "visible");
-         })
-            .on("mouseout", function(d) {
-              tooltip.style("visibility", "hidden");
-            });
+    .on("mouseout", function(d) {
+      hideTooltip(tooltip, "testing");
+    });
 
-        // hide notes when tooltip is showing
-        d3.select(svgClass).on("mousemove", function () {
-          let wOffset = document.querySelector(svgClass).getBoundingClientRect();
+    // hide notes when tooltip is showing
+    d3.select(svgClass).on("mousemove", function () {
+      let wOffset = document.querySelector(svgClass).getBoundingClientRect();
 
-       if (d3.event.clientX - wOffset.x >= (offset)
+      if (d3.event.clientX - wOffset.x >= (offset)
         && d3.event.clientX - wOffset.x < offset+ gridSize*16
         && d3.event.clientY - wOffset.y > 100
         && d3.event.clientY - wOffset.y < 100+gridSize*7) {
-         d3.selectAll(".heatmap_notes").style("visibility", "hidden");
-       } else {
-         d3.selectAll(".heatmap_notes").style("visibility", "visible");
-       }
-        });
+          d3.selectAll(".heatmap_notes").style("visibility", "hidden");
+        } else {
+          d3.selectAll(".heatmap_notes").style("visibility", "visible");
+        }
+    });
 
-        // draw y-axis
-        var y = d3.scaleBand().domain(Object.keys(collegeTotal))
-          .range([0, gridSize*7]);
-        d3.select(svgClass)
-          .append('g')
-          .attr("class", "y_axis")
-          .attr("transform", "translate(" + (offset-5) + ", 100)")
-            .call(d3.axisLeft(y).ticks(7).tickSize(0))
-        .style("font-family", "Inconsolata")
-        .style("font-size", 12)
-        .style("font-weight", "bold")
-        .select(".domain").remove();
+    // draw y-axis
+    var y = d3.scaleBand().domain(Object.keys(collegeTotal))
+      .range([0, gridSize*7]);
+    d3.select(svgClass)
+      .append('g')
+      .attr("class", "y_axis")
+      .attr("transform", "translate(" + (offset-5) + ", 100)")
+        .call(d3.axisLeft(y).ticks(7).tickSize(0))
+      .style("font-family", "Inconsolata")
+      .style("font-size", 12)
+      .style("font-weight", "bold")
+      .select(".domain").remove();
 
     // draw x-axis
     var x = d3.scaleBand().domain(Object.keys(pList))
       .range([-1*(gridSpacing/2), (gridSize * 16)-(gridSpacing/2)]);
     d3.select(svgClass)
-          .append('g')
-          .attr("transform", "translate(" + offset + ", 95)")
-            .call(d3.axisTop(x))
-        .style("font-family", "Inconsolata")
-        .style("font-size", 12)
-        .style("font-weight", "bold")
-        .select(".domain").remove();
+      .append('g')
+      .attr("transform", "translate(" + offset + ", 95)")
+        .call(d3.axisTop(x))
+      .style("font-family", "Inconsolata")
+      .style("font-size", 12)
+      .style("font-weight", "bold")
+      .select(".domain").remove();
 
     // most common mbti note
     heatmapSvg.append("line")
@@ -205,7 +194,7 @@ function drawHeatMap(svgClass) {
       .text("(the virtuoso) at 15%")
       .style("font-family", "Inconsolata")
       .style("font-weight", "bold")
-        .style("font-size", "12px");
+      .style("font-size", "12px");
 
     // learn more note
     heatmapSvg.append("text")
@@ -214,6 +203,6 @@ function drawHeatMap(svgClass) {
       .html("*learn more about the 16 mbti type <a href=\"https:\/\/www.16personalities.com\/personality-types\" style=\"text-decoration: underline;\">here<\/a>")
       .style("font-family", "Inconsolata")
       .style("font-weight", "bold")
-        .style("font-size", "12px");
+      .style("font-size", "12px");
        
 }

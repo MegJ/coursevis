@@ -116,3 +116,36 @@ function handleBarLegendChange(d, circle_id) {
     .duration(500)
     .style("fill", darkTextColor);
 }
+
+/* FUNCTIONS TO HANDLE TOOLTIP FUNCTIONALITY */
+// height sleep personality
+
+function addTooltipToVis(className) {
+  return d3.select("body")
+    .append("div")
+    .attr("class", className)
+    .style("padding", 10)
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .attr("white-space", "pre-line")
+    .style("background-color", "#fbfbfb")
+    .style("border-radius", "5px")
+    .style("border", "1px solid #cdcdcd");
+}
+
+function updateToolTipText(tooltip, tooltipText, topOffset, leftOffset) {
+  tooltip
+    .html(tooltipText)
+    .style("font-family", "Montserrat")
+    .style("font-size", "12px")
+    .style("visibility", "visible")
+    .style("max-width", 150)
+    .style("top", function() { return event.pageY - topOffset + "px"; })
+    .style("left", function() { return event.pageX - leftOffset +"px"; });
+}
+
+function hideTooltip(tooltip, className) {
+  tooltip.style("visibility", "hidden");
+  d3.selectAll(className).remove();
+}

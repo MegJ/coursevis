@@ -43,17 +43,7 @@ function drawSleepDials(svgClass) {
     })
     .curve(d3.curveCatmullRom.alpha(1));
 
-  let tooltip = d3.select("body")
-    .append("div")
-    .attr("class", "sleepSvg_tooltip")
-    .style("padding", 10)
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .attr("white-space", "pre-line")
-    .style("background-color", "#fbfbfb")
-    .style("border-radius", "5px")
-    .style("border", "1px solid #cdcdcd");
+  let tooltip = addTooltipToVis("sleepSvg_tooltip");
 
   // create initial bars
   sleepSvg.selectAll(".bars")
@@ -244,24 +234,16 @@ function drawSleepDials(svgClass) {
         && d3.event.clientY - offset.y > padding*2
         && d3.event.clientY - offset.y < thirdSvgHeight-(padding*2)) {
 
-         // get cursor's current x
-         let tempX = x.invert((d3.event.clientX - offset.x)-(5)).toFixed(0);
+        // get cursor's current x
+        let tempX = x.invert((d3.event.clientX - offset.x)-(5)).toFixed(0);
 
-         // set tooltip attributes
+        // set tooltip attributes
         var tooltipText = "<b> time: " + tempX + ":00" + "</b>"
         + "<br /><b>sleep count: </b> " + sleepData[tempX][String(tempX)]
         + "<br /><b>wake count: </b>" + wakeData[tempX][String(tempX)];
 
         // add tooltip to screen
-        tooltip
-           .html(tooltipText)
-           .style("font-family", "Montserrat")
-           .style("font-size", "12px")
-           .style("visibility", "visible")
-           .style("max-width", 150)
-           .style("top", function() { return event.pageY - 0 + "px"; })
-           .style("left", function() { return event.pageX - 130 +"px";
-           });
+        updateToolTipText(tooltip, tooltipText, 0, 130);     
 
          // bc function acts on mousemove, check that hovered bar changes
          if (hoverX != tempX) {
@@ -285,27 +267,20 @@ function drawSleepDials(svgClass) {
            hoverX = tempX;
          }
 
-         d3.selectAll("#sleepSvg_tooltip")
-          .transition()
-          .attr("opacity", 1);
-
        } else {
-         d3.selectAll(".sleepBar")
-           .transition()
-           .style("fill", maroonColor);
+          d3.selectAll(".sleepBar")
+            .transition()
+            .style("fill", maroonColor);
 
-         d3.selectAll(".wakeBar")
-           .transition()
-           .style("fill", blueColor);
+          d3.selectAll(".wakeBar")
+            .transition()
+            .style("fill", blueColor);
 
-         d3.selectAll(".nohover_sleep").attr("opacity", 1);
+          d3.selectAll(".nohover_sleep").attr("opacity", 1);
 
-         d3.selectAll("#sleepSvg_tooltip")
-          .transition()
-          .attr("opacity", 0);
+          hoverX = -1;
 
-        hoverX = -1;
-        tooltip.style("visibility", "hidden");
+          hideTooltip(tooltip, "#sleepSvg_tooltip");
        }
      });
 }

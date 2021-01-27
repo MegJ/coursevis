@@ -18,17 +18,7 @@ function drawHeightChart(svgClass) {
 
   let heightSvg = d3.select(svgClass);
 
-  let tooltip = d3.select("body")
-    .append("div")
-    .attr("class", "heightSvg_tooltip")
-    .style("padding", 10)
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .attr("white-space", "pre-line")
-    .style("background-color", "#fbfbfb")
-    .style("border-radius", "5px")
-    .style("border", "1px solid #cdcdcd");
+  let tooltip = addTooltipToVis("heightSvg_tooltip");
 
   heightSvg.append("path")
     .datum(femaleHeight)
@@ -169,7 +159,7 @@ function drawHeightChart(svgClass) {
     d3.select(svgClass).on("mousemove", function() {
       var offset = document.querySelector(svgClass).getBoundingClientRect();
  
-       d3.selectAll(".height_tooltip").remove();
+      hideTooltip(tooltip, ".height_tooltip");
 
       // window for bar chart
       if (d3.event.clientX - offset.x >= (padding*5)
@@ -191,15 +181,7 @@ function drawHeightChart(svgClass) {
         + "<br /><b>male count: </b>" + maleHeight[(height-minHeight)];
 
         // add tooltip to screen
-        tooltip
-           .html(tooltipText)
-           .style("font-family", "Montserrat")
-           .style("font-size", "12px")
-           .style("visibility", "visible")
-           .style("max-width", 150)
-           .style("top", function() { return event.pageY - 10 + "px"; })
-           .style("left", function() { return event.pageX - 150 +"px";
-           });
+        updateToolTipText(tooltip, tooltipText, 10, 150);
          
          // add circles + line
          heightSvg.append("circle")
@@ -231,15 +213,16 @@ function drawHeightChart(svgClass) {
          }
            
     } else {
-        tooltip.style("visibility", "hidden");
+      hideTooltip(tooltip, ".height_tooltip");
 
-        d3.selectAll(".nohover_tooltip")
-          .attr("opacity", 1);
-       }
+      d3.selectAll(".nohover_tooltip")
+        .attr("opacity", 1);
+      }
+
     }).on("mouseleave", function () {
       d3.selectAll(".nohover_tooltip").attr("opacity", 1);
-      tooltip.style("visibility", "hidden");
-      d3.selectAll(".height_tooltip").remove();
+      
+      hideTooltip(tooltip, ".height_tooltip");
     });
 
 }
