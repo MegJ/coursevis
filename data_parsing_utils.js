@@ -32,6 +32,70 @@ function getSummary(data, str, newKey = "", isList = false) {
   return map;
 }
 
+function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
+  let key;
+  let map = {}; // age => (age => number of participants who would date someone of this age)
+  let participant_age_map = {} //age => number of participants of that age
+
+  if (isFemale) {
+    key = "female";
+  } else {
+    key = "male";
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i]["data.gender"] == key) {
+      let participant_age = data[i]["data.age"];
+
+      try { //allow for json parsing exception
+      let age_preference = JSON.parse(data[i]["data.agepref"]);
+      let min_age = age_preference["youngest"];
+      let max_age = age_preference["oldest"];
+
+      if(participant_age < 17 || participant_age > 35){ //filter out outlier responses
+        continue;
+      }
+
+      if (participant_age in participant_age_map) {
+        participant_age_map[participant_age] += 1;
+      } else {
+        participant_age_map[participant_age] = 1;
+      }
+
+      if(!(participant_age in map)){
+        map[participant_age] = new Array(51).fill(0);
+      }
+
+      if(!(min_age < 16 || isNaN(min_age) || isNaN(max_age) || max_age > 50)){ //throw out bad answers
+        for(let i = min_age; i <= max_age; i++){
+          map[participant_age][i] += 1;
+        }
+      }
+
+    } catch (e) {
+      console.log(e);
+    }
+
+    }
+  }
+
+  //normalize
+  for(age in participant_age_map){
+    for(let i = 0; i < 51; i++){
+      map[age][i] = map[age][i] / participant_age_map[age] //we want percentages, not total values
+    }
+  }
+
+  console.log(participant_age_map);
+  console.log(map);
+
+  
+  console.log(data);
+
+  return(map);
+}
+
+
 function getHeightList(data, isFemale) {
   let key;
   let map = {};
@@ -200,3 +264,5 @@ function convertNestedMapToList(map) {
 
   return finalList;
 }
+
+
