@@ -35,7 +35,28 @@ function getSummary(data, str, newKey = "", isList = false) {
 function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
   let key;
   let map = {}; // age => (age => number of participants who would date someone of this age)
+
   let participant_age_map = {} //age => number of participants of that age
+  let age_buckets = {
+    17: "18 and under",
+    18: "18 and under",
+    19:"19",
+    20:"20",
+    21:"21",
+    22:"22",
+    23:"23",
+    24:"24",
+    25:"25 and over", 
+    26:"25 and over",
+    27:"25 and over",
+    28:"25 and over",
+    29:"25 and over",
+    30:"25 and over"}
+
+  for(var age_bucket in age_buckets){
+    map[age_buckets[age_bucket]] = new Array(51).fill(0);
+    participant_age_map[age_buckets[age_bucket]] = 0;
+  }
 
   if (isFemale) {
     key = "female";
@@ -52,47 +73,27 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
       let min_age = age_preference["youngest"];
       let max_age = age_preference["oldest"];
 
-      if(participant_age < 17 || participant_age > 35){ //filter out outlier responses
+      if(!(participant_age in age_buckets)){ //filter out outlier responses
         continue;
       }
 
-      if (participant_age in participant_age_map) {
-        participant_age_map[participant_age] += 1;
-      } else {
-        participant_age_map[participant_age] = 1;
-      }
+      let participant_age_bucket = age_buckets[participant_age];
 
-      if(!(participant_age in map)){
-        map[participant_age] = new Array(51).fill(0);
-      }
+      participant_age_map[participant_age_bucket] += 1;
 
       if(!(min_age < 16 || isNaN(min_age) || isNaN(max_age) || max_age > 50)){ //throw out bad answers
         for(let i = min_age; i <= max_age; i++){
-          map[participant_age][i] += 1;
+          map[participant_age_bucket][i] += 1;
         }
       }
 
     } catch (e) {
-      console.log(e);
+      //add error handling
     }
-
-    }
+    
   }
-
-  //normalize
-  for(age in participant_age_map){
-    for(let i = 0; i < 51; i++){
-      map[age][i] = map[age][i] / participant_age_map[age] //we want percentages, not total values
-    }
-  }
-
-  console.log(participant_age_map);
-  console.log(map);
-
-  
-  console.log(data);
-
-  return(map);
+}
+  return(map, participant_age_map);
 }
 
 
