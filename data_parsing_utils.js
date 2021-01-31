@@ -54,7 +54,7 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
     30:"25 and over"}
 
   for(var age_bucket in age_buckets){
-    map[age_buckets[age_bucket]] = new Array(51).fill(0);
+    map[age_buckets[age_bucket]] = new Array(19).fill(0);
     participant_age_map[age_buckets[age_bucket]] = 0;
   }
 
@@ -83,14 +83,15 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
 
       if(!(min_age < 16 || isNaN(min_age) || isNaN(max_age) || max_age > 50)){ //throw out bad answers
         for(let i = min_age; i <= max_age; i++){
-          map[participant_age_bucket][i] += 1;
+          if(i <= 35){
+            map[participant_age_bucket][i-17] += 1;
+          }
         }
       }
 
     } catch (e) {
       //add error handling
     }
-    
   }
 }
   return(map, participant_age_map);
