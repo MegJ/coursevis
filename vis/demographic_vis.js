@@ -56,7 +56,7 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, yearData, maxBarHeight, barWidth, "#A7333F");
           drawTotalText(barSvg, x, y, yearData, barWidth, 5);
-          redrawXAxis(x, maxBarHeight);
+          redrawXAxis(barSvg, x, maxBarHeight);
 
         }
         else if (d == "gender") {
@@ -65,14 +65,14 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, genderData, maxBarHeight, barWidth, "#A7333F");
           drawTotalText(barSvg, x, y, genderData, barWidth, 5);
-          redrawXAxis(x, maxBarHeight);
+          redrawXAxis(barSvg, x, maxBarHeight);
         } else if (d == "ethnicity") {
           x = getBarX(ethnicityData, firstSvgWidth, "key");
           y = getBarY(ethnicityData, firstSvgHeight);
 
           drawBars(barSvg, x, y, ethnicityData, maxBarHeight, barWidth, maroonColor);
           drawTotalText(barSvg, x, y, ethnicityData, barWidth, 5);
-          redrawXAxis(x, maxBarHeight);
+          redrawXAxis(barSvg, x, maxBarHeight);
 
         } else if (d == "college") {
           x = getBarX(collegeData, firstSvgWidth, "key");
@@ -80,7 +80,7 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, collegeData, maxBarHeight, barWidth, maroonColor);
           drawTotalText(barSvg, x, y, collegeData, barWidth, 5);
-          redrawXAxis(x, maxBarHeight);
+          redrawXAxis(barSvg, x, maxBarHeight);
 
         } else if (d == "activities") {
           x = getBarX(activitiesData, firstSvgWidth, "key");
@@ -88,7 +88,7 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, activitiesData, maxBarHeight, barWidth, maroonColor);
           drawTotalText(barSvg, x, y, activitiesData, barWidth, 5);
-          redrawXAxis(x, maxBarHeight, true);
+          redrawXAxis(barSvg, x, maxBarHeight, true);
 
         }
       });
