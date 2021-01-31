@@ -15,12 +15,16 @@
 	<script type="text/javascript" src="vis/personality_vis.js"></script>
 	<script type="text/javascript" src="vis/commitment_vis.js"></script>
 	<script type="text/javascript" src="vis/age_pref_visual.js"></script>
+	<script type="text/javascript" src="vis/gender_pref_vis.js"></script>
 </head>
 <body bgcolor = "#FB6466" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 800;font-family: Montserrat; font-size: 20; font-weight: bold; color: #505050; text-align: left;">
 		<h4>In 2020, 5618 students signed up to meet their perfect match. We hope to provide insights on the general trends of Cornell students as well as conversation starters for your next date! </h4>
 		<h4>Over a third of Cornell's student body participated in our survey. Let's take a look at the breakdown of different demographics:</h4>
 		<svg height="500" width="800" class="generalBar"></svg>
+
+		<h4>tbd tbd tbd tbd tbd tbd megan help tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd tbd </h4>
+		<svg height="500" width="800" class="genderPrefChart"></svg>
 
 		<h4> We asked participants to give the minimum and maximum ages they would be willing to be matched with.  We expected men and women to answer differently, but we were not prepared for just how differently men and women responded. This is a look at how age preferences broke down by gender*.  </h4>
 		<svg height="500" width="800" class="agePrefChart"></svg>
@@ -110,17 +114,11 @@
 			
 			let advMe = getSummary(initialData, "data.describepartner", "", true);
 
-
 			let femaleAgePref = getAgePreferences(initialData, true);
 			let maleAgePref = getAgePreferences(initialData, false);
 
-			printSortMap(fridayMap);
-			console.log("");
-			printSortMap(dateMap);
-			console.log("");
-			printSortMap(perfectMap);
-			console.log("");
-			printSortMap(commitment);
+			let genderPref = getGenderPreferences(initialData);
+			console.log(genderPref);
 		};
 
 		const requestFinalData = async () => {
@@ -129,8 +127,9 @@
 
 		requestInitialData();
 		function final() {
-			drawAgeChart(".agePrefChart");
 			drawBarChart(".generalBar");
+			drawGenderPrefChart(".genderPrefChart");
+			drawAgeChart(".agePrefChart");
 			drawHeightChart(".heightChart");
 			drawSleepDials(".timeDials");
 			drawPollDonuts(".polls");
