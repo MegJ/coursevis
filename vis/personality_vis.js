@@ -31,7 +31,7 @@ function drawHeatMap(svgClass) {
     .attr("ry", 4)
     .attr("width", gridSize-gridSpacing)
     .attr("height", gridSize-gridSpacing)
-    .style("fill", function(d) {;return colorScale(d.total/collegeTotal[d.college]);})
+    .style("fill", function(d) {return colorScale(d.total/collegeTotal[d.college]);})
     .on("mousemove", function (d) {
       var tooltipText = "<b>" + d.personality + " | " + pList[d.personality] + "</b>"
         + "<br/> <b>college:</b> " + d.college
@@ -39,21 +39,7 @@ function drawHeatMap(svgClass) {
 
       // add tooltip to screen
       updateToolTipText(tooltip, tooltipText, -20, 110);
-      // tooltip
-      //     .html(tooltipText)
-      //     .style("font-family", "Montserrat")
-      //     .style("font-size", "12px")
-      //     .style("visibility", "visible")
-      //     .style("max-width", 150)
-      //     .style("top", function() { return event.pageY + 20 + "px"; })
-      //     .style("left", function() { 
-      //       if (d3.event.clientX < 500) {
-      //         return event.pageX;
-      //       } else {
-      //         return event.pageX - 110;
-      //       }
-      })
-
+    })
     .on("mouseout", function(d) {
       hideTooltip(tooltip, "testing");
     });

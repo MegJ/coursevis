@@ -226,8 +226,9 @@ function printSortMap(map) {
   sortedMap.sort(function(k1, k2) {
     return k2[1] - k1[1];
   });
+  
   for (let i = 0; i < sortedMap.length; i++) {
-    console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
+    // console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
   }
 }
    
@@ -267,4 +268,44 @@ function convertNestedMapToList(map) {
   return finalList;
 }
 
+function getGenderPreferences(data) {
+  let finalMap = {
+    "men": [0, 0, 0], 
+    "women": [0, 0, 0],
+    "other": [0, 0, 0]
+  };
+  let counter = 0;
+
+  for (entry of data) {
+    if (entry["data.gender"] != "") {
+      counter += 1;
+      let mapKey = "";
+      if (entry["data.gender"] == "male") {
+        mapKey = "men"
+      } else if (entry["data.gender"] == "female") {
+        mapKey = "women";
+      } else {
+        mapKey = "other";
+      }
+
+      let tempGenderList = entry["data.genderpref"]
+        .replace("[", "")
+        .replace("]", "")
+        .replaceAll("\"", "")
+        .split(",");
+      if (tempGenderList.indexOf("male") != -1) {
+        finalMap[mapKey][0] += 1;
+      } 
+      if (tempGenderList.indexOf("female") != -1) {
+        finalMap[mapKey][1] += 1;
+      } 
+      if (tempGenderList.includes("other") || tempGenderList.includes("transmale") || tempGenderList.includes("transfemale")) {
+        finalMap[mapKey][2] += 1;
+      } 
+    
+    }
+  }
+  console.log(counter)
+  return finalMap;
+}
 

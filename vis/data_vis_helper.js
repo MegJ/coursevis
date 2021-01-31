@@ -88,17 +88,17 @@ function wrap(text, width) {
 /* FUNCTIONS FOR HANDLING BAR GRAPH ANIMATIONS */
 
 /* bar graph axes will need to be redrawn when the represented data changes */
-function redrawXAxis(x, maxBarHeight, slantText = false) {
-  d3.selectAll(".x_axis")
+function redrawXAxis(svg, x, maxBarHeight, slantText = false) {
+  svg.selectAll(".x_axis")
     .transition()
     .duration(0)
     .call(d3.axisBottom(x))
     .attr("transform", "translate(" + 0 + ", " + (maxBarHeight) + ")");
 
-  d3.select(".domain").remove();
+  svg.select(".domain").remove();
     
   if (slantText) {
-    d3.selectAll(".x_axis .tick text")
+    svg.selectAll(".x_axis .tick text")
           .attr("transform", "rotate(-25)")
           .style("text-anchor", "end");
   }
@@ -118,7 +118,6 @@ function handleBarLegendChange(d, circle_id) {
 }
 
 /* FUNCTIONS TO HANDLE TOOLTIP FUNCTIONALITY */
-// height sleep personality
 
 function addTooltipToVis(className) {
   return d3.select("body")

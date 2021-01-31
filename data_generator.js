@@ -11,6 +11,10 @@ function createGenderData() {
     {"key": "other", "value": 32}
   ];
 }
+
+function createGenderListData() {
+  return [2182, 3413, 32];
+}
 function createYearData() {
   return [
     {"key": "freshman", "value": 1359}, 
@@ -272,4 +276,8 @@ function createMaleParticipantAgeMap(){
   return [
     {"18 and under":309,"19 ":496,"20 ":496,"21 ":472,"22 ":174,"23 ":51,"24 ":25,"25 and over":61}
   ]
+}
+
+function createGenderPreferenceData() {
+  return [320, 1924, 17, 3226, 500, 66, 16, 19, 20];
 }
