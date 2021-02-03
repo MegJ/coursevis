@@ -391,3 +391,13 @@ function createFemaleTopWordsToDescribePartner(){
     }
   ]
 }
+
+function createPoliticalPreferences(){
+  return [
+    {'key' : 1, 'total': 941},
+    {'key':2, 'total':2637},
+    {'key':3, 'total':1593},
+    {'key':4, 'total': 382}, 
+    {'key':5, 'total': 65}
+  ]
+}

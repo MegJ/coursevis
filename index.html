@@ -16,6 +16,9 @@
 	<script type="text/javascript" src="vis/commitment_vis.js"></script>
 	<script type="text/javascript" src="vis/age_pref_visual.js"></script>
 	<script type="text/javascript" src="vis/gender_pref_vis.js"></script>
+	<script type="text/javascript" src="vis/political_chart_vis.js"></script>
+
+	
 </head>
 <body bgcolor = "#FB6466" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 800;font-family: Montserrat; font-size: 20; font-weight: bold; color: #505050; text-align: left;">
@@ -32,6 +35,9 @@
 
 		<h4 style="margin-top: 50px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
 		<svg height="400" width="800" class="heightChart"></svg>
+
+		<h4 style="margin-top: 50px;"> We asked participants to rate themselves politcally on a scale of 1 (most left) to 5 (most right).  Here is how Cornell students responded:</h4>
+		<svg height="400" width="800" class="politicalChart"></svg>
 
 		<h4>Need to know the best time to plan a date or make an impromptu phone call? Here is the aggregate data on when people are most likely to fall asleep and wake up. </h4>
 		<svg height="500" width="800" class="timeDials"></svg>
@@ -71,7 +77,7 @@
 		/** Functions for building data structures **/
 		const requestInitialData = async () => {
 			let initialData = await d3.csv("answer.csv");
-			// console.log(initialData);
+			 //console.log(initialData);
 
 			let genderMap = getSummary(initialData, "data.gender", "total_");
 			let ethnicityMap = getSummary(initialData, "data.ethnicity", "total_");
@@ -121,6 +127,8 @@
 
 			let femaleTopWords = getTopWords(initialData, true);
 			let maleTopWords = getTopWords(initialData, false);
+
+			let political_preferences = getSummary(initialData, "data.politics");
 		};
 
 		const requestFinalData = async () => {
@@ -129,6 +137,7 @@
 
 		requestInitialData();
 		function final() {
+			drawPoliticalChart(".politicalChart");
 			drawBarChart(".generalBar");
 			drawGenderPrefChart(".genderPrefChart");
 			drawAgeChart(".agePrefChart");
