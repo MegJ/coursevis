@@ -281,3 +281,113 @@ function createMaleParticipantAgeMap(){
 function createGenderPreferenceData() {
   return [320, 1924, 17, 3226, 500, 66, 16, 19, 20];
 }
+
+function createFemaleTopWordsToDescribeSelf(){
+  return [
+  {
+    "funny": 1033,
+    "caring": 453,
+    "kind": 380,
+    "smart": 371,
+    "outgoing": 335,
+    "thoughtful": 301,
+    "adventurous": 261,
+    "loyal": 247,
+    "chill": 217,
+    "creative": 205,
+    "fun":189,
+    "honest": 174,
+    "independent": 160,
+    "friendly": 155,
+    "passionate": 153,
+    "bubbly": 153,
+    "sarcastic": 149,
+    "empathetic": 146,
+    "energetic": 145,
+    "witty": 129
+}]};
+
+function createFemaleTopWordsToDescribePartner() {
+  return [
+    {
+      "funny": 2007,
+      "smart": 659,
+      "kind": 622,
+      "caring": 400,
+      "loyal": 332,
+      "thoughtful": 329,
+      "honest": 268,
+      "outgoing": 241,
+      "adventurous": 228,
+      "intelligent": 221,
+      "charming": 216,
+      "fun": 145,
+      "confident": 138,
+      "ambitious": 129,
+      "chill": 124,
+      "reliable": 119,
+      "passionate": 106,
+      "athletic": 102,
+      "driven": 101,
+      "compassionate": 94,
+      "tall": 94 //lol
+    }]
+}
+
+number_of_women_who_describe_ideal_husband_as_rich = 7;
+
+function createMaleTopWordsToDescribeSelf(){
+  return [
+    {
+  "funny": 862,
+  "smart": 455,
+  "thoughtful": 209,
+  "caring": 203,
+  "charming": 202,
+  "kind": 195,
+  "chill": 134,
+  "outgoing": 128,
+  "adventurous": 125,
+  "witty": 106,
+  "loyal": 98,
+  "honest": 94,
+  "curious": 86,
+  "fun": 85,
+  "passionate": 84,
+  "ambitious": 83,
+  "relaxed": 66,
+  "creative": 65,
+  "sarcastic": 65,
+  "goofy": 61,
+  "driven": 57
+}
+  ]
+}
+
+function createFemaleTopWordsToDescribePartner(){
+  return [
+    {
+    "funny": 969,
+    "smart": 593,
+    "kind": 324,
+    "caring": 283,
+    "thoughtful": 161,
+    "fun": 155,
+    "outgoing": 155,
+    "honest": 124,
+    "adventurous": 123,
+    "chill": 117,
+    "intelligent": 114,
+    "charming": 113,
+    "cute": 103,
+    "confident": 84,
+    "loyal": 82,
+    "passionate": 76,
+    "sweet": 72,
+    "independent": 69,
+    "witty": 67,
+    "ambitious": 65,
+    "compassionate": 62
+    }
+  ]
+}

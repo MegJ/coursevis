@@ -97,6 +97,60 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
   return(map, participant_age_map);
 }
 
+function getTopWords(data, isFemale){
+  let gender;
+  let describe_you_map = {};
+  let describe_partner_map = {};
+
+  
+  if(isFemale){
+    gender = "female";
+  } else {
+    gender = "male";
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i]["data.gender"] == gender) {
+      let describe_you = data[i]["data.desscribeyou"]; //lol at the spelling error
+      let describe_partner = data[i]["data.describepartner"];
+
+
+      let describe_you_list = describe_you.split(/[ ,]+/);
+      let describe_partner_list = describe_partner.split(/[ ,]+/);
+
+      for(j = 0; j < describe_you_list.length; j++){
+        word = describe_you_list[j].toLowerCase();
+        if (word in describe_you_map){
+          describe_you_map[word] += 1;
+        } else {
+          describe_you_map[word] = 1;
+        }
+      }
+
+      for(j = 0; j < describe_partner_list.length; j++){
+        word = describe_partner_list[j].toLowerCase();
+        if (word in describe_partner_map){
+          describe_partner_map[word] += 1;
+        } else {
+          describe_partner_map[word] = 1;
+        }
+      }
+    }
+
+  }
+
+  let top_words_for_you = Object.keys(describe_you_map)
+  .map((key) => [key, describe_you_map[key]])
+  .sort((a, b) => b[1] - a[1]);
+    
+
+  let top_words_for_partner = Object.keys(describe_partner_map)
+  .map((key) => [key, describe_partner_map[key]])
+  .sort((a, b) => b[1] - a[1]);
+    
+  return (top_words_for_you, top_words_for_partner);
+}
+
 
 function getHeightList(data, isFemale) {
   let key;
@@ -305,7 +359,6 @@ function getGenderPreferences(data) {
     
     }
   }
-  console.log(counter)
   return finalMap;
 }
 

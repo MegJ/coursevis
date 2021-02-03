@@ -118,7 +118,9 @@
 			let maleAgePref = getAgePreferences(initialData, false);
 
 			let genderPref = getGenderPreferences(initialData);
-			console.log(genderPref);
+
+			let femaleTopWords = getTopWords(initialData, true);
+			let maleTopWords = getTopWords(initialData, false);
 		};
 
 		const requestFinalData = async () => {

@@ -26,7 +26,6 @@ function drawAgeChart(svgClass) {
         heatmapSvg.selectAll("rect").remove();
         heatmapSvg.selectAll(".heatmap_notes").remove();
         heatmapSvg.selectAll(".total_text").remove();
-        console.log(d);
         if(d == "Women"){
             drawMap(svgClass, heatmapSvg, true);
         } else {
@@ -128,7 +127,6 @@ function drawMap(svgClass, heatmapSvg, isFemale){
       });
   
       // draw y-axis
-      console.log(collegeTotal);
       var y = d3.scaleBand().domain(Object.keys(collegeTotal))
         .range([0, gridSize*Object.keys(collegeTotal).length]);
       d3.select(svgClass)
