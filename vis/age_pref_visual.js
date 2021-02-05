@@ -100,7 +100,7 @@ function drawMap(svgClass, heatmapSvg, isFemale){
       .style("fill", function(d) {;return colorScale(d.total/collegeTotal[d.college]);})  
       .on("mousemove", function (d) {
         var tooltipText = "<b>" + (Math.trunc(d.total / collegeTotal[d.college] * 100)) + "% of " + gender + " </b>"
-         + "<br/> <b>age </b> " + d.college
+         + "<b>age </b> " + d.college
           + "<br/> <b> would date</b> "
           + "<br/> <b>someone age</b> " + d.personality;
 
@@ -187,7 +187,7 @@ function drawMap(svgClass, heatmapSvg, isFemale){
         heatmapSvg.append("text")
         .attr("class", "heatmap_notes")
         .attr("x", gridSize*3.5)
-        .attr("y", gridSize*9.8)
+        .attr("y", gridSize*9.5 + 15)
         .text("they would date an 18 year old.")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
@@ -195,10 +195,19 @@ function drawMap(svgClass, heatmapSvg, isFemale){
         heatmapSvg.append("text")
         .attr("class", "heatmap_notes")
         .attr("x", gridSize*3.5)
-        .attr("y", gridSize*10.1)
+        .attr("y", gridSize*9.5 + 30)
         .text("That's a yikes from us")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
         .style("font-size", "12px");
     }
+
+    // add disclaimer text 
+    heatmapSvg.append("text")
+      .attr("x", -80)
+      .attr("y", -90)
+      .text("*Participants who gave their gender as \"other\" are excluded due to small sample size.")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+      .style("font-size", "12px");
   }
