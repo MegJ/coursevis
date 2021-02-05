@@ -284,111 +284,27 @@ function createGenderPreferenceData() {
 
 function createFemaleTopWordsToDescribeSelf(){
   return [
-  {
-    "funny": 1033,
-    "caring": 453,
-    "kind": 380,
-    "smart": 371,
-    "outgoing": 335,
-    "thoughtful": 301,
-    "adventurous": 261,
-    "loyal": 247,
-    "chill": 217,
-    "creative": 205,
-    "fun":189,
-    "honest": 174,
-    "independent": 160,
-    "friendly": 155,
-    "passionate": 153,
-    "bubbly": 153,
-    "sarcastic": 149,
-    "empathetic": 146,
-    "energetic": 145,
-    "witty": 129
-}]};
+    {"Career":[{"adjective":"smart","count":371},{"adjective":"creative","count":205},{"adjective":"independent","count":160},{"adjective":"passionate","count":153},{"adjective":"driven","count":113},{"adjective":"ambitious","count":109},{"adjective":"curious","count":89},{"adjective":"hardworking","count":78},{"adjective":"charismatic","count":59},{"adjective":"intelligent","count":57},{"adjective":"confident","count":53},{"adjective":"motivated","count":52}],"Physical":[],"Agreablness":[{"adjective":"caring","count":453},{"adjective":"kind","count":380},{"adjective":"thoughtful","count":301},{"adjective":"loyal","count":247},{"adjective":"honest","count":174},{"adjective":"empathetic","count":146},{"adjective":"compassionate","count":127},{"adjective":"sweet","count":119},{"adjective":"nice","count":88},{"adjective":"genuine","count":82},{"adjective":"reliable","count":66},{"adjective":"considerate","count":52}],"Extraversion":[{"adjective":"funny","count":1033},{"adjective":"outgoing","count":335},{"adjective":"adventurous","count":261},{"adjective":"chill","count":217},{"adjective":"fun","count":189},{"adjective":"friendly","count":155},{"adjective":"bubbly","count":153},{"adjective":"sarcastic","count":149},{"adjective":"energetic","count":145},{"adjective":"witty","count":129},{"adjective":"charming","count":103},{"adjective":"spontaneous","count":99},{"adjective":"goofy","count":98},{"adjective":"easygoing","count":79},{"adjective":"easy-going","count":77},{"adjective":"happy","count":61}]}
+  ]};
 
 function createFemaleTopWordsToDescribePartner() {
   return [
-    {
-      "funny": 2007,
-      "smart": 659,
-      "kind": 622,
-      "caring": 400,
-      "loyal": 332,
-      "thoughtful": 329,
-      "honest": 268,
-      "outgoing": 241,
-      "adventurous": 228,
-      "intelligent": 221,
-      "charming": 216,
-      "fun": 145,
-      "confident": 138,
-      "ambitious": 129,
-      "chill": 124,
-      "reliable": 119,
-      "passionate": 106,
-      "athletic": 102,
-      "driven": 101,
-      "compassionate": 94,
-      "tall": 94 //lol
-    }]
-}
+    {"Career":[{"adjective":"smart","count":659},{"adjective":"intelligent","count":221},{"adjective":"confident","count":138},{"adjective":"ambitious","count":129},{"adjective":"passionate","count":106},{"adjective":"driven","count":101},{"adjective":"charismatic","count":77},{"adjective":"independent","count":53},{"adjective":"creative","count":53},{"adjective":"motivated","count":52}],"Physical":[{"adjective":"athletic","count":102},{"adjective":"tall","count":94}],"Agreablness":[{"adjective":"kind","count":622},{"adjective":"caring","count":400},{"adjective":"loyal","count":332},{"adjective":"thoughtful","count":329},{"adjective":"honest","count":268},{"adjective":"reliable","count":119},{"adjective":"compassionate","count":94},{"adjective":"sweet","count":92},{"adjective":"nice","count":91},{"adjective":"genuine","count":78},{"adjective":"considerate","count":77},{"adjective":"understanding","count":76},{"adjective":"empathetic","count":68},{"adjective":"trustworthy","count":67},{"adjective":"supportive","count":49},{"adjective":"patient","count":48},{"adjective":"loving","count":48},{"adjective":"dependable","count":46}],"Extraversion":[{"adjective":"funny","count":2007},{"adjective":"outgoing","count":241},{"adjective":"adventurous","count":228},{"adjective":"charming","count":216},{"adjective":"fun","count":145},{"adjective":"chill","count":124},{"adjective":"spontaneous","count":84},{"adjective":"witty","count":78},{"adjective":"easygoing","count":62},{"adjective":"humorous","count":51},{"adjective":"friendly","count":49},{"adjective":"goofy","count":47}]}
+  ]
+};
 
 number_of_women_who_describe_ideal_husband_as_rich = 7;
 
 function createMaleTopWordsToDescribeSelf(){
   return [
-    {
-  "funny": 862,
-  "smart": 455,
-  "thoughtful": 209,
-  "caring": 203,
-  "charming": 202,
-  "kind": 195,
-  "chill": 134,
-  "outgoing": 128,
-  "adventurous": 125,
-  "witty": 106,
-  "loyal": 98,
-  "honest": 94,
-  "curious": 86,
-  "fun": 85,
-  "passionate": 84,
-  "ambitious": 83,
-  "relaxed": 66,
-  "creative": 65,
-  "sarcastic": 65,
-  "goofy": 61,
-  "driven": 57
-}
+    {"Career":[{"adjective":"smart","count":455},{"adjective":"curious","count":86},{"adjective":"passionate","count":84},{"adjective":"ambitious","count":83},{"adjective":"creative","count":65},{"adjective":"driven","count":57},{"adjective":"charismatic","count":57},{"adjective":"confident","count":56},{"adjective":"intelligent","count":48},{"adjective":"independent","count":43}],"Physical":[],"Agreablness":[{"adjective":"thoughtful","count":209},{"adjective":"caring","count":203},{"adjective":"kind","count":195},{"adjective":"loyal","count":98},{"adjective":"honest","count":94},{"adjective":"compassionate","count":50},{"adjective":"nice","count":48},{"adjective":"reliable","count":46},{"adjective":"empathetic","count":46},{"adjective":"genuine","count":37},{"adjective":"considerate","count":29},{"adjective":"dependable","count":27}],"Extraversion":[{"adjective":"funny","count":862},{"adjective":"charming","count":202},{"adjective":"chill","count":134},{"adjective":"outgoing","count":128},{"adjective":"adventurous","count":125},{"adjective":"witty","count":106},{"adjective":"fun","count":85},{"adjective":"relaxed","count":66},{"adjective":"sarcastic","count":65},{"adjective":"goofy","count":61},{"adjective":"easygoing","count":57},{"adjective":"spontaneous","count":56},{"adjective":"energetic","count":45},{"adjective":"friendly","count":43},{"adjective":"easy-going","count":42},{"adjective":"humorous","count":28}]}
   ]
 }
 
-function createFemaleTopWordsToDescribePartner(){
+function createMaleTopWordsToDescribePartner(){
   return [
-    {
-    "funny": 969,
-    "smart": 593,
-    "kind": 324,
-    "caring": 283,
-    "thoughtful": 161,
-    "fun": 155,
-    "outgoing": 155,
-    "honest": 124,
-    "adventurous": 123,
-    "chill": 117,
-    "intelligent": 114,
-    "charming": 113,
-    "cute": 103,
-    "confident": 84,
-    "loyal": 82,
-    "passionate": 76,
-    "sweet": 72,
-    "independent": 69,
-    "witty": 67,
-    "ambitious": 65,
-    "compassionate": 62
-    }
+    {"Career":[{"adjective":"smart","count":593},{"adjective":"intelligent","count":114},{"adjective":"confident","count":84},{"adjective":"passionate","count":76},{"adjective":"independent","count":69},{"adjective":"ambitious","count":65},{"adjective":"open-minded","count":41},{"adjective":"creative","count":41},{"adjective":"driven","count":40},{"adjective":"curious","count":36}],"Physical":[{"adjective":"cute","count":103},{"adjective":"attractive","count":38},{"adjective":"pretty","count":30},{"adjective":"hot","count":29}],"Agreablness":[{"adjective":"kind","count":324},{"adjective":"caring","count":283},{"adjective":"thoughtful","count":161},{"adjective":"honest","count":124},{"adjective":"loyal","count":82},{"adjective":"sweet","count":72},{"adjective":"compassionate","count":62},{"adjective":"nice","count":58},{"adjective":"understanding","count":57},{"adjective":"genuine","count":52},{"adjective":"trustworthy","count":45},{"adjective":"reliable","count":41},{"adjective":"empathetic","count":39},{"adjective":"loving","count":29}],"Extraversion":[{"adjective":"funny","count":969},{"adjective":"fun","count":155},{"adjective":"outgoing","count":155},{"adjective":"adventurous","count":123},{"adjective":"chill","count":117},{"adjective":"charming","count":113},{"adjective":"witty","count":67},{"adjective":"relaxed","count":44},{"adjective":"friendly","count":42},{"adjective":"spontaneous","count":40},{"adjective":"easygoing","count":39},{"adjective":"energetic","count":34},{"adjective":"happy","count":33},{"adjective":"easy-going","count":31},{"adjective":"humorous","count":30}]}
+    
   ]
 }
 
@@ -401,3 +317,4 @@ function createPoliticalPreferences(){
     {'key':5, 'total': 65}
   ]
 }
+

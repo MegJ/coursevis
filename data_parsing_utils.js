@@ -147,8 +147,44 @@ function getTopWords(data, isFemale){
   let top_words_for_partner = Object.keys(describe_partner_map)
   .map((key) => [key, describe_partner_map[key]])
   .sort((a, b) => b[1] - a[1]);
+
+
+  top_30 = top_words_for_you.slice(0, 45);
+  top_30_partner = top_words_for_partner.slice(0, 45);
+  getCategoryData(top_30);
+  getCategoryData(top_30_partner);
     
   return (top_words_for_you, top_words_for_partner);
+}
+
+function getCategoryData(top_words_list){
+
+  career_words = ["hardworking", "motivated", "open-minded", "curious", "creative","independent","smart", "intelligent", "confident", "ambitious", "passionate", "driven", "charismatic"];
+  physical_words = ["hot", "attractive", "pretty","athletic", "tall", "cute"]
+  agreeablness = ["supportive", "patient", "loving", "dependable", "trustworthy", "understanding","considerate", "reliable", "loyal", "kind", "caring", "thoughtful", "empathetic","honest", "compassionate", "sweet", "nice", "genuine"]
+  extraversion = ["chill","easy-going", "relaxed", "happy", "easygoing","friendly", "humorous", "relaxed", "bubbly", "sarcastic", "energetic", "spontaneous", "goofy","funny", "outgoing", "adventurous", "charming", "fun", "spontanious", "witty"]
+
+  dictionary = {
+    "Career": [],
+    "Physical": [],
+    "Agreablness": [],
+    "Extraversion": []
+  } //"category" => [{adjective: "", total:::}]
+
+  for(i = 0; i < top_words_list.length; i++){
+    word = top_words_list[i];
+    if(career_words.includes(word[0])){
+      dictionary["Career"].push({"adjective": word[0], "count": word[1]});
+    } else if (agreeablness.includes(word[0])){
+      dictionary["Agreablness"].push({"adjective": word[0], "count": word[1]});
+    } else if (extraversion.includes(word[0])){
+      dictionary["Extraversion"].push({"adjective": word[0], "count": word[1]});
+    } else if (physical_words.includes(word[0])){
+      dictionary["Physical"].push({"adjective": word[0], "count": word[1]});
+    } else {
+    }
+  }
+  // console.log(JSON.stringify(dictionary));
 }
 
 
