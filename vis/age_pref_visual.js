@@ -208,6 +208,5 @@ function drawMap(svgClass, heatmapSvg, isFemale){
       .attr("y", -90)
       .text("*Participants who gave their gender as \"other\" are excluded due to small sample size.")
       .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
       .style("font-size", "12px");
   }
