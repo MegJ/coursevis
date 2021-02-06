@@ -225,4 +225,7 @@ function drawHeightChart(svgClass) {
       hideTooltip(tooltip, ".height_tooltip");
     });
 
+    drawFunFact(svgClass, 100, 350, 40, "6'1");
+
+
 }

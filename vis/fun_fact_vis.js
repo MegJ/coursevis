@@ -19,10 +19,11 @@ function drawFunFact(svgClass, x, y, radius, number, text=null){
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'middle')
         .style("font-family", "Inconsolata")
-        .attr('dy', radius)
-        .attr('dx', radius)
+        .attr('dy', y)
+        .attr('dx', x)
+        .style("text-shadow", "2px 3px 3px #505050")
         .style('font-weight', 'bold') 
-        .style("font-size", radius)
+        .style("font-size", radius/1.25)
         .style("fill", "white")
         .text(number);
 }
