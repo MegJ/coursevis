@@ -239,6 +239,15 @@ function createCommitmentData() {
   ];
 }
 
+function createFakeCommitmentData() {
+  return [
+    {"key": "I plan to meet my matches", "value": 454}, 
+    {"key": "I will potentially meet with my matches", "value": 3506},
+    {"key": "I just want to meet new people", "value": 1252},
+    {"key": "I am taking this for fun and will probably not make an effort to meet", "value": 806}
+  ];
+}
+
 function createFemaleAgePref(){
   return [
   { "18 and under":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,72,530,552,510,348,217,89,44,24,13,10,9,7,7,2,2,2,2,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0],
