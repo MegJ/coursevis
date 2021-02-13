@@ -22,6 +22,8 @@ function drawPollDonuts(svgClass) {
 }
 
 function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffset, yOffset) {
+  let colors = [ coralColor, blueColor,greenColor,yellowColor,  pinkColor,purpleColor,  ];
+
   let pie = d3.pie()
     .value(function(d) { return d.value; })
     .sort(null);
@@ -59,7 +61,7 @@ function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffse
     .attr("id", function(d) {
       return pieClass + "_" + d.data.key;
     })
-    .attr("fill", function(d, i) { return d3.schemePastel2[i]; })
+    .attr("fill", function(d, i) { return colors[i]; })
     .attr("d", arc)
     .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
     .on("mouseover", function(d) {

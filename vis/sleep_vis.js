@@ -54,7 +54,7 @@ function drawSleepDials(svgClass) {
       .attr("id", function(d, i) {return "sleepBar_" + i;})
       .attr("x", function(d, i) {return x(i);})
       .attr("y", function(d, i) {return ySleep(d[i]);})
-      .attr("fill", function(d) {return maroonColor;})
+      .attr("fill", function(d) {return coralColor;})
       .attr("height", function(d, i) {return maxBarHeight- ySleep(d[i]);})
       .attr("width", padding-5);
   sleepSvg.selectAll(".bars")

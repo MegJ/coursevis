@@ -23,8 +23,8 @@ function drawHeightChart(svgClass) {
   heightSvg.append("path")
     .datum(femaleHeight)
     .attr("class", "area")
-    .attr("fill", pinkColor)
-    .attr("stroke", pinkColor)
+    .attr("fill", coralColor)
+    .attr("stroke", coralColor)
     .attr("stroke-width", "1")
     .attr("d", d3.area()
       .x(function (d, i) {return x(i+minHeight);})
@@ -225,7 +225,7 @@ function drawHeightChart(svgClass) {
       hideTooltip(tooltip, ".height_tooltip");
     });
 
-    drawFunFact(svgClass, 100, 350, 40, "6'1");
+    // drawFunFact(svgClass, 100, 350, 40, "6'1");
 
 
 }

@@ -9,10 +9,19 @@ function drawGenderPrefChart(svgClass) {
   let totalGenderData = createGenderListData();
   let totalPeople = getTotalPeople();
 
+  let coralColorScale =  d3.scaleLinear([0, 40], ["white", coralColor])
+    .interpolate(d3.interpolateRgb.gamma(0.5))
+    .domain([0, 1.5]);
+
   let blueColorScale = d3.scaleSequential(d3.interpolateBlues)
     .domain([0, 1.5]);
+
+  let rdPuColorScale = d3.scaleSequential(d3.interpolateRdPu)
+    .domain([0, 2]);
+
   let redColorScale = d3.scaleSequential(d3.interpolateReds)
-  .domain([0, 1]);
+  .domain([0, 1.5]);
+
   let purpleColorScale = d3.scaleSequential(d3.interpolatePurples)
   .domain([0, 1]);
   let colorScale = [blueColorScale, redColorScale, purpleColorScale];
@@ -28,7 +37,7 @@ function drawGenderPrefChart(svgClass) {
       .attr("y", function(d, i) { return Math.floor(i/3) * gridHeight + padding*2; })
       .attr("width", gridWidth-gridSpacing)
       .attr("height", gridHeight-gridSpacing)
-      .style("fill", function(d, i) { return blueColorScale(d/totalGenderData[Math.floor(i/3)])});
+      .style("fill", function(d, i) { return coralColorScale(d/totalGenderData[Math.floor(i/3)])});
 
   // add percentage text to heatmap
   genderPrefSvg.selectAll(".genderPText")

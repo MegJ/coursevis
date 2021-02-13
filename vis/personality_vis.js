@@ -14,8 +14,13 @@ function drawHeatMap(svgClass) {
 
   let pList = {"INTJ": "Architect", "INTP": "Logician", "ENTJ": "Commander", "ENTP": "Debater", "INFJ": "Advocate", "INFP": "Mediator", "ENFJ": "Protagonist", "ENFP": "Campaigner", "ISTP": "Virtuoso", "ISFP": "Adventurer", "ESTP": "Entrepreneur", "ESFP": "Entertainer", "ISTJ": "Logistician", "ISFJ": "Defender", "ESTJ": "Executive", "ESFJ": "Consul"};
 
-  let colorScale = d3.scaleSequential(d3.interpolateBlues)
+  // let colorScale = d3.scaleSequential(d3.interpolateBlues)
+  //   .domain([0, d3.max(heatmapData, function(d) {return d.total/collegeTotal[d.college]})]);
+
+  let colorScale =  d3.scaleLinear([0, 40], ["white", coralColor])
+    .interpolate(d3.interpolateRgb.gamma(0.5))
     .domain([0, d3.max(heatmapData, function(d) {return d.total/collegeTotal[d.college]})]);
+
 
   let tooltip = addTooltipToVis(svgClass + "_tooltip");
 

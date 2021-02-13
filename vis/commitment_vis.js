@@ -11,7 +11,7 @@ function drawCommitmentBarChart(svgClass) {
   let x = getBarX(commitementData, firstSvgWidth, "key");
   let y = getBarY(commitementData, commitmentSvgHeight);
 
-  drawBars(barSvg, x, y, commitementData, maxBarHeight, barWidth, "#A7333F");
+  drawBars(barSvg, x, y, commitementData, maxBarHeight, barWidth, coralColor);
 
   // add x axis
   barSvg.append("g")

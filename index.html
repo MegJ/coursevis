@@ -26,38 +26,37 @@
 
 	
 </head>
-<body bgcolor = "#FB6466" style="text-align: center; margin-top: 50; color: #505050;">
+<body bgcolor = "white" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 800;font-family: Montserrat; font-size: 20; font-weight: bold; color: #505050; text-align: left;">
-		<h4>We all have that one friend (or three...) that somehow managed to find a significant 2020.  For the rest of us, there's perfect match. Every year, we ask you to fill out a short survey, and in return, we match you with the people most compatible with you based on your answers.  In 2020, 5618 hopeful students signed up to meet their perfect match.  Let's take a look at how they responded. </h4>
+		<h4>We all have that one friend (or three...) that somehow managed to find a significant other in 2020.  For the rest of us, there's perfect match. Every year, we ask you to fill out a short survey, and in return, we match you with the people whose answers show they are most compatible with you.  In 2020, 5618 hopeful students signed up to meet their perfect match.  Let's take a look at how they responded. </h4>
 		<h4>I know it feels like you're the only single person left at Cornell (we're seniors, the feeling only gets worse), but we swear, over a third of Cornell's student body participated in our survey. Here's a breakdown of the demographics of the people who took our survey:</h4>
 		<svg height="500" width="800" class="generalBar"></svg>
-
-		<h4 style="margin-top: 50px;"></h4>
-		<svg height="450" width="800" class="commitmentComparisonChart"></svg>
 
 		<h4> There's hope for people seeking partners of the same sex too. 14.7% of men and 14.6% of women who took perfect match indicated that they would like to be matched with a partner of the same sex.</h4>
 		<svg height="500" width="800" class="genderPrefChart"></svg>
 
-		<h4> We also asked participants to give the minimum and maximum ages they would be willing to be matched with.  We expected men and women to answer differently, but we were not prepared for just how differently men and women responded. This is a look at how age preferences broke down by gender*.  </h4>
+		<h4 style="margin-top: 50px;"> We have good news for people looking to get cuffed! We asked participants to give their commitment levels, and more than half of participants responded that they were willing to meet or planned to meet their matches. </h4>
+		<svg height="450" width="800" class="commitmentBar"></svg>
+
+		<h4> Participants also gave the minimum and maximum ages they would be willing to be matched with.  We expected men and women to answer differently, but we were not prepared for just how differently men and women responded. This is a look at how age preferences broke down by gender*.  </h4>
 		<svg height="425" width="800" class="agePrefChart"></svg>
-
-		<h4 style="margin-top: 50px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
-		<svg height="400" width="800" class="heightChart"></svg>
-
-		<h4 style="margin-top: 50px;"> We asked participants to rate themselves politcally on a scale of 1 (most left) to 5 (most right).  Here is how Cornell students responded:</h4>
-		<svg height="400" width="800" class="politicalChart"></svg>
-
-		<h4>Need to know the best time to plan a date or make an impromptu phone call? Here is the aggregate data on when people are most likely to fall asleep and wake up. </h4>
-		<svg height="500" width="800" class="timeDials"></svg>
-
-		<h4 style="margin-top: 50px;">Based on a series of questions, we categorized students into 1 of 16 personalities on the Myers Briggs Type Indicator. While the science behind personality compatibilities is lacking, it is still fun to compare MBTI results with your perfect match as well as to see how you compare to students within your college. </h4>
-		<svg height="600" width="800" class="heatmap"></svg>
 
 		<h4 style="margin-bottom: 50px;">In need of topics to fill that awkward silence? Here are the aggregate answers to controversial questions that we posed to our respondents. Do your answers agree with results?</h4>
 		<svg height="800" width="800" class="polls"></svg>
 
-		<h4 style="margin-top: 50px;">Before you go on that first date, you should be aware of your matches' commitment levels. Here's what people were looking to get out of Perfect Match: </h4>
-		<svg height="450" width="800" class="commitmentBar"></svg>
+		<h4 style="margin-top: 50px;">Based on how they responded to our survery questions, We also categorized students into 1 of 16 personalities on the Myers Briggs Type Indicator. While the science behind personality compatibilities is lacking, it is still fun to compare MBTI results with your perfect match as well as to see how you compare to students within your college. </h4>
+		<svg height="600" width="800" class="heatmap"></svg>
+
+		<h4 style="margin-top: 50px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
+		<svg height="400" width="800" class="heightChart"></svg>
+
+		
+		<h4>Need to know the best time to plan a date or make an impromptu phone call? Here is the aggregate data on when people are most likely to fall asleep and wake up. </h4>
+		<svg height="500" width="800" class="timeDials"></svg>
+
+		<h4>Thanks for taking perfect match this year!  Be sure to keep checking this page; we will continue to update it as more students respond. </h4>
+
+
 	</div>
 	<script>
 		var data;
@@ -75,11 +74,25 @@
 		var minHeight = 51; 
 
 		var darkTextColor = "#505050";
-		var maroonColor = "#A7333F";
+		var maroonColor = "FF7882";
 
-		var blueColor = "#88C8EA";
-		var pinkColor = "#FFADC6";
+		var coralColor = "#FF7882";
+
+		var blueColor = "#7AFFF6";
+		var greenColor = "#CAFF85";
+
+		var yellowColor = "#FFF785";
+
+		var purpleColor = "#99A0FF";
+
+		var pinkColor = "#F899FF";
+
+		var deepPinkColor = "#FF7AC6"
+
+		var marineColor = "#85FFBA";
+
 		var whiteColor = "#fbfbfb";
+
 		var lightGreyColor = "#cdcdcd";
 
 		/** Functions for building data structures **/

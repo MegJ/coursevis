@@ -15,7 +15,7 @@ function drawBarChart(svgClass) {
   let x = getBarX(genderData, firstSvgWidth, "key");
   let y = getBarY(genderData, firstSvgHeight);
 
-  drawBars(barSvg, x, y, genderData, maxBarHeight, barWidth, "#A7333F");
+  drawBars(barSvg, x, y, genderData, maxBarHeight, barWidth, coralColor);
 
   // add x axis
   barSvg.append("g")
@@ -54,7 +54,7 @@ function drawBarChart(svgClass) {
           x = getBarX(yearData, firstSvgWidth, "key");
           y = getBarY(yearData, firstSvgHeight);
 
-          drawBars(barSvg, x, y, yearData, maxBarHeight, barWidth, "#A7333F");
+          drawBars(barSvg, x, y, yearData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, yearData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight);
 
@@ -63,14 +63,14 @@ function drawBarChart(svgClass) {
           x = getBarX(genderData, firstSvgWidth, "key");
           y = getBarY(genderData, firstSvgHeight);
 
-          drawBars(barSvg, x, y, genderData, maxBarHeight, barWidth, "#A7333F");
+          drawBars(barSvg, x, y, genderData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, genderData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight);
         } else if (d == "ethnicity") {
           x = getBarX(ethnicityData, firstSvgWidth, "key");
           y = getBarY(ethnicityData, firstSvgHeight);
 
-          drawBars(barSvg, x, y, ethnicityData, maxBarHeight, barWidth, maroonColor);
+          drawBars(barSvg, x, y, ethnicityData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, ethnicityData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight);
 
@@ -78,7 +78,7 @@ function drawBarChart(svgClass) {
           x = getBarX(collegeData, firstSvgWidth, "key");
           y = getBarY(collegeData, firstSvgHeight);
 
-          drawBars(barSvg, x, y, collegeData, maxBarHeight, barWidth, maroonColor);
+          drawBars(barSvg, x, y, collegeData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, collegeData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight);
 
@@ -86,7 +86,7 @@ function drawBarChart(svgClass) {
           x = getBarX(activitiesData, firstSvgWidth, "key");
           y = getBarY(activitiesData, firstSvgHeight);
 
-          drawBars(barSvg, x, y, activitiesData, maxBarHeight, barWidth, maroonColor);
+          drawBars(barSvg, x, y, activitiesData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, activitiesData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight, true);
 

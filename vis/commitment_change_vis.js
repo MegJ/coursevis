@@ -42,7 +42,7 @@ function drawCommitmentComparisonChart(svgClass) {
 
     let color = d3.scaleOrdinal()
         .domain(data)
-        .range(["#FFADC6", "#88C8EA"]);
+        .range([coralColor, blueColor]);
 
     
     barSvg.append("g")
