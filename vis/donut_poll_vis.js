@@ -61,7 +61,7 @@ function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffse
     .attr("id", function(d) {
       return pieClass + "_" + d.data.key;
     })
-    .attr("fill", function(d, i) { return d3.schemeSet2[i]; })
+    .attr("fill", function(d, i) { return colors[i]; })
     .attr("d", arc)
     .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
     .on("mouseover", function(d) {
