@@ -135,12 +135,12 @@ function createWakeData() {
 
 function createMealData() {
   return [
-    {"key": "artist", "value": 2323},
     {"key": "entrepreneur", "value": 820},
     {"key": "actor", "value": 804},
     {"key": "athlete", "value": 655},
     {"key": "politician", "value": 510},
     {"key": "scientist", "value": 506},
+    {"key": "artist", "value": 2323}
   ];
 }
 
@@ -155,15 +155,15 @@ function createBestQualityData() {
 
 function createTimeMoneyData() {
   return [
-    {"key": "time", "value": 3844},
-    {"key": "money", "value": 1774}
+    {"key": "money", "value": 1774},
+    {"key": "time", "value": 3844}
   ];
 }
 
 function createStartOverData() {
   return [
-    {"key": "yes", "value": 3460},
-    {"key": "no", "value": 2158}
+    {"key": "no", "value": 2158},
+    {"key": "yes", "value": 3460}
   ];
 }
 
