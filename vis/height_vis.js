@@ -50,182 +50,180 @@ function drawHeightChart(svgClass) {
     .call(d3.axisBottom(x))
     .style("font-family", "Inconsolata")
     .style("color", darkTextColor)
-        .style("font-size", "12px")
-        .select(".domain").remove();
+    .style("font-size", "12px")
+    .select(".domain").remove();
 
-    heightSvg.append("text")
-      .attr("transform", "translate(" + (secSvgWidth-padding*5) + ", " + (midwayPoint) + ")")
-      .text("height (inches)")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
+  heightSvg.append("text")
+    .attr("transform", "translate(" + (secSvgWidth-padding*5) + ", " + (midwayPoint) + ")")
+    .text("height (inches)")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
     .style("color", darkTextColor)
-        .style("font-size", "12px");
+    .style("font-size", "12px");
 
-    heightSvg.append("text")
-      .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint-10) + ")")
-      .text("female")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
+  heightSvg.append("text")
+    .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint-10) + ")")
+    .text("female")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
 
-    heightSvg.append("text")
-      .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint+20) + ")")
-      .text("male")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
+  heightSvg.append("text")
+    .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint+20) + ")")
+    .text("male")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
 
-    // no-hover tool tips - female median height comment
-    var medianFemale = calculateMedianForHeight(femaleHeight);
-    heightSvg.append("circle")
-      .attr("class", "nohover_tooltip")
-      .attr("cx", x(medianFemale))
-       .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
-       .attr("r", 4)
-       .style('stroke-width', 2)
-      .style('fill-opacity', 0)
-       .attr("stroke", darkTextColor);
-     heightSvg.append("text")
-       .attr("class", "nohover_tooltip")
-      .attr("x", x(medianFemale)+10)
-       .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
-       .text("median height: " + (medianFemale) + " in")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
+  // no-hover tool tips - female median height comment
+  var medianFemale = calculateMedianForHeight(femaleHeight);
+  heightSvg.append("circle")
+    .attr("class", "nohover_tooltip")
+    .attr("cx", x(medianFemale))
+    .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
+    .attr("r", 4)
+    .style('stroke-width', 2)
+    .style('fill-opacity', 0)
+    .style("stroke", darkTextColor);
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(medianFemale)+10)
+    .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
+    .text("median height: " + (medianFemale) + " in")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
 
-    // male median height comment
-    var medianMale = calculateMedianForHeight(maleHeight);
-     heightSvg.append("circle")
-       .attr("class", "nohover_tooltip")
-      .attr("cx", x(medianMale))
-       .attr("cy", ymale(maleHeight[medianMale-minHeight]))
-       .attr("r", 4)
-       .style('stroke-width', 2)
-      .style('fill-opacity', 0)
-       .attr("stroke", darkTextColor);
-     heightSvg.append("text")
-       .attr("class", "nohover_tooltip")
-      .attr("x", x(medianMale)-5)
-       .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
-       .text("median height: " + medianMale + " in")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-      .style("text-anchor", "end")
-        .style("font-size", "12px");
+  // male median height comment
+  var medianMale = calculateMedianForHeight(maleHeight);
+  heightSvg.append("circle")
+    .attr("class", "nohover_tooltip")
+    .attr("cx", x(medianMale))
+    .attr("cy", ymale(maleHeight[medianMale-minHeight]))
+    .attr("r", 4)
+    .style('stroke-width', 2)
+    .style('fill-opacity', 0)
+    .style("stroke", darkTextColor);
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(medianMale)-5)
+    .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
+    .text("median height: " + medianMale + " in")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("text-anchor", "end")
+    .style("font-size", "12px");
 
-    // 6ft comment
-    heightSvg.append("circle")
-       .attr("class", "nohover_tooltip")
-      .attr("cx", x(72))
-       .attr("cy", ymale(maleHeight[72-minHeight]))
-       .attr("r", 4)
-       .style('stroke-width', 2)
-      .style('fill-opacity', 0)
-       .attr("stroke", darkTextColor);
-     heightSvg.append("line")
-       .attr("class", "nohover_tooltip")
-       .attr("x1", x(72)+4)
-       .attr("x2", x(75))
-       .attr("y2", ymale(maleHeight[72-minHeight]))
-       .attr("y1", ymale(maleHeight[72-minHeight]))
-       .style('stroke-width', 2)
-       .attr("stroke", darkTextColor);
-     heightSvg.append("text")
-       .attr("class", "nohover_tooltip")
-      .attr("x", x(75)+4)
-       .attr("y", ymale(maleHeight[72-minHeight])-5)
-       .text("only ~30% of male participants are 6ft+")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
-    heightSvg.append("text")
-       .attr("class", "nohover_tooltip")
-      .attr("x", x(75)+4)
-       .attr("y", ymale(maleHeight[72-minHeight])+10)
-       .text("(but it's 2020 and it's time to forgo")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
-    heightSvg.append("text")
-       .attr("class", "nohover_tooltip")
-      .attr("x", x(75)+4)
-       .attr("y", ymale(maleHeight[72-minHeight])+25)
-       .text("patriarchal standards 🎉)")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-        .style("font-size", "12px");
+  // 6ft comment
+  heightSvg.append("circle")
+    .attr("class", "nohover_tooltip")
+    .attr("cx", x(72))
+    .attr("cy", ymale(maleHeight[72-minHeight]))
+    .attr("r", 4)
+    .style('stroke-width', 2)
+    .style('fill-opacity', 0)
+    .style("stroke", darkTextColor);
+  heightSvg.append("line")
+    .attr("class", "nohover_tooltip")
+    .attr("x1", x(72)+4)
+    .attr("x2", x(75))
+    .attr("y2", ymale(maleHeight[72-minHeight]))
+    .attr("y1", ymale(maleHeight[72-minHeight]))
+    .style('stroke-width', 2)
+    .style("stroke", darkTextColor);
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(75)+4)
+    .attr("y", ymale(maleHeight[72-minHeight])-5)
+    .text("only ~30% of male participants are 6ft+")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(75)+4)
+    .attr("y", ymale(maleHeight[72-minHeight])+10)
+    .text("(but it's 2020 and it's time to forgo")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(75)+4)
+    .attr("y", ymale(maleHeight[72-minHeight])+25)
+    .text("patriarchal standards 🎉)")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
 
-    d3.select(svgClass).on("mousemove", function() {
-      var offset = document.querySelector(svgClass).getBoundingClientRect();
- 
-      hideTooltip(tooltip, ".height_tooltip");
+  d3.select(svgClass).on("mousemove", function() {
+    var offset = document.querySelector(svgClass).getBoundingClientRect();
 
-      // window for bar chart
-      if (d3.event.clientX - offset.x >= (padding*5)
-        && d3.event.clientX - offset.x < secSvgWidth-(padding*5)-10
-        && d3.event.clientY - offset.y > padding*2
-        && d3.event.clientY - offset.y < secSvgHeight-(padding*4)) {
+    hideTooltip(tooltip, ".height_tooltip");
 
-        d3.selectAll("#height_tooltip")
-          .transition()
-          .attr("opacity", 1);
+    // window for bar chart
+    if (d3.event.clientX - offset.x >= (padding*5)
+      && d3.event.clientX - offset.x < secSvgWidth-(padding*5)-10
+      && d3.event.clientY - offset.y > padding*2
+      && d3.event.clientY - offset.y < secSvgHeight-(padding*4)) {
 
-        d3.selectAll(".nohover_tooltip").attr("opacity", 0);
-
-        var height = Math.round(x.invert(d3.event.clientX - offset.x));
-
-        // set tooltip attributes
-        var tooltipText = "<b>" + height + " inches | " + convertInToFeet((height)) + "</b>"
-        + "<br /><b>female count: </b> " + femaleHeight[(height-minHeight)]
-        + "<br /><b>male count: </b>" + maleHeight[(height-minHeight)];
-
-        // add tooltip to screen
-        updateToolTipText(tooltip, tooltipText, 10, 150);
-         
-         // add circles + line
-         heightSvg.append("circle")
-           .attr("class", "height_tooltip")
-           .attr("cx", x(height))
-           .attr("cy", yfemale(femaleHeight[height-minHeight]))
-           .attr("r", 4)
-           .style('stroke-width', 2)
-          .style('fill-opacity', 0)
-           .attr("stroke", whiteColor);
-         heightSvg.append("circle")
-           .attr("class", "height_tooltip")
-           .attr("cx", x(height))
-           .attr("cy", ymale(maleHeight[height-minHeight]))
-           .attr("r", 4)
-           .style('stroke-width', 2)
-          .style('fill-opacity', 0)
-           .attr("stroke", whiteColor);
-         // make sure that lines are not drawn when circles are too close
-         if (ymale(maleHeight[height-minHeight]) - yfemale(femaleHeight[height-minHeight]) >= 8) {
-           heightSvg.append("line")
-           .attr("class", "height_tooltip")
-           .attr("x1", x(height))
-           .attr("x2", x(height))
-           .attr("y2", ymale(maleHeight[height-minHeight])-4)
-           .attr("y1", yfemale(femaleHeight[height-minHeight])+4)
-           .style('stroke-width', 2)
-           .attr("stroke", whiteColor);
-         }
-           
-    } else {
-      hideTooltip(tooltip, ".height_tooltip");
-
-      d3.selectAll(".nohover_tooltip")
+      d3.selectAll("#height_tooltip")
+        .transition()
         .attr("opacity", 1);
-      }
 
-    }).on("mouseleave", function () {
-      d3.selectAll(".nohover_tooltip").attr("opacity", 1);
-      
-      hideTooltip(tooltip, ".height_tooltip");
-    });
+      d3.selectAll(".nohover_tooltip").attr("opacity", 0);
+
+      var height = Math.round(x.invert(d3.event.clientX - offset.x));
+
+      // set tooltip attributes
+      var tooltipText = "<b>" + height + " inches | " + convertInToFeet((height)) + "</b>"
+      + "<br /><b>female count: </b> " + femaleHeight[(height-minHeight)]
+      + "<br /><b>male count: </b>" + maleHeight[(height-minHeight)];
+
+      // add tooltip to screen
+      updateToolTipText(tooltip, tooltipText, 10, 150);
+        
+      // add circles + line
+      heightSvg.append("circle")
+        .attr("class", "height_tooltip")
+        .attr("cx", x(height))
+        .attr("cy", yfemale(femaleHeight[height-minHeight]))
+        .attr("r", 4)
+        .style('stroke-width', 2)
+        .style('fill-opacity', 0)
+        .style("stroke", darkTextColor);
+      heightSvg.append("circle")
+        .attr("class", "height_tooltip")
+        .attr("cx", x(height))
+        .attr("cy", ymale(maleHeight[height-minHeight]))
+        .attr("r", 4)
+        .style('stroke-width', 2)
+        .style('fill-opacity', 0)
+        .style("stroke", darkTextColor);
+      // make sure that lines are not drawn when circles are too close
+      if (ymale(maleHeight[height-minHeight]) - yfemale(femaleHeight[height-minHeight]) >= 8) {
+        heightSvg.append("line")
+          .attr("class", "height_tooltip")
+          .attr("x1", x(height))
+          .attr("x2", x(height))
+          .attr("y2", ymale(maleHeight[height-minHeight])-4)
+          .attr("y1", yfemale(femaleHeight[height-minHeight])+4)
+          .style('stroke-width', 2)
+          .style("stroke", darkTextColor);
+      }
+          
+  } else {
+    hideTooltip(tooltip, ".height_tooltip");
+
+    d3.selectAll(".nohover_tooltip")
+      .attr("opacity", 1);
+    }
+
+  }).on("mouseleave", function () {
+    d3.selectAll(".nohover_tooltip").attr("opacity", 1);
+    
+    hideTooltip(tooltip, ".height_tooltip");
+  });
 
     // drawFunFact(svgClass, 100, 350, 40, "6'1");
-
-
 }
