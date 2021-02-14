@@ -146,10 +146,10 @@ function createMealData() {
 
 function createBestQualityData() {
   return [
-    {"key": "thoughtfulness", "value": 2661},
     {"key": "reliability", "value": 1401},
     {"key": "humor", "value": 1193},
-    {"key": "independence", "value": 363}
+    {"key": "independence", "value": 363},
+    {"key": "thoughtfulness", "value": 2661}
   ];
 }
 
