@@ -140,7 +140,7 @@ function createMealData() {
     {"key": "actor", "value": 804},
     {"key": "athlete", "value": 655},
     {"key": "politician", "value": 510},
-    {"key": "scientist", "value": 506},
+    {"key": "scientist", "value": 506}
   ];
 }
 
