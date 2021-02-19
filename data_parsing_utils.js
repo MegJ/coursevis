@@ -97,13 +97,47 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
   return(map, participant_age_map);
 }
 
+
+function getPoliticalPreferences(data){
+  political_preferences = 
+  {
+    1 : {"total" : 0, "activity" : 0},
+    2 : {"total" : 0, "activity": 0},
+    3 : {"total" : 0, "activity": 0},
+    4 : {"total" : 0, "activity" : 0},
+    5 : {"total" : 0, "activity" : 0},
+    6 : {"total" : 0, "activity" : 0},
+    7 : {"total" : 0, "activity" : 0},
+    8 : {"total" : 0, "activity" : 0},
+    9 : {"total" : 0, "activity" : 0},
+    10 : {"total" : 0, "activity" : 0}
+  };
+
+  for(let i = 0; i < data.length; i++){
+    if(data[i] != null && data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["optIn"] == true){
+      let political_preference = data[i]["survey"]["politics"]
+      let political_activity = data[i]["survey"]["politically_active"]
+
+
+      political_preferences[political_preference]["total"] += 1;
+      political_preferences[political_preference]["activity"] += political_activity;
+
+    }
+  }
+
+  for(let j = 1; j <= 10; j++){
+    political_preferences[j]["activity"] = political_preferences[j]["activity"] / political_preferences[j]["total"]; 
+   }
+  return (political_preferences);
+}
+
+
 function getTopWords(data, isFemale){
 
   let gender;
   let describe_you_map = {};
   let describe_partner_map = {};
 
-  
   if(isFemale){
     gender = "female";
   } else {

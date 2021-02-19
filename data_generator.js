@@ -344,11 +344,16 @@ function createMaleTopWordsToDescribePartner(){
 
 function createPoliticalPreferences(){
   return [
-    {'key': 1, 'total': 941},
-    {'key':2, 'total':2637},
-    {'key':3, 'total':1593},
-    {'key':4, 'total': 382}, 
-    {'key':5, 'total': 65}
+    {"1":{"total":221,"activity":3.6425339366515836},
+    "2":{"total":368,"activity":3.255434782608696},
+    "3":{"total":522,"activity":2.8314176245210727},
+    "4":{"total":257,"activity":2.272373540856031},
+    "5":{"total":194,"activity":1.8865979381443299},
+    "6":{"total":75,"activity":2.1866666666666665},
+    "7":{"total":55,"activity":2.5090909090909093},
+    "8":{"total":20,"activity":2.85},
+    "9":{"total":9,"activity":3.5555555555555554},
+    "10":{"total":6,"activity":3.5}}
   ]
 }
 
