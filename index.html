@@ -20,6 +20,8 @@
 	<script type="text/javascript" src="vis/fun_fact_vis.js"></script>
 	<script type="text/javascript" src="vis/top_words_vis.js"></script>
 	<script type="text/javascript" src="vis/commitment_change_vis.js"></script>
+	<script type="text/javascript" src="vis/political_donut_vis.js"></script>
+
 
 
 
@@ -31,6 +33,10 @@
 		<h4>We all have that one friend (or three...) that somehow managed to find a significant other in 2020.  For the rest of us, there's perfect match. Every year, we ask you to fill out a short survey, and in return, we match you with the people whose answers show they are most compatible with you.  In 2020, 5618 hopeful students signed up to meet their perfect match.  Let's take a look at how they responded. </h4>
 		<h4>I know it feels like you're the only single person left at Cornell (we're seniors, the feeling only gets worse), but we swear, over a third of Cornell's student body participated in our survey. Here's a breakdown of the demographics of the people who took our survey:</h4>
 		<svg height="500" width="800" class="generalBar"></svg>
+
+		
+		<h4 style="margin-top: 50px;"> We have good news for people looking to get cuffed! We asked participants to give their commitment levels, and more than half of participants responded that they were willing to meet or planned to meet their matches. </h4>
+		<svg height="450" width="800" class="politicalChart"></svg>
 
 		<h4> There's hope for people seeking partners of the same sex too. 14.7% of men and 14.6% of women who took perfect match indicated that they would like to be matched with a partner of the same sex.</h4>
 		<svg height="500" width="800" class="genderPrefChart"></svg>
@@ -96,6 +102,8 @@
 		/** Functions for building data structures **/
 		const requestInitialData = async () => {
 			let initialData = await d3.csv("answer.csv");
+
+			let jsonData = await d3.json("users.json");
 			 //console.log(initialData);
 
 			let genderMap = getSummary(initialData, "data.gender", "total_");
@@ -144,10 +152,12 @@
 
 			let genderPref = getGenderPreferences(initialData);
 
-			let femaleTopWords = getTopWords(initialData, true);
-			let maleTopWords = getTopWords(initialData, false);
+			let femaleTopWords = getTopWords(jsonData, true);
+			let maleTopWords = getTopWords(jsonData, false);
 
-			let political_preferences = getSummary(initialData, "data.politics");
+			let political_preferences = (jsonData);
+
+
 
 			
 		};
@@ -159,7 +169,7 @@
 		requestInitialData();
 		function final() {
 			drawCommitmentComparisonChart(".commitmentComparisonChart");
-			drawPoliticalChart(".politicalChart");
+			drawPoliticalDonut(".politicalChart");
 			drawBarChart(".generalBar");
 			drawGenderPrefChart(".genderPrefChart");
 			drawAgeChart(".agePrefChart");

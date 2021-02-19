@@ -344,16 +344,16 @@ function createMaleTopWordsToDescribePartner(){
 
 function createPoliticalPreferences(){
   return [
-    {"1":{"total":221,"activity":3.6425339366515836},
-    "2":{"total":368,"activity":3.255434782608696},
-    "3":{"total":522,"activity":2.8314176245210727},
-    "4":{"total":257,"activity":2.272373540856031},
-    "5":{"total":194,"activity":1.8865979381443299},
-    "6":{"total":75,"activity":2.1866666666666665},
-    "7":{"total":55,"activity":2.5090909090909093},
-    "8":{"total":20,"activity":2.85},
-    "9":{"total":9,"activity":3.5555555555555554},
-    "10":{"total":6,"activity":3.5}}
+      {"key": 1, "value":221,"activity":3.6425339366515836},
+      {"key": 2, "value":368,"activity":3.255434782608696},
+      {"key": 3, "value":522,"activity":2.8314176245210727},
+      {"key": 4, "value":257,"activity":2.272373540856031},
+      {"key": 5, "value":194,"activity":1.8865979381443299},
+      {"key":6, "value":75,"activity":2.1866666666666665},
+      {"key":7, "value":55,"activity":2.5090909090909093},
+      {"key":8, "value":20,"activity":2.85},
+      {"key":9, "value":9,"activity":3.5555555555555554},
+      {"key":10, "value":6,"activity":3.5}
   ]
 }
 
