@@ -98,6 +98,7 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
 }
 
 function getTopWords(data, isFemale){
+
   let gender;
   let describe_you_map = {};
   let describe_partner_map = {};
@@ -110,34 +111,39 @@ function getTopWords(data, isFemale){
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i]["data.gender"] == gender) {
-      let describe_you = data[i]["data.desscribeyou"]; //lol at the spelling error
-      let describe_partner = data[i]["data.describepartner"];
+    if(data[i] != null && data[i]["profile"]["optIn"] == true){     
+
+      if (data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["gender"] == gender) {
+
+        let describe_you = data[i]["survey"]["desscribeyou"]; //lol at the spelling error
+        let describe_partner = data[i]["survey"]["describepartner"];
 
 
-      let describe_you_list = describe_you.split(/[ ,]+/);
-      let describe_partner_list = describe_partner.split(/[ ,]+/);
 
-      for(j = 0; j < describe_you_list.length; j++){
-        word = describe_you_list[j].toLowerCase();
-        if (word in describe_you_map){
-          describe_you_map[word] += 1;
-        } else {
-          describe_you_map[word] = 1;
+        let describe_you_list = describe_you.split(/[ ,]+/);
+        let describe_partner_list = describe_partner.split(/[ ,]+/);
+
+        for(j = 0; j < describe_you_list.length; j++){
+          word = describe_you_list[j].toLowerCase();
+          if (word in describe_you_map){
+            describe_you_map[word] += 1;
+          } else {
+            describe_you_map[word] = 1;
+          }
         }
-      }
 
-      for(j = 0; j < describe_partner_list.length; j++){
-        word = describe_partner_list[j].toLowerCase();
-        if (word in describe_partner_map){
-          describe_partner_map[word] += 1;
-        } else {
-          describe_partner_map[word] = 1;
+        for(j = 0; j < describe_partner_list.length; j++){
+          word = describe_partner_list[j].toLowerCase();
+          if (word in describe_partner_map){
+            describe_partner_map[word] += 1;
+          } else {
+            describe_partner_map[word] = 1;
+          }
         }
       }
     }
-
   }
+
 
   let top_words_for_you = Object.keys(describe_you_map)
   .map((key) => [key, describe_you_map[key]])
@@ -153,6 +159,9 @@ function getTopWords(data, isFemale){
   top_30_partner = top_words_for_partner.slice(0, 45);
   getCategoryData(top_30);
   getCategoryData(top_30_partner);
+
+
+
     
   return (top_words_for_you, top_words_for_partner);
 }
@@ -183,8 +192,18 @@ function getCategoryData(top_words_list){
       dictionary["Physical"].push({"adjective": word[0], "count": word[1]});
     } else {
     }
+
+    for(var category in dictionary){
+      let li = dictionary[category];
+      li.sort(function(a, b){
+        return (b["count"] - a["count"]);
+      });
+      for(let j = 0; j < li.length; j++){
+        li[j]["position"] = j;
+      }
   }
-  // console.log(JSON.stringify(dictionary));
+}
+  //console.log(JSON.stringify(dictionary));
 }
 
 
