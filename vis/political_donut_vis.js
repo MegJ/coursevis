@@ -137,6 +137,34 @@ function  drawPoliticalDonut(svgClass) {
           .style("font-family", "Inconsolata")
           .style("font-weight", "bold")
               .style("font-size", "12px");
+
+    drawFunFact(svgClass, 50, yOffset + 50, 45, "43");
+
+    svg.append("text")
+        .attr("class", "political_label")
+        .attr("x", 100)
+        .attr("y", yOffset + 50)
+        .text("percentage of people")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+            .style("font-size", "12px");
+    svg.append("text")
+        .attr("class", "political_label")
+        .attr("x", 100)
+        .attr("y", yOffset + 65)
+        .text("who listed politics")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+            .style("font-size", "12px");
+    svg.append("text")
+        .attr("class", "political_label")
+        .attr("x", 100)
+        .attr("y", yOffset + 80)
+        .text("as a dealbreaker")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+            .style("font-size", "12px");
+
   }
   
   function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }

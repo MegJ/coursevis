@@ -8,8 +8,8 @@ function drawFunFact(svgClass, x, y, radius, number, text=null){
     circleSVG.selectAll("circle")
         .data([number])
         .enter().append("circle")
-        .style("stroke", "#e66e92")
-        .style("fill", "#FFADC6")
+        .style("stroke", coralColor)
+        .style("fill", coralColor)
         .attr("r", radius)
         .attr("cx", x)
         .attr("cy", y);

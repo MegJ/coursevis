@@ -97,6 +97,25 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
   return(map, participant_age_map);
 }
 
+function getDealBreakerPercent(data){
+  let total_participants = 0;
+  let deal_breaker = 0;
+
+  for(let i = 0; i < data.length; i++){
+    if(data[i] != null && data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["optIn"] == true){
+      let dealbreakers = data[i]["survey"]["deal_breakers"];
+      if(dealbreakers.includes("politiics")){
+        deal_breaker += 1;
+      }
+      total_participants += 1;
+  }
+}
+
+deal_breaker = deal_breaker / total_participants;
+console.log(deal_breaker);
+return deal_breaker;
+
+}
 
 function getPoliticalPreferences(data){
   political_preferences = 
