@@ -99,8 +99,6 @@ function  drawPoliticalDonut(svgClass) {
           .attr("d", arc);
       });
 
-
-      
   
     // add pie segment labels
     svg.datum(data).selectAll("#" + pieClass + "_label")
