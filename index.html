@@ -145,8 +145,8 @@
 			
 			let advMe = getSummary(initialData, "data.describepartner", "", true);
 
-			let femaleAgePref = getAgePreferences(initialData, true);
-			let maleAgePref = getAgePreferences(initialData, false);
+			let femaleAgePref = getAgePreferences(jsonData, true);
+			let maleAgePref = getAgePreferences(jsonData, false);
 
 			let genderPref = getGenderPreferences(initialData);
 
@@ -155,7 +155,6 @@
 
 			let political_preferences = (jsonData);
 
-			console.log(jsonData);
 			let political_dealbreaker = getDealBreakerPercent(jsonData);
 
 			

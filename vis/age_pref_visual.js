@@ -156,26 +156,26 @@ function drawMap(svgClass, heatmapSvg, isFemale){
         .style("font-weight", "bold")
         .select(".domain").remove();
 
-    if(!isFemale){ // call out the pervs note
+    if(!isFemale){ // call out note
         heatmapSvg.append("line")
         .attr("class", "heatmap_notes")
         .attr("x1", gridSize*1+2)
         .attr("x2", gridSize*2 - gridSpacing - 2)
-        .attr("y1", gridSize*7)
-        .attr("y2", gridSize*7)
+        .attr("y1", gridSize*8)
+        .attr("y2", gridSize*8)
         .style("stroke", darkTextColor)
         .style("stroke-width", 2);
         heatmapSvg.append("line")
         .attr("class", "heatmap_notes")
         .attr("x1", gridSize*1+2)
         .attr("x2", gridSize*2 - gridSpacing - 2)
-        .attr("y1", gridSize*7 + 5)
-        .attr("y2", gridSize*7 + 5)
+        .attr("y1", gridSize*8 + 5)
+        .attr("y2", gridSize*8 + 5)
         .style("stroke", darkTextColor)
         .style("stroke-width", 2);
         heatmapSvg.append("path")
         .attr("class", "heatmap_notes")
-        .attr("d", "M " + (gridSize*1 + gridSize*2 - gridSpacing)/2 + " " + (gridSize*7 + 5)
+        .attr("d", "M " + (gridSize*1 + gridSize*2 - gridSpacing)/2 + " " + (gridSize*8 + 5)
             + "L " + (gridSize*1 + gridSize*2 - gridSpacing)/2 + " " + (gridSize*9.5)
             + "L" + (gridSize*3) + " " + (gridSize*9.5))
         .style("stroke", darkTextColor)
@@ -185,7 +185,7 @@ function drawMap(svgClass, heatmapSvg, isFemale){
         .attr("class", "heatmap_notes")
         .attr("x", gridSize*3.5)
         .attr("y", gridSize*9.5)
-        .text("28% of 24-year-old men say")
+        .text("33% of men ages 25 and older say")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");

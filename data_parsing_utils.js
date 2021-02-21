@@ -33,6 +33,7 @@ function getSummary(data, str, newKey = "", isList = false) {
 }
 
 function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
+
   let key;
   let map = {}; // age => (age => number of participants who would date someone of this age)
 
@@ -54,10 +55,9 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
     30:"25 and over"}
 
   for(var age_bucket in age_buckets){
-    map[age_buckets[age_bucket]] = new Array(19).fill(0);
+    map[age_buckets[age_bucket]] = new Array(51).fill(0);
     participant_age_map[age_buckets[age_bucket]] = 0;
   }
-
   if (isFemale) {
     key = "female";
   } else {
@@ -65,17 +65,24 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i]["data.gender"] == key) {
-      let participant_age = data[i]["data.age"];
+      if(data[i] != null && data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["optIn"] == true && data[i]["profile"]["gender"] == key){
+      let participant_age = data[i]["profile"]["age_v2"];
 
       try { //allow for json parsing exception
-      let age_preference = JSON.parse(data[i]["data.agepref"]);
-      let min_age = age_preference["youngest"];
-      let max_age = age_preference["oldest"];
+        
+
+      let age_preference = data[i]["survey"]["agepref"];
+
+
+      
+
+      let min_age = age_preference.youngest_v2;
+      let max_age = age_preference.oldest_v2;
 
       if(!(participant_age in age_buckets)){ //filter out outlier responses
         continue;
       }
+
 
       let participant_age_bucket = age_buckets[participant_age];
 
@@ -84,7 +91,7 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
       if(!(min_age < 16 || isNaN(min_age) || isNaN(max_age) || max_age > 50)){ //throw out bad answers
         for(let i = min_age; i <= max_age; i++){
           if(i <= 35){
-            map[participant_age_bucket][i-17] += 1;
+            map[participant_age_bucket][i] += 1;
           }
         }
       }
@@ -92,6 +99,7 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
     } catch (e) {
       //add error handling
     }
+
   }
 }
   return(map, participant_age_map);
@@ -112,7 +120,6 @@ function getDealBreakerPercent(data){
 }
 
 deal_breaker = deal_breaker / total_participants;
-console.log(deal_breaker);
 return deal_breaker;
 
 }
