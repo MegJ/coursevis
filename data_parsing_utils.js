@@ -72,6 +72,19 @@ function getSummary(data, str, prefix = "survey", isList = false) {
     delete map["clubsports"];
   }
 
+  //reformat keys for commitment
+  if (str == "commitment") {
+    map["I plan to meet my matches"] = map["plantomeet"];
+    map["I will potentially meet with my matches"] = map["willsee"];
+    map["I just want to meet new people"] = map["meetfriends"];
+    map["I am taking this for fun"] = map["fun"];
+
+    delete map["plantomeet"];
+    delete map["willsee"];
+    delete map["meetfriends"];
+    delete map["fun"];
+  }
+
   return map;
 }
 

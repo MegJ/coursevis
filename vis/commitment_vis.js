@@ -2,7 +2,7 @@ function drawCommitmentBarChart(svgClass) {
   let maxBarHeight = commitmentSvgHeight - padding*3;
   let barWidth = padding*2;
 
-  let commitementData = createCommitmentData();
+  let commitementData = convertDemoDataToMap(getSummary(jsonData, "commitment", "survey"));
 
   let barSvg = d3.select(svgClass);
   

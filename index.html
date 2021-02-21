@@ -42,8 +42,8 @@
 		<h4 style="margin-bottom: 50px;">In need of topics to fill that awkward silence? Here are the aggregate answers to controversial questions that we posed to our respondents. Do your answers agree with results?</h4>
 		<svg height="800" width="800" class="polls"></svg>
 
-		<h4 style="margin-top: 50px;">Based on how they responded to our survery questions, We also categorized students into 1 of 16 personalities on the Myers Briggs Type Indicator. While the science behind personality compatibilities is lacking, it is still fun to compare MBTI results with your perfect match as well as to see how you compare to students within your college. </h4>
-		<svg height="500" width="800" class="heatmap"></svg>
+		<!-- <h4 style="margin-top: 50px;">Based on how they responded to our survery questions, We also categorized students into 1 of 16 personalities on the Myers Briggs Type Indicator. While the science behind personality compatibilities is lacking, it is still fun to compare MBTI results with your perfect match as well as to see how you compare to students within your college. </h4>
+		<svg height="500" width="800" class="heatmap"></svg> -->
 
 		<h4 style="margin-top: 50px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
 		<svg height="400" width="800" class="heightChart"></svg>
@@ -96,21 +96,12 @@
 			// let yearMap = getSummary(jsonData, "year", "profile");
 			// let activitiesMap = getSummary(jsonData, "activities", "survey", true);
 			// let collegeMap = getSummary(jsonData, "college", "survey");
-
-			let femaleHeightMap = {"min_height": 50, "female_height": getHeightList(initialData, true)};
-			let maleHeightMap = {"male_height": getHeightList(initialData, false)};
-
 			// let finalObj = {...genderMap, ...yearMap, ...ethnicityMap, ...activitiesMap, ...collegeMap, ...femaleHeightMap, ...maleHeightMap};
 
 			// finalCSV = d3.csvFormat([finalObj]);
-
 			// let sleepTimeMap = getSleepHabits(jsonData, true);
 			// let wakeTimeMap = getSleepHabits(jsonData, false);
-			// console.log(sleepTimeMap)
-			// console.log(wakeTimeMap)
 
-			console.log(recastSleepData(getSleepHabits(jsonData, true), true));
-			console.log(recastSleepData(getSleepHabits(jsonData, false), false));
 			requestFinalData();
 
 			let todoMap = getSummary(initialData, "data.todolist");
