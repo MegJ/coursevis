@@ -4,7 +4,7 @@ function getSummary(data, str, prefix = "survey", isList = false) {
   let map = {};
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i] != null && data[i][prefix] != null && data[i][prefix][str] != null && data[i]["profile"]["optIn"]) {
+    if (checkOptInAndNull(data[i], prefix, str)) {
       if (isList) {
         let keys = data[i][prefix][str].join().split(",");
         for (let j = 0; j < keys.length; j++) {
@@ -92,6 +92,10 @@ function convertDemoDataToMap(data) {
     finalMap.push({"key": "other", "value": data["other"]});
   }
   return finalMap;
+}
+
+function checkOptInAndNull(data, prefix, str) {
+  return data != null && data[prefix] != null && data[prefix][str] != null && data["profile"]["optIn"]
 }
 
 function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
@@ -200,7 +204,6 @@ function getPoliticalPreferences(data){
       let political_preference = data[i]["survey"]["politics"]
       let political_activity = data[i]["survey"]["politically_active"]
 
-
       political_preferences[political_preference]["total"] += 1;
       political_preferences[political_preference]["activity"] += political_activity;
 
@@ -234,8 +237,6 @@ function getTopWords(data, isFemale){
         let describe_you = data[i]["survey"]["desscribeyou"]; //lol at the spelling error
         let describe_partner = data[i]["survey"]["describepartner"];
 
-
-
         let describe_you_list = describe_you.split(/[ ,]+/);
         let describe_partner_list = describe_partner.split(/[ ,]+/);
 
@@ -260,25 +261,19 @@ function getTopWords(data, isFemale){
     }
   }
 
-
   let top_words_for_you = Object.keys(describe_you_map)
-  .map((key) => [key, describe_you_map[key]])
-  .sort((a, b) => b[1] - a[1]);
-    
+    .map((key) => [key, describe_you_map[key]])
+    .sort((a, b) => b[1] - a[1]);
 
   let top_words_for_partner = Object.keys(describe_partner_map)
-  .map((key) => [key, describe_partner_map[key]])
-  .sort((a, b) => b[1] - a[1]);
-
+    .map((key) => [key, describe_partner_map[key]])
+    .sort((a, b) => b[1] - a[1]);
 
   top_30 = top_words_for_you.slice(0, 45);
   top_30_partner = top_words_for_partner.slice(0, 45);
   getCategoryData(top_30);
   getCategoryData(top_30_partner);
 
-
-
-    
   return (top_words_for_you, top_words_for_partner);
 }
 
@@ -374,9 +369,9 @@ function getSleepHabits(data, isSleep) {
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i]["data.gender"] != "") { // ignore uncomplete survey answers
-      let time = JSON.parse(data[i]["data.sleephabits"]);
-      time = time[key].toLowerCase()
+    if (checkOptInAndNull(data[i], "profile", "gender") && checkOptInAndNull(data[i], "survey", "sleephabits")) { // ignore uncomplete survey answers
+      let time = data[i]["survey"]["sleephabits"][key].toLowerCase()
+      time = time
         .replace("am", "")
         .replace("a.m.", "")
         .replace("a.m", "")
@@ -410,6 +405,10 @@ function getSleepHabits(data, isSleep) {
         time = "8"
       } else if (time == "06") {
         time = "6";
+      } else if (time == "07") {
+        time = "7"
+      } else if (time == "2.00") {
+        time = "2"
       }
 
       if (Number.isInteger(+time) && +time < 13 && +time > 0) {
@@ -422,6 +421,34 @@ function getSleepHabits(data, isSleep) {
     }
   }
   return map;
+}
+
+function recastSleepData(data, isSleep) {
+  let finalList = [];
+  for (var i = 0; i < 24; i++) {
+    var newKey = i.toString();
+    var tempMap = {};
+    var tempKey = i;
+
+    // handles +12 hours support
+    if (isSleep && i > 19) {
+      tempKey = (i-12).toString();
+    } else if (isSleep && i == 0) {
+      tempKey = "12";
+    } else if (!isSleep && i > 12 && i < 17) {
+      tempKey = (i-12).toString();
+    }
+
+    if ((isSleep && i > 7 && i < 20) || !isSleep && (i < 5)) {
+      tempMap[newKey] = 0;
+    } else {
+      tempMap[newKey] = (data[tempKey] ? data[tempKey] : 0);
+    }
+
+    finalList.push(tempMap)
+  }
+
+  return finalList;
 }
 
 function getPersonalities(data, key) {

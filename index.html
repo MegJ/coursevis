@@ -91,21 +91,26 @@
 			jsonData = await d3.json("users.json");
 			console.log(jsonData);
 
-			let genderMap = getSummary(jsonData, "gender", "profile");
-			let ethnicityMap = getSummary(jsonData, "race", "profile", true);
-			let yearMap = getSummary(jsonData, "year", "profile");
-			let activitiesMap = getSummary(jsonData, "activities", "survey", true);
-			let collegeMap = getSummary(jsonData, "college", "survey");
+			// let genderMap = getSummary(jsonData, "gender", "profile");
+			// let ethnicityMap = getSummary(jsonData, "race", "profile", true);
+			// let yearMap = getSummary(jsonData, "year", "profile");
+			// let activitiesMap = getSummary(jsonData, "activities", "survey", true);
+			// let collegeMap = getSummary(jsonData, "college", "survey");
 
 			let femaleHeightMap = {"min_height": 50, "female_height": getHeightList(initialData, true)};
 			let maleHeightMap = {"male_height": getHeightList(initialData, false)};
 
-			let finalObj = {...genderMap, ...yearMap, ...ethnicityMap, ...activitiesMap, ...collegeMap, ...femaleHeightMap, ...maleHeightMap};
+			// let finalObj = {...genderMap, ...yearMap, ...ethnicityMap, ...activitiesMap, ...collegeMap, ...femaleHeightMap, ...maleHeightMap};
 
-			finalCSV = d3.csvFormat([finalObj]);
+			// finalCSV = d3.csvFormat([finalObj]);
 
-			let sleepTimeMap = getSleepHabits(initialData, true);
-			let wakeTimeMap = getSleepHabits(initialData, false);
+			// let sleepTimeMap = getSleepHabits(jsonData, true);
+			// let wakeTimeMap = getSleepHabits(jsonData, false);
+			// console.log(sleepTimeMap)
+			// console.log(wakeTimeMap)
+
+			console.log(recastSleepData(getSleepHabits(jsonData, true), true));
+			console.log(recastSleepData(getSleepHabits(jsonData, false), false));
 			requestFinalData();
 
 			let todoMap = getSummary(initialData, "data.todolist");

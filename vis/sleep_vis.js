@@ -6,8 +6,8 @@ function drawSleepDials(svgClass) {
 
   let sleepSvg = d3.select(svgClass);
 
-  let sleepData = createSleepData();
-  let wakeData = createWakeData();
+  let sleepData = (recastSleepData(getSleepHabits(jsonData, true), true));
+  let wakeData = (recastSleepData(getSleepHabits(jsonData, false), false));
 
   let maxBarHeight = thirdSvgHeight/2;
 
@@ -16,16 +16,16 @@ function drawSleepDials(svgClass) {
     .range([padding*5.5, thirdSvgWidth-padding*5.5])
 
   let y = d3.scaleLinear()
-    .domain([0, 1860]) // max value
+    .domain([0, 1000]) // max value
     .range([innerRadius, outerRadius]);
 
   let ySleep = d3.scaleLinear()
-    .domain([0, 1860]) // max value
-    .range([thirdSvgHeight/2, padding*4]);
+    .domain([0, 800]) // max value
+    .range([thirdSvgHeight/2, padding]);
 
   let yWake = d3.scaleLinear()
-    .domain([0, 1860]) // max value
-    .range([thirdSvgHeight/2, thirdSvgHeight-padding*4]);
+    .domain([0, 800]) // max value
+    .range([thirdSvgHeight/2, thirdSvgHeight-padding]);
 
   let line = d3.lineRadial()
     .angle(function(d, i) {return x(i)})
@@ -125,104 +125,104 @@ function drawSleepDials(svgClass) {
     .style("font-size", "12px");
 
   // late sleepers comment
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(4)+(padding-5)/2 -1)
-    .attr("x2", x(6)+(padding-5)/2+1) 
-    .attr("y1", thirdSvgHeight/2 - 20)
-    .attr("y2", thirdSvgHeight/2 - 20)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(4)+(padding-5)/2)
-    .attr("x2", x(4)+(padding-5)/2)
-    .attr("y1", thirdSvgHeight/2 - 20)
-    .attr("y2", thirdSvgHeight/2 - 15)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(6)+(padding-5)/2)
-    .attr("x2", x(6)+(padding-5)/2)
-    .attr("y1", thirdSvgHeight/2 - 20)
-    .attr("y2", thirdSvgHeight/2 - 15)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(5)+(padding-5)/2)
-    .attr("x2", x(5)+(padding-5)/2)
-    .attr("y1", thirdSvgHeight/2 - 20)
-    .attr("y2", thirdSvgHeight/2 - 60)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append("text")
-    .attr("class", "nohover_sleep")
-    .attr("x", x(5)+(padding-5)/2 - padding/2)
-    .attr("y", thirdSvgHeight/2 - 90)
-    .text("42 people generally fall")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
-  sleepSvg.append("text")
-    .attr("class", "nohover_sleep")
-    .attr("x", x(5)+(padding-5)/2 - padding/2)
-    .attr("y", thirdSvgHeight/2 - 75)
-    .text("asleep past 4:00am")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(4)+(padding-5)/2 -1)
+  //   .attr("x2", x(6)+(padding-5)/2+1) 
+  //   .attr("y1", thirdSvgHeight/2 - 20)
+  //   .attr("y2", thirdSvgHeight/2 - 20)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(4)+(padding-5)/2)
+  //   .attr("x2", x(4)+(padding-5)/2)
+  //   .attr("y1", thirdSvgHeight/2 - 20)
+  //   .attr("y2", thirdSvgHeight/2 - 15)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(6)+(padding-5)/2)
+  //   .attr("x2", x(6)+(padding-5)/2)
+  //   .attr("y1", thirdSvgHeight/2 - 20)
+  //   .attr("y2", thirdSvgHeight/2 - 15)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(5)+(padding-5)/2)
+  //   .attr("x2", x(5)+(padding-5)/2)
+  //   .attr("y1", thirdSvgHeight/2 - 20)
+  //   .attr("y2", thirdSvgHeight/2 - 60)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append("text")
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x", x(5)+(padding-5)/2 - padding/2)
+  //   .attr("y", thirdSvgHeight/2 - 90)
+  //   .text("42 people generally fall")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
+  // sleepSvg.append("text")
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x", x(5)+(padding-5)/2 - padding/2)
+  //   .attr("y", thirdSvgHeight/2 - 75)
+  //   .text("asleep past 4:00am")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
 
   //median sleep times
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(0)+(padding-5)/2)
-    .attr("x2", x(0)+(padding-5)/2)
-    .attr("y1", ySleep(sleepData[0][0])-4)
-    .attr("y2", ySleep(sleepData[0][0])-40)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append('circle')
-    .attr("class", "nohover_sleep")
-    .attr("cx", x(0)+(padding-5)/2)
-    .attr("cy", ySleep(sleepData[0][0]))
-    .attr("r", 4)
-    .style('fill-opacity', 0)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append("text")
-    .attr("class", "nohover_sleep")
-    .attr("x", x(0)+(padding-5)/2 - padding/2)
-    .attr("y", ySleep(sleepData[0][0])- 50)
-    .text("median: 12:00am")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
-  sleepSvg.append('line')
-    .attr("class", "nohover_sleep")
-    .attr("x1", x(8)+(padding-5)/2)
-    .attr("x2", x(8)+(padding-5)/2)
-    .attr("y1", yWake(sleepData[8][8])+maxBarHeight-padding*4+15)
-    .attr("y2", yWake(sleepData[8][8])+maxBarHeight-padding*4+20+30)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  sleepSvg.append("text")
-    .attr("class", "nohover_sleep")
-    .attr("x", x(8)+(padding-5)/2 - padding/2)
-    .attr("y", yWake(sleepData[8][8])+maxBarHeight-padding*4+20+30+15)
-    .text("median: 8:00am")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
-  sleepSvg.append('circle')
-    .attr("class", "nohover_sleep")
-    .attr("cx", x(8)+(padding-5)/2)
-    .attr("cy", yWake(sleepData[8][8])+maxBarHeight-padding*4+15-4)
-    .attr("r", 4)
-    .style('fill-opacity', 0)
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(0)+(padding-5)/2)
+  //   .attr("x2", x(0)+(padding-5)/2)
+  //   .attr("y1", ySleep(sleepData[0][0])-4)
+  //   .attr("y2", ySleep(sleepData[0][0])-40)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append('circle')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("cx", x(0)+(padding-5)/2)
+  //   .attr("cy", ySleep(sleepData[0][0]))
+  //   .attr("r", 4)
+  //   .style('fill-opacity', 0)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append("text")
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x", x(0)+(padding-5)/2 - padding/2)
+  //   .attr("y", ySleep(sleepData[0][0])- 50)
+  //   .text("median: 12:00am")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
+  // sleepSvg.append('line')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x1", x(8)+(padding-5)/2)
+  //   .attr("x2", x(8)+(padding-5)/2)
+  //   .attr("y1", yWake(sleepData[8][8])+maxBarHeight-padding*4+15)
+  //   .attr("y2", yWake(sleepData[8][8])+maxBarHeight-padding*4+20+30)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // sleepSvg.append("text")
+  //   .attr("class", "nohover_sleep")
+  //   .attr("x", x(8)+(padding-5)/2 - padding/2)
+  //   .attr("y", yWake(sleepData[8][8])+maxBarHeight-padding*4+20+30+15)
+  //   .text("median: 8:00am")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
+  // sleepSvg.append('circle')
+  //   .attr("class", "nohover_sleep")
+  //   .attr("cx", x(8)+(padding-5)/2)
+  //   .attr("cy", yWake(sleepData[8][8])+maxBarHeight-padding*4+15-4)
+  //   .attr("r", 4)
+  //   .style('fill-opacity', 0)
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
 
   d3.select(svgClass).on("mousemove", function() {
   let offset = document.querySelector(svgClass).getBoundingClientRect();
