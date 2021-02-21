@@ -101,6 +101,10 @@ function redrawXAxis(svg, x, maxBarHeight, slantText = false) {
     svg.selectAll(".x_axis .tick text")
           .attr("transform", "rotate(-25)")
           .style("text-anchor", "end");
+  } else {
+    svg.selectAll(".x_axis .tick text")
+        .attr("transform", "rotate(0)")
+        .style("text-anchor", "middle");;
   }
 }
 

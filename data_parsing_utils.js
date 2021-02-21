@@ -1,35 +1,97 @@
 /** Functions for parsing initial raw data **/
 // get results based on key (ie. data.gender) and sorts key in descending value
-function getSummary(data, str, newKey = "", isList = false) {
+function getSummary(data, str, prefix = "survey", isList = false) {
   let map = {};
 
   for (let i = 0; i < data.length; i++) {
-    if (isList) {
-      let keys = (data[i][str].replace(/\"/g, '').replace("[", '').replace("]", '')).split(",");
-      for (let j = 0; j < keys.length; j++) {
-        let key = keys[j].trim().toLowerCase();
-        if (key != "") { // remove unfinished surveys
-          if (!map[newKey+key]) {
-            map[newKey+key] = 1;
-          } else {
-            map[newKey+key] = map[newKey+key] + 1;
+    if (data[i] != null && data[i][prefix] != null && data[i][prefix][str] != null && data[i]["profile"]["optIn"]) {
+      if (isList) {
+        let keys = data[i][prefix][str].join().split(",");
+        for (let j = 0; j < keys.length; j++) {
+          let key = keys[j].trim().toLowerCase();
+          if (key != "") { // remove unfinished surveys
+            if (!map[key]) {
+              map[key] = 1;
+            } else {
+              map[key] = map[key] + 1;
+            }
           }
         }
-      }
-    } else {
-      let key = data[i][str].trim().toLowerCase();
-      if (key != "") { // remove unfinished surveys
-        if (!map[newKey+key]) {
-          map[newKey+key] = 1;
-        } else {
-          map[newKey+key] = map[newKey+key] + 1;
+      } else {
+        let key = data[i][prefix][str].trim().toLowerCase();
+        if (key != "") { // remove unfinished surveys
+          if (!map[key]) {
+            map[key] = 1;
+          } else {
+            map[key] = map[key] + 1;
+          }
         }
       }
     }
     
   }
 
+  // reformat keys for race
+  if (str == "race") {
+    map["east asian"] = map["eastasian"];
+    map["south asian"] = map["southasian"];
+    map["middle eastern"] = map["middle_eastern"];
+    map["native american"] = map["native_american"];
+
+    delete map["eastasian"];
+    delete map["southasian"];
+    delete map["middle_eastern"];
+    delete map["native_american"];
+  }
+
+  //reformat keys for gender
+  if (str == "gender") {
+    map["non-binary"] = map["nonbinary"];
+
+    delete map["nonbinary"];
+  }
+
+  //reformat keys for activities
+  if (str == "activities") {
+    map["project team"] = map["projectteam"];
+    map["social club"] = map["socialclub"];
+    map["other"] = map["otherclub"];
+    map["cultural club"] = map["culturalclub"];
+    map["professional frat"] = map["proffrat"];
+    map["professional club"] = map["profclub"];
+    map["greek life"] = map["greeklife"];
+    map["club sports"] = map["clubsports"];
+
+    delete map["projectteam"];
+    delete map["socialclub"];
+    delete map["otherclub"];
+    delete map["culturalclub"];
+    delete map["proffrat"];
+    delete map["profclub"];
+    delete map["greeklife"];
+    delete map["clubsports"];
+  }
+
   return map;
+}
+
+function convertDemoDataToMap(data) {
+  let keys = Object.keys(data);
+  let finalMap = [];
+  let hasOther = false;
+
+  for (key of keys) {
+    if (key != "other") {
+      finalMap.push({"key": key, "value": data[key]});
+    } else {
+      hasOther = true;
+    }
+  }
+
+  if (hasOther) {
+    finalMap.push({"key": "other", "value": data["other"]});
+  }
+  return finalMap;
 }
 
 function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
@@ -68,21 +130,15 @@ function getAgePreferences(data, isFemale){ // returns map of shape age to how m
       if(data[i] != null && data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["optIn"] == true && data[i]["profile"]["gender"] == key){
       let participant_age = data[i]["profile"]["age_v2"];
 
-      try { //allow for json parsing exception
-        
-
+      //allow for json parsing exception
+      try { 
       let age_preference = data[i]["survey"]["agepref"];
-
-
-      
-
       let min_age = age_preference.youngest_v2;
       let max_age = age_preference.oldest_v2;
 
       if(!(participant_age in age_buckets)){ //filter out outlier responses
         continue;
       }
-
 
       let participant_age_bucket = age_buckets[participant_age];
 

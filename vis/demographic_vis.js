@@ -2,11 +2,11 @@ function drawBarChart(svgClass) {
   let maxBarHeight = firstSvgHeight - padding*3;
   let barWidth = padding*2;
 
-  let genderData = createGenderData();
-  let yearData = createYearData();
-  let ethnicityData = createEthnicityData();
-  let activitiesData = createActivitiesData();
-  let collegeData = createCollegeData();
+  let genderData = convertDemoDataToMap(getSummary(jsonData, "gender", "profile"));
+  let yearData = convertDemoDataToMap(getSummary(jsonData, "year", "profile"));
+  let ethnicityData = convertDemoDataToMap(getSummary(jsonData, "race", "profile", true));
+  let activitiesData = convertDemoDataToMap(getSummary(jsonData, "activities", "survey", true));
+  let collegeData = convertDemoDataToMap(getSummary(jsonData, "college", "survey"));
 
   let barSvg = d3.select(svgClass);
   
@@ -57,7 +57,6 @@ function drawBarChart(svgClass) {
           drawBars(barSvg, x, y, yearData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, yearData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight);
-
         }
         else if (d == "gender") {
           x = getBarX(genderData, firstSvgWidth, "key");
@@ -72,7 +71,7 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, ethnicityData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, ethnicityData, barWidth, 5);
-          redrawXAxis(barSvg, x, maxBarHeight);
+          redrawXAxis(barSvg, x, maxBarHeight, true);
 
         } else if (d == "college") {
           x = getBarX(collegeData, firstSvgWidth, "key");
@@ -89,7 +88,6 @@ function drawBarChart(svgClass) {
           drawBars(barSvg, x, y, activitiesData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, activitiesData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight, true);
-
         }
       });
 
