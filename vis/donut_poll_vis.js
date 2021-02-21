@@ -3,11 +3,12 @@ function drawPollDonuts(svgClass) {
   let outerRadius = 120;
   let pollSvg = d3.select(svgClass);
 
-  let mealData = createMealData();
-  let startOverData = createStartOverData();
-  let timeMoneyData = createTimeMoneyData();
-  let qualityData = createBestQualityData();
+  let mealData = convertDemoDataToMap(getSummary(jsonData, "meal", "survey"));
+  let startOverData = convertDemoDataToMap(getSummary(jsonData, "startover", "survey"));
+  let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
+  let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
 
+  console.log(qualityData)
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_meal", mealData, 200, 200);
 

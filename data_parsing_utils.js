@@ -94,15 +94,20 @@ function convertDemoDataToMap(data) {
   let hasOther = false;
 
   for (key of keys) {
-    if (key != "other") {
+    if (key != "other" && key != "thoughtfulness") {
       finalMap.push({"key": key, "value": data[key]});
     } else {
       hasOther = true;
     }
   }
 
+  // move "other" or "thoughtfulness" value to end of list 
   if (hasOther) {
-    finalMap.push({"key": "other", "value": data["other"]});
+    if (data["other"] != null) {
+      finalMap.push({"key": "other", "value": data["other"]});
+    } else {
+      finalMap.push({"key": "thoughtfulness", "value": data["thoughtfulness"]});
+    }
   }
   return finalMap;
 }
