@@ -1,8 +1,10 @@
 function drawHeightChart(svgClass) {
   let midwayPoint = secSvgHeight/2;
 
-  let femaleHeight = createFemaleHeightData();
-  let maleHeight = createMaleHeightData();
+  let femaleHeight = getHeightList(jsonData, true);
+  let maleHeight = getHeightList(jsonData, false);
+  console.log(getHeightList(jsonData, true));
+  console.log(getHeightList(jsonData, false));
 
   let x = d3.scaleLinear()
     .domain([minHeight, femaleHeight.length+minHeight])
@@ -10,11 +12,11 @@ function drawHeightChart(svgClass) {
 
   let yfemale = d3.scaleLinear()
     .domain([0, d3.max([d3.max(femaleHeight), d3.max(maleHeight)])])
-    .range([midwayPoint, (padding*3)]);
+    .range([midwayPoint, (padding*2)]);
 
   let ymale = d3.scaleLinear()
     .domain([0, d3.max([d3.max(femaleHeight), d3.max(maleHeight)])])
-    .range([midwayPoint, secSvgHeight-(padding*3)]);
+    .range([midwayPoint, secSvgHeight-(padding*2)]);
 
   let heightSvg = d3.select(svgClass);
 
@@ -62,99 +64,101 @@ function drawHeightChart(svgClass) {
     .style("font-size", "12px");
 
   heightSvg.append("text")
-    .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint-10) + ")")
+    .attr("transform", "translate(" + (padding*4+15) + ", " + (midwayPoint-10) + ")")
     .text("female")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
-    .style("font-size", "12px");
+    .style("font-size", "12px")
+    .style("text-anchor", "end");
 
   heightSvg.append("text")
-    .attr("transform", "translate(" + (padding*4) + ", " + (midwayPoint+20) + ")")
+    .attr("transform", "translate(" + (padding*4+15) + ", " + (midwayPoint+20) + ")")
     .text("male")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
-    .style("font-size", "12px");
+    .style("font-size", "12px")
+    .style("text-anchor", "end");
 
   // no-hover tool tips - female median height comment
-  var medianFemale = calculateMedianForHeight(femaleHeight);
-  heightSvg.append("circle")
-    .attr("class", "nohover_tooltip")
-    .attr("cx", x(medianFemale))
-    .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
-    .attr("r", 4)
-    .style('stroke-width', 2)
-    .style('fill-opacity', 0)
-    .style("stroke", darkTextColor);
-  heightSvg.append("text")
-    .attr("class", "nohover_tooltip")
-    .attr("x", x(medianFemale)+10)
-    .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
-    .text("median height: " + (medianFemale) + " in")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
+  // var medianFemale = calculateMedianForHeight(femaleHeight);
+  // heightSvg.append("circle")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("cx", x(medianFemale))
+  //   .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
+  //   .attr("r", 4)
+  //   .style('stroke-width', 2)
+  //   .style('fill-opacity', 0)
+  //   .style("stroke", darkTextColor);
+  // heightSvg.append("text")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x", x(medianFemale)+10)
+  //   .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
+  //   .text("median height: " + (medianFemale) + " in")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
 
   // male median height comment
-  var medianMale = calculateMedianForHeight(maleHeight);
-  heightSvg.append("circle")
-    .attr("class", "nohover_tooltip")
-    .attr("cx", x(medianMale))
-    .attr("cy", ymale(maleHeight[medianMale-minHeight]))
-    .attr("r", 4)
-    .style('stroke-width', 2)
-    .style('fill-opacity', 0)
-    .style("stroke", darkTextColor);
-  heightSvg.append("text")
-    .attr("class", "nohover_tooltip")
-    .attr("x", x(medianMale)-5)
-    .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
-    .text("median height: " + medianMale + " in")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("text-anchor", "end")
-    .style("font-size", "12px");
+  // var medianMale = calculateMedianForHeight(maleHeight);
+  // heightSvg.append("circle")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("cx", x(medianMale))
+  //   .attr("cy", ymale(maleHeight[medianMale-minHeight]))
+  //   .attr("r", 4)
+  //   .style('stroke-width', 2)
+  //   .style('fill-opacity', 0)
+  //   .style("stroke", darkTextColor);
+  // heightSvg.append("text")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x", x(medianMale)-5)
+  //   .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
+  //   .text("median height: " + medianMale + " in")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("text-anchor", "end")
+  //   .style("font-size", "12px");
 
   // 6ft comment
-  heightSvg.append("circle")
-    .attr("class", "nohover_tooltip")
-    .attr("cx", x(72))
-    .attr("cy", ymale(maleHeight[72-minHeight]))
-    .attr("r", 4)
-    .style('stroke-width', 2)
-    .style('fill-opacity', 0)
-    .style("stroke", darkTextColor);
-  heightSvg.append("line")
-    .attr("class", "nohover_tooltip")
-    .attr("x1", x(72)+4)
-    .attr("x2", x(75))
-    .attr("y2", ymale(maleHeight[72-minHeight]))
-    .attr("y1", ymale(maleHeight[72-minHeight]))
-    .style('stroke-width', 2)
-    .style("stroke", darkTextColor);
-  heightSvg.append("text")
-    .attr("class", "nohover_tooltip")
-    .attr("x", x(75)+4)
-    .attr("y", ymale(maleHeight[72-minHeight])-5)
-    .text("only ~30% of male participants are 6ft+")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
-  heightSvg.append("text")
-    .attr("class", "nohover_tooltip")
-    .attr("x", x(75)+4)
-    .attr("y", ymale(maleHeight[72-minHeight])+10)
-    .text("(but it's 2020 and it's time to forgo")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
-  heightSvg.append("text")
-    .attr("class", "nohover_tooltip")
-    .attr("x", x(75)+4)
-    .attr("y", ymale(maleHeight[72-minHeight])+25)
-    .text("patriarchal standards 🎉)")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("font-size", "12px");
+  // heightSvg.append("circle")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("cx", x(72))
+  //   .attr("cy", ymale(maleHeight[72-minHeight]))
+  //   .attr("r", 4)
+  //   .style('stroke-width', 2)
+  //   .style('fill-opacity', 0)
+  //   .style("stroke", darkTextColor);
+  // heightSvg.append("line")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x1", x(72)+4)
+  //   .attr("x2", x(75))
+  //   .attr("y2", ymale(maleHeight[72-minHeight]))
+  //   .attr("y1", ymale(maleHeight[72-minHeight]))
+  //   .style('stroke-width', 2)
+  //   .style("stroke", darkTextColor);
+  // heightSvg.append("text")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x", x(75)+4)
+  //   .attr("y", ymale(maleHeight[72-minHeight])-5)
+  //   .text("only ~30% of male participants are 6ft+")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
+  // heightSvg.append("text")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x", x(75)+4)
+  //   .attr("y", ymale(maleHeight[72-minHeight])+10)
+  //   .text("(but it's 2020 and it's time to forgo")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
+  // heightSvg.append("text")
+  //   .attr("class", "nohover_tooltip")
+  //   .attr("x", x(75)+4)
+  //   .attr("y", ymale(maleHeight[72-minHeight])+25)
+  //   .text("patriarchal standards 🎉)")
+  //   .style("font-family", "Inconsolata")
+  //   .style("font-weight", "bold")
+  //   .style("font-size", "12px");
 
   d3.select(svgClass).on("mousemove", function() {
     var offset = document.querySelector(svgClass).getBoundingClientRect();

@@ -351,20 +351,23 @@ function getHeightList(data, isFemale) {
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (data[i]["data.gender"] == key) {
-      let height = data[i]["data.height"];
+    if (checkOptInAndNull(data[i], "profile", "gender") 
+      && checkOptInAndNull(data[i], "profile", "height")) {
+      if (data[i]["profile"]["gender"] == key) {
+        let height = data[i]["profile"]["height"];
 
-      // convert feet to inches
-      if (height < 50) {
-        height = height * 12;
+        // convert feet to inches
+        if (height < 50) {
+          height = height * 12;
+        }
+
+        height = (+height).toFixed(0);
+
+        if (height < 85 && height > 50) {
+          map[height] = map[height] + 1;
+        }
+        
       }
-
-      height = (+height).toFixed(0);
-
-      if (height < 85 && height > 50) {
-        map[height] = map[height] + 1;
-      }
-      
     }
   }
 

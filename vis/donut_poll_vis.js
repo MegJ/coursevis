@@ -8,7 +8,6 @@ function drawPollDonuts(svgClass) {
   let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
   let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
 
-  console.log(qualityData)
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_meal", mealData, 200, 200);
 
