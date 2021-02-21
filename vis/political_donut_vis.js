@@ -5,7 +5,7 @@ function  drawPoliticalDonut(svgClass) {
     let pieClass = "path_political";
 
     xOffset = 380;
-    yOffset = 350;
+    yOffset = 425;
   
     let data = createPoliticalPreferences();
   
@@ -34,8 +34,6 @@ function  drawPoliticalDonut(svgClass) {
       .innerRadius(innerRadius)
       .outerRadius(d => radiusScale(d.data.activity));
 
-
-  
     // add total text in the middle of pie
     svg.append("text")
       .datum(data)
@@ -60,9 +58,9 @@ function  drawPoliticalDonut(svgClass) {
         .style("text-anchor", "middle")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
-              .style("font-size", 16);
+        .style("font-size", 16);
   
-          // draw pie segments
+    // draw pie segments
     svg.datum(data).selectAll("." + pieClass)
         .data(pie)
     .enter().append("path")
@@ -99,6 +97,14 @@ function  drawPoliticalDonut(svgClass) {
           .attr("d", arc);
       });
 
+    // add x axis label
+    svg.append("text")
+      .attr("x", xOffset - 270)
+      .attr("y", yOffset + 15)
+      .text("← political activeness")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+      .style("font-size", "12px");
   
     // add pie segment labels
     svg.datum(data).selectAll("#" + pieClass + "_label")
@@ -138,33 +144,24 @@ function  drawPoliticalDonut(svgClass) {
           .style("font-weight", "bold")
               .style("font-size", "12px");
 
-    drawFunFact(svgClass, 50, yOffset + 50, 45, "43");
+    drawFunFact(svgClass, 50, 50, 30, "43");
 
     svg.append("text")
         .attr("class", "political_label")
         .attr("x", 100)
-        .attr("y", yOffset + 50)
-        .text("percentage of people")
+        .attr("y", 50-7.5)
+        .text("percentage of participants listed")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");
     svg.append("text")
         .attr("class", "political_label")
         .attr("x", 100)
-        .attr("y", yOffset + 65)
-        .text("who listed politics")
+        .attr("y", 50+7.5)
+        .text("politics as a dealbreaker")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");
-    svg.append("text")
-        .attr("class", "political_label")
-        .attr("x", 100)
-        .attr("y", yOffset + 80)
-        .text("as a dealbreaker")
-        .style("font-family", "Inconsolata")
-        .style("font-weight", "bold")
-            .style("font-size", "12px");
-
   }
   
   function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }

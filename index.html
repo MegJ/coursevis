@@ -20,13 +20,7 @@
 	<script type="text/javascript" src="vis/fun_fact_vis.js"></script>
 	<script type="text/javascript" src="vis/top_words_vis.js"></script>
 	<script type="text/javascript" src="vis/commitment_change_vis.js"></script>
-	<script type="text/javascript" src="vis/political_donut_vis.js"></script>
-
-
-
-
-
-	
+	<script type="text/javascript" src="vis/political_donut_vis.js"></script>	
 </head>
 <body bgcolor = "white" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 800;font-family: Montserrat; font-size: 20; font-weight: bold; color: #505050; text-align: left;">
@@ -53,7 +47,6 @@
 
 		<h4 style="margin-top: 50px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
 		<svg height="400" width="800" class="heightChart"></svg>
-
 		
 		<h4>Need to know the best time to plan a date or make an impromptu phone call? Here is the aggregate data on when people are most likely to fall asleep and wake up. </h4>
 		<svg height="500" width="800" class="timeDials"></svg>
@@ -79,21 +72,14 @@
 
 		var darkTextColor = "#505050";
 		var maroonColor = "#FF7882";
-
 		var coralColor = "#FF7882";
 		var blueColor = "#7ADCFF";
 		var greenColor = "#DCFFAD";
-
 		var yellowColor = "#FFFAAD";
-
 		var purpleColor = "#99A0FF";
-
 		var pinkColor = "#FF99D1";
-
-
 		var deepPinkColor = "#FF7AC6"
 		var marineColor = "#85FFBA";
-
 		var whiteColor = "#fbfbfb";
 		var lightGreyColor = "#cdcdcd";
 
@@ -102,7 +88,7 @@
 			let initialData = await d3.csv("answer.csv");
 
 			let jsonData = await d3.json("users.json");
-			 //console.log(initialData);
+			 console.log(initialData);
 
 			let genderMap = getSummary(initialData, "data.gender", "total_");
 			let ethnicityMap = getSummary(initialData, "data.ethnicity", "total_");
@@ -112,7 +98,6 @@
 
 			let femaleHeightMap = {"min_height": 50, "female_height": getHeightList(initialData, true)};
 			let maleHeightMap = {"male_height": getHeightList(initialData, false)};
-
 
 			let finalObj = {...genderMap, ...yearMap, ...ethnicityMap, ...activitiesMap, ...collegeMap, ...femaleHeightMap, ...maleHeightMap};
 			// console.log(finalObj);
@@ -155,9 +140,7 @@
 
 			let political_preferences = (jsonData);
 
-			let political_dealbreaker = getDealBreakerPercent(jsonData);
-
-			
+			let political_dealbreaker = getDealBreakerPercent(jsonData);			
 		};
 
 		const requestFinalData = async () => {
