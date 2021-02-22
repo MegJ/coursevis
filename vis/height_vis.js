@@ -3,8 +3,6 @@ function drawHeightChart(svgClass) {
 
   let femaleHeight = getHeightList(jsonData, true);
   let maleHeight = getHeightList(jsonData, false);
-  console.log(getHeightList(jsonData, true));
-  console.log(getHeightList(jsonData, false));
 
   let x = d3.scaleLinear()
     .domain([minHeight, femaleHeight.length+minHeight])

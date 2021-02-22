@@ -452,15 +452,15 @@ function recastSleepData(data, isSleep) {
     var tempKey = i;
 
     // handles +12 hours support
-    if (isSleep && i > 19) {
+    if (isSleep && i > 17) {
       tempKey = (i-12).toString();
     } else if (isSleep && i == 0) {
       tempKey = "12";
-    } else if (!isSleep && i > 12 && i < 17) {
+    } else if (!isSleep && i > 12 && i < 16) {
       tempKey = (i-12).toString();
     }
 
-    if ((isSleep && i > 7 && i < 20) || !isSleep && (i < 5)) {
+    if ((isSleep && i > 5 && i < 18) || !isSleep && (i < 4)) {
       tempMap[newKey] = 0;
     } else {
       tempMap[newKey] = (data[tempKey] ? data[tempKey] : 0);

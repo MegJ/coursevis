@@ -1,14 +1,12 @@
-function drawFunFact(svgClass, x, y, radius, number, text=null){
+function drawFunFact(svgClass, x, y, radius, innerText, color=coralColor){
     let offset = 80;
 
     let circleSVG = d3.select(svgClass)
         .append('g');
 
-    circleSVG.selectAll("circle")
-        .data([number])
-        .enter().append("circle")
-        .style("stroke", coralColor)
-        .style("fill", coralColor)
+    circleSVG.append("circle")
+        .style("stroke", color)
+        .style("fill", color)
         .attr("r", radius)
         .attr("cx", x)
         .attr("cy", y);
@@ -24,7 +22,7 @@ function drawFunFact(svgClass, x, y, radius, number, text=null){
         .style('font-weight', 'bold') 
         .style("font-size", radius/1.25)
         .style("fill", "white")
-        .text(number);
+        .text(innerText);
 }
 
 

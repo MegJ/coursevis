@@ -124,6 +124,45 @@ function drawSleepDials(svgClass) {
     .style("font-weight", "bold")
     .style("font-size", "12px");
 
+  // add fun fact vis
+  drawFunFact(svgClass, 50, 30, 25, "5am");
+  sleepSvg.append("text")
+    .attr("x", 90)
+    .attr("y", 30-7.5)
+    .text("People who fall asleep at this time majored in")
+    .style("font-family", "Inconsolata")
+    .style("alignment-baseline", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+  sleepSvg.append("text")
+    .attr("x", 90)
+    .attr("y", 30+7.5)
+    .text("ILR, Philosophy, ECE or Mechanical Engineering")
+    .style("font-family", "Inconsolata")
+    .style("alignment-baseline", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+
+  drawFunFact(svgClass, 60, 460, 25, "3pm", blueColor);
+  sleepSvg.append("text")
+    .attr("x", 95)
+    .attr("y", 460-7.5)
+    .text("The noctural person who wakes up at")
+    .style("font-family", "Inconsolata")
+    .style("alignment-baseline", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+  sleepSvg.append("text")
+    .attr("x", 95)
+    .attr("y", 460+7.5)
+    .text("this time majors in Government")
+    .style("font-family", "Inconsolata")
+    .style("alignment-baseline", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
+  
+
+
   // late sleepers comment
   // sleepSvg.append('line')
   //   .attr("class", "nohover_sleep")

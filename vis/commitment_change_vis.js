@@ -143,8 +143,6 @@ function drawCommitmentComparisonChart(svgClass) {
         .style("font-weight", "bold")
         .style("font-family", "Inconsolata")
         .style("font-size", "12px");
-
-    console.log(newCommitmentData)
   
     // add annotations
     barSvg.append("text")
