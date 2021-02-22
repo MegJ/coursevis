@@ -86,7 +86,7 @@ function drawHeightChart(svgClass) {
   heightSvg.append("text")
     .attr("x", 100 + 20 + 10)
     .attr("y", 350)
-    .text("percentage of men are 6ft or taller")
+    .text("percentage of men who are 6ft or taller")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("alignment-baseline", "middle")
