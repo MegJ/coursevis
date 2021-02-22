@@ -150,7 +150,7 @@ function  drawPoliticalDonut(svgClass) {
         .attr("class", "political_label")
         .attr("x", 100)
         .attr("y", 50-7.5)
-        .text("percentage of participants who")
+        .text("percentage of participants ")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");
