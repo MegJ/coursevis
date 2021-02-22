@@ -3,15 +3,11 @@ function drawCommitmentComparisonChart(svgClass) {
 
     y_offset = 15;
 
-  
-  
     let barSvg = d3.select(svgClass);
 
     let oldCommitmentData = createOldCommitmentData();
     let newCommitmentData = createNewCommitmentData();
     let data = [oldCommitmentData, newCommitmentData];
-
-
 
     // let max = d3.max([
     //     d3.max(data[0].map(function(d){
@@ -96,8 +92,6 @@ function drawCommitmentComparisonChart(svgClass) {
         )
     }
 
- 
-
     oldCommitmentData = oldCommitmentData.map(function(d){
         return (
             {"key": d.key, "value": Math.round((d.value / totals[0]) * 100)}
@@ -150,6 +144,32 @@ function drawCommitmentComparisonChart(svgClass) {
         .style("font-family", "Inconsolata")
         .style("font-size", "12px");
 
+    console.log(newCommitmentData)
   
+    // add annotations
+    barSvg.append("text")
+        .attr("x", 200)
+        .attr("y", y_axis(newCommitmentData[0]["value"]+15))
+        .text("This is a sign for you")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+        .style("text-anchor", "end")
+        .style("alignment-baseline", "middle")
+        .style("font-size", 12);
+    barSvg.append("text")
+        .attr("x", 200)
+        .attr("y", y_axis(newCommitmentData[0]["value"]+15)+15)
+        .text("to shoot your shot 🏹")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+        .style("text-anchor", "end")
+        .style("alignment-baseline", "middle")
+        .style("font-size", 12);
+    barSvg.append("path")
+        .attr("d", "M 180 " + (y_axis(newCommitmentData[0]["value"]+15)+25) 
+            + " L 180 " + (y_axis(newCommitmentData[0]["value"]+1)))
+        .style("stroke", darkTextColor)
+        .style("stroke-width", 2)
+        .style("fill", "none");
   }
 

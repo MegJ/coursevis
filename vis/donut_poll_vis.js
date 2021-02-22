@@ -7,6 +7,7 @@ function drawPollDonuts(svgClass) {
   let startOverData = convertDemoDataToMap(getSummary(jsonData, "startover", "survey"));
   let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
   let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
+  console.log(startOverData);
 
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_meal", mealData, 200, 200);
@@ -19,6 +20,23 @@ function drawPollDonuts(svgClass) {
 
   addPollText(pollSvg, 600, 600, outerRadius,"What quality do you value", "the most?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_quality", qualityData, 600, 600);
+
+  // add annotation for "start over" result increase
+  var math = (startOverData[0]["value"]/(startOverData[0]["value"] + startOverData[1]["value"]) - 0.384)*100;
+  pollSvg.append("text")
+    .attr("x", 600)
+    .attr("y", 350)
+    .text("There is a " + math.toFixed(1) + "% increase from 2020. ")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("text-anchor", "end")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 12);
+  pollSvg.append("path")
+    .attr("d", "M 605 350 L 650 350 L 650 300")
+    .style("stroke", darkTextColor)
+    .style("stroke-width", 2)
+    .style("fill", "none");
 }
 
 function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffset, yOffset) {
@@ -102,7 +120,6 @@ function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffse
             .style("font-family", "Inconsolata")
       .style("font-weight", "bold")
         .style("font-size", "12px");
-
 }
 
 function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
