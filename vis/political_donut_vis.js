@@ -144,24 +144,17 @@ function  drawPoliticalDonut(svgClass) {
           .style("font-weight", "bold")
               .style("font-size", "12px");
 
-    drawFunFact(svgClass, 50, 50, 30, "43");
+    drawFunFact(svgClass, 50, 50, 20, "43");
 
     svg.append("text")
         .attr("class", "political_label")
-        .attr("x", 100)
-        .attr("y", 50-7.5)
-        .text("percentage of participants ")
+        .attr("x", 50+20+10)
+        .attr("y", 50)
+        .text("percentage of participants listed politics as a dealbreaker")
         .style("font-family", "Inconsolata")
+        .style("alignment-baseline", "middle")
         .style("font-weight", "bold")
-            .style("font-size", "12px");
-    svg.append("text")
-        .attr("class", "political_label")
-        .attr("x", 100)
-        .attr("y", 50+7.5)
-        .text("listed politics as a dealbreaker")
-        .style("font-family", "Inconsolata")
-        .style("font-weight", "bold")
-            .style("font-size", "12px");
+        .style("font-size", "12px");
   }
   
   function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }

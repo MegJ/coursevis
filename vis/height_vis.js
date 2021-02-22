@@ -3,6 +3,7 @@ function drawHeightChart(svgClass) {
 
   let femaleHeight = getHeightList(jsonData, true);
   let maleHeight = getHeightList(jsonData, false);
+  console.log(maleHeight)
 
   let x = d3.scaleLinear()
     .domain([minHeight, femaleHeight.length+minHeight])
@@ -76,6 +77,20 @@ function drawHeightChart(svgClass) {
     .style("font-weight", "bold")
     .style("font-size", "12px")
     .style("text-anchor", "end");
+
+  // annotation for % > 6ft
+  let tempMaleHeight = maleHeight.slice(21);
+  var sixFeetMale = tempMaleHeight.reduce(function(a, b){ return a + b;}, 0);
+  let totalMale = maleHeight.reduce(function(a, b){ return a + b;}, 0);
+  drawFunFact(svgClass, 100, 350, 20, ((sixFeetMale/totalMale)*100).toFixed(0), blueColor);
+  heightSvg.append("text")
+    .attr("x", 100 + 20 + 10)
+    .attr("y", 350)
+    .text("percentage of men who are 6ft or taller")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("alignment-baseline", "middle")
+    .style("font-size", "12px");
 
   // no-hover tool tips - female median height comment
   // var medianFemale = calculateMedianForHeight(femaleHeight);
