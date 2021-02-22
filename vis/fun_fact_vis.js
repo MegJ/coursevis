@@ -1,5 +1,4 @@
 function drawFunFact(svgClass, x, y, radius, number, text=null){
-    console.log("hi");
     let offset = 80;
 
     let circleSVG = d3.select(svgClass)

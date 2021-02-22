@@ -34,14 +34,20 @@ function drawBars(svg, x, y, data, maxBarHeight, barWidth, color) {
 }
 
 /* adds text for value on top of respective bar for a bar graph */
-function drawTotalText(barSvg, x, y, data, barWidth, gutter, x_offset=0) {
+function drawTotalText(barSvg, x, y, data, barWidth, gutter, x_offset=0, percent = false) {
   // create total text above bar
     barSvg.selectAll(".total_text")
       .data(data)
     .enter()
       .append("text")
         .attr("class", "total_text")
-        .text(function(d) {return d.value})
+        .text(function(d) {
+          if(percent){
+            return (d.value + "%");
+          } else {
+          return d.value}
+        }
+          )
         .attr("x", function(d) {return x(d.key) + x.bandwidth()/2 + x_offset;})
       .attr("y", function(d) {return y(d.value) - gutter;})
       .style("text-anchor", "middle")

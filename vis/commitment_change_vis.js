@@ -7,17 +7,24 @@ function drawCommitmentComparisonChart(svgClass) {
   
     let barSvg = d3.select(svgClass);
 
-    let realCommitmentData = createCommitmentData();
-    let fakeCommitmentData = createFakeCommitmentData();
-    let data = [realCommitmentData, fakeCommitmentData];
+    let oldCommitmentData = createOldCommitmentData();
+    let newCommitmentData = createNewCommitmentData();
+    let data = [oldCommitmentData, newCommitmentData];
 
-    let max = d3.max([
-        d3.max(data[0].map(function(d){
-            return (d.value);
-        })),
-        d3.max(data[1].map(function(d){
-            return(d.value);
-        }))]);
+
+
+    // let max = d3.max([
+    //     d3.max(data[0].map(function(d){
+    //         return (d.value);
+    //     })),
+    //     d3.max(data[1].map(function(d){
+    //         return(d.value);
+    //     }))]);
+    
+    let oldCommitmentTotal = d3.sum(oldCommitmentData, d => d.value);
+    let newCommitmentTotal = d3.sum(newCommitmentData, d=> d.value);
+    let totals = [oldCommitmentTotal, newCommitmentTotal];
+    
     
     let x_axis_values = [
         "I plan to meet my matches",
@@ -32,7 +39,7 @@ function drawCommitmentComparisonChart(svgClass) {
         .padding([0.1]);
 
     let y_axis = d3.scaleLinear()
-        .domain([0, max])
+        .domain([0, 75])
         .range([maxBarHeight, 0])
     
     let x_axis_subgroup = d3.scaleBand()
@@ -59,11 +66,12 @@ function drawCommitmentComparisonChart(svgClass) {
             .attr("x", function(d, i) {
                 return x_axis(d.key);})
             .attr("y",  function(d) {
-                return y_axis(d.value);
+                return  y_axis((100 * d.value / totals[d.group]));
+                
             })
             .attr("width", (x_axis.bandwidth() / 2) - 10)
             .attr("height", function(d) {
-                return (maxBarHeight - y_axis(d.value))
+                return (maxBarHeight - y_axis((100 * d.value / totals[d.group])));
             })
             .attr("fill", function(d){
                 return color(d.group)});
@@ -79,12 +87,32 @@ function drawCommitmentComparisonChart(svgClass) {
     
     barSvg.select(".domain").remove();
 
-    
+    for(let i = 0; i < 2; i++){
+        data[i].map(function(d){
+            return (
+                {"key": d.key, "value": d.value / totals[i]}
+            )
+        }
+        )
+    }
 
+ 
+
+    oldCommitmentData = oldCommitmentData.map(function(d){
+        return (
+            {"key": d.key, "value": Math.round((d.value / totals[0]) * 100)}
+        )
+    });
+
+    newCommitmentData = newCommitmentData.map(function(d){
+        return (
+            {"key": d.key, "value": Math.round((d.value / totals[1]) * 100)}
+        )
+    });
 
     
-    drawTotalText(barSvg, x_axis, y_axis, realCommitmentData, x_axis.bandwidth()/2, 5 - y_offset, - x_axis.bandwidth() / 4);
-    drawTotalText(barSvg.append("g"), x_axis, y_axis, fakeCommitmentData, x_axis.bandwidth()/2, 5 - y_offset,  x_axis.bandwidth() / 4);
+    drawTotalText(barSvg, x_axis, y_axis, oldCommitmentData, x_axis.bandwidth()/2, 5 - y_offset, - x_axis.bandwidth() / 4, true);
+    drawTotalText(barSvg.append("g"), x_axis, y_axis, newCommitmentData, x_axis.bandwidth()/2, 5 - y_offset,  x_axis.bandwidth() / 4, true);
 
     
     //add legend

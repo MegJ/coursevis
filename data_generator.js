@@ -230,7 +230,7 @@ function createPerfectData() {
   ];
 }
 
-function createCommitmentData() {
+function createOldCommitmentData() {
   return [
     {"key": "I plan to meet my matches", "value": 854}, 
     {"key": "I will potentially meet with my matches", "value": 3006},
@@ -239,19 +239,19 @@ function createCommitmentData() {
   ];
 }
 
-function createFakeCommitmentData() {
+function createNewCommitmentData() {
   return [
-    {"key": "I plan to meet my matches", "value": 454}, 
-    {"key": "I will potentially meet with my matches", "value": 3506},
-    {"key": "I just want to meet new people", "value": 1252},
-    {"key": "I am taking this for fun and will probably not make an effort to meet", "value": 806}
-  ];
+    {"key":"I plan to meet my matches", "value":415},
+    {"key":"I will potentially meet with my matches", "value":922},
+    {"key":"I just want to meet new people", "value":313},
+    {"key":"I am taking this for fun and will probably not make an effort to meet", "value":77},
+  ]
 }
 
 function createFemaleAgePref(){ //need a space after each number because we are doing some sketchy sorting lmao 
 
   return [
-  {
+  {  
   "18 and under":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,117,118,102,65,36,9,6,4,2,2,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   "19 ":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,129,260,265,243,172,80,33,15,6,4,4,4,4,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   "20 ":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,176,284,289,260,176,100,65,27,12,8,7,6,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],

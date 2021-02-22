@@ -150,7 +150,7 @@ function  drawPoliticalDonut(svgClass) {
         .attr("class", "political_label")
         .attr("x", 100)
         .attr("y", 50-7.5)
-        .text("percentage of participants listed")
+        .text("percentage of participants who")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");
@@ -158,7 +158,7 @@ function  drawPoliticalDonut(svgClass) {
         .attr("class", "political_label")
         .attr("x", 100)
         .attr("y", 50+7.5)
-        .text("politics as a dealbreaker")
+        .text("listed politics as a dealbreaker")
         .style("font-family", "Inconsolata")
         .style("font-weight", "bold")
             .style("font-size", "12px");

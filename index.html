@@ -33,8 +33,12 @@
 		<!-- <h4 style="margin-top: 50px; margin-bottom: 50px;"> There's hope for people seeking partners of the same sex too. 14.7% of men and 14.6% of women who took perfect match indicated that they would like to be matched with a partner of the same sex.</h4>
 		<svg height="500" width="800" class="genderPrefChart"></svg> -->
 
+		<h4 style="margin-top: 25px;"> Participants were 60% more likely to say they were willing to meet their matches in 2021 compared to 2020.</h4>
+		<svg height="450" width="800" class="commitmentComparisonChart"></svg>
+
+<!-- 		
 		<h4 style="margin-top: 25px;"> We have good news for people looking to get cuffed! We asked participants to give their commitment levels, and more than half of participants responded that they were willing to meet or planned to meet their matches. </h4>
-		<svg height="450" width="800" class="commitmentBar"></svg>
+		<svg height="450" width="800" class="commitmentBar"></svg> -->
 
 		<h4> Participants also gave the minimum and maximum ages they would be willing to be matched with.  We expected men and women to answer differently, but we were not prepared for just how differently men and women responded. This is a look at how age preferences broke down by gender*.  </h4>
 		<svg height="425" width="800" class="agePrefChart"></svg>
@@ -89,7 +93,6 @@
 			let initialData = await d3.csv("answer.csv");
 
 			jsonData = await d3.json("users.json");
-			console.log(jsonData);
 
 			// let genderMap = getSummary(jsonData, "gender", "profile");
 			// let ethnicityMap = getSummary(jsonData, "race", "profile", true);
@@ -98,43 +101,46 @@
 			// let collegeMap = getSummary(jsonData, "college", "survey");
 			// let finalObj = {...genderMap, ...yearMap, ...ethnicityMap, ...activitiesMap, ...collegeMap, ...femaleHeightMap, ...maleHeightMap};
 
+			let newCommitmentData = getSummary(jsonData, "commitment", "survey");
+
+
 			// finalCSV = d3.csvFormat([finalObj]);
 			// let sleepTimeMap = getSleepHabits(jsonData, true);
 			// let wakeTimeMap = getSleepHabits(jsonData, false);
 
 			requestFinalData();
 
-			let todoMap = getSummary(initialData, "data.todolist");
-			let startOverMap = getSummary(initialData, "data.startover");
-			let timeMoneyMap = getSummary(initialData, "data.timeormoney");
-			let qualityMap = getSummary(initialData, "data.quality");
-			let planMap = getSummary(initialData, "data.plans");
-			let workMap = getSummary(initialData, "data.work");
-			let mealMap = getSummary(initialData, "data.meal");
+			// let todoMap = getSummary(initialData, "data.todolist");
+			// let startOverMap = getSummary(initialData, "data.startover");
+			// let timeMoneyMap = getSummary(initialData, "data.timeormoney");
+			// let qualityMap = getSummary(initialData, "data.quality");
+			// let planMap = getSummary(initialData, "data.plans");
+			// let workMap = getSummary(initialData, "data.work");
+			// let mealMap = getSummary(initialData, "data.meal");
 
-			let personalityMap = getPersonalities(initialData, "data.college");
-			let pMapByGender = getPersonalities(initialData, "data.gender");
+			// let personalityMap = getPersonalities(initialData, "data.college");
+			// let pMapByGender = getPersonalities(initialData, "data.gender");
 
-			let pMap = getSummary(initialData, "personality");
+			// let pMap = getSummary(initialData, "personality");
 
-			let fridayMap = getSummary(initialData, "data.friday");
-			let dateMap = getSummary(initialData, "data.date");
-			let perfectMap = getSummary(initialData, "data.perfectday");
+			// let fridayMap = getSummary(initialData, "data.friday");
+			// let dateMap = getSummary(initialData, "data.date");
+			// let perfectMap = getSummary(initialData, "data.perfectday");
 
-			let commitment = getSummary(initialData, "data.commitment");
+			// let commitment = getSummary(initialData, "data.commitment");
 			
-			let advMe = getSummary(initialData, "data.describepartner", "", true);
+			// let advMe = getSummary(initialData, "data.describepartner", "", true);
 
-			let femaleAgePref = getAgePreferences(jsonData, true);
-			let maleAgePref = getAgePreferences(jsonData, false);
+			// let femaleAgePref = getAgePreferences(jsonData, true);
+			// let maleAgePref = getAgePreferences(jsonData, false);
 
-			let genderPref = getGenderPreferences(initialData);
+			// let genderPref = getGenderPreferences(initialData);
 
-			let femaleTopWords = getTopWords(jsonData, true);
-			let maleTopWords = getTopWords(jsonData, false);
+			// let femaleTopWords = getTopWords(jsonData, true);
+			// let maleTopWords = getTopWords(jsonData, false);
 
-			let political_preferences = (jsonData);
-			let political_dealbreaker = getDealBreakerPercent(jsonData);			
+			// let political_preferences = (jsonData);
+			// let political_dealbreaker = getDealBreakerPercent(jsonData);			
 		};
 
 		const requestFinalData = async () => {
