@@ -82,7 +82,9 @@ function drawHeightChart(svgClass) {
   let tempMaleHeight = maleHeight.slice(21);
   var sixFeetMale = tempMaleHeight.reduce(function(a, b){ return a + b;}, 0);
   let totalMale = maleHeight.reduce(function(a, b){ return a + b;}, 0);
+
   drawFunFact(svgClass, 100, 350, 20, ((sixFeetMale/totalMale)*100).toFixed(0), blueColor);
+
   heightSvg.append("text")
     .attr("x", 100 + 20 + 10)
     .attr("y", 350)
@@ -91,6 +93,30 @@ function drawHeightChart(svgClass) {
     .style("font-weight", "bold")
     .style("alignment-baseline", "middle")
     .style("font-size", "12px");
+
+  drawFunFact(svgClass, 550, 25, 20, "6'0", coralColor);
+
+  heightSvg.append("text")
+  .attr("x", 550 + 25 + 10)
+  .attr("y", 20)
+  .text("median height of male humec students")
+  .style("font-family", "Inconsolata")
+  .style("font-weight", "bold")
+  .style("alignment-baseline", "middle")
+  .style("font-size", "12px");
+
+  // drawFunFact(svgClass, 550, 70, 15, "5'9", blueColor);
+
+  // heightSvg.append("text")
+  // .attr("x", 550 + 25 + 10)
+  // .attr("y", 70)
+  // .text("median height of male aap students")
+  // .style("font-family", "Inconsolata")
+  // .style("font-weight", "bold")
+  // .style("alignment-baseline", "middle")
+  // .style("font-size", "12px");
+
+
 
   // no-hover tool tips - female median height comment
   // var medianFemale = calculateMedianForHeight(femaleHeight);
