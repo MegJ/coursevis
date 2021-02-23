@@ -49,7 +49,7 @@ function drawAgeChart(svgClass) {
         .style("font-weight", "bold")
         .style("font-family", "Inconsolata")
         .style("font-size", "12px");
-
+    
     drawMap(svgClass, heatmapSvg, true); //draw first time
 }
 
@@ -81,6 +81,61 @@ function drawMap(svgClass, heatmapSvg, isFemale){
     let colorScale =  d3.scaleLinear([0, 40], ["white", coralColor])
     .interpolate(d3.interpolateRgb.gamma(0.5))
     .domain([0,  d3.max(heatmapData, function(d) {return d.total/collegeTotal[d.college]})]);
+
+//add legend
+    let legendColorScale = d3.scaleLinear([0, 40], ["white", coralColor])
+    .interpolate(d3.interpolateRgb.gamma(0.5))
+    .domain([0, 5]);
+
+  
+  d3.selectAll(".heatMapRect")
+      .data([0, 1, 2, 3, 4, 5])
+      .enter()
+      .append('rect')
+      .attr('class', ".heatMapLegend")
+      .attr("id", function(d) {
+        return "heatmap_" + d})
+      .attr("y", 50)
+      .attr("x", 100)
+      .attr("rx", 40)
+      .attr("ry", 40)
+      .attr("width", 111)
+      .attr("height", 111)
+      .style("fill", "black");
+
+
+    heatmapSvg.selectAll(".heatMapRect")
+      .data([0, 1, 2, 3, 4, 5])
+      .enter()
+      .append('rect')
+      .attr("class", "heatmap_rect")
+      .attr("y", 300)
+      .attr("x", function(d, i) { return d * gridSize + (13 * gridSize); })
+      .attr("rx", 4)
+      .attr("ry", 4)
+      .attr("width", gridSize-gridSpacing)
+      .attr("height", gridSize-gridSpacing)
+      .style("fill", function(d) {;return legendColorScale(d);})  
+    
+      heatmapSvg.append("text")
+      .attr("class", "legend_label")
+      .attr("x", gridSize * 13)
+      .attr("y", 315)
+      .text("less")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+          .style("font-size", "12px");
+
+              
+      heatmapSvg.append("text")
+      .attr("class", "legend_label")
+      .attr("x", gridSize * 19)
+      .attr("y", 315)
+      .text("more")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+          .style("font-size", "12px");
+
 
 
     
@@ -215,3 +270,5 @@ function drawMap(svgClass, heatmapSvg, isFemale){
       .style("font-family", "Inconsolata")
       .style("font-size", "12px");
   }
+
+  

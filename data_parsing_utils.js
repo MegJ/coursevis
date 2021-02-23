@@ -141,6 +141,42 @@ function checkOptInAndNull(data, prefix, str) {
   return data != null && data[prefix] != null && data[prefix][str] != null && data["profile"]["optIn"]
 }
 
+function getMaleHeightsByCollege(data){
+  let gender = "male"; 
+  let college_to_height = 
+  {
+    "aap": [],
+    "arts": [],
+    "cals": [],
+    "engineering": [],
+    "hotel": [],
+    "humec": [],
+    "ilr": [],
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    if(data[i] != null && data[i]["profile"] != null && data[i]["survey"] != null && data[i]["profile"]["optIn"] == true && data[i]["profile"]["gender"] == gender){
+    try {
+      let participant_height = parseInt(data[i]["profile"]["height"]);
+      let college = data[i]["survey"]["college"]
+
+      college_to_height[college].push(participant_height);
+    } finally {
+
+    }
+  }
+}
+
+for(var college in college_to_height){
+  college_to_height[college].sort();
+  let midpoint = parseInt(college_to_height[college].length / 2)
+  college_to_height[college] = college_to_height[college][midpoint];
+}
+
+  return college_to_height;
+}
+
+
 function getAgePreferences(data, isFemale){ // returns map of shape age to how many people willing to date
 
   let key;
