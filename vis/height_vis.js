@@ -97,8 +97,16 @@ function drawHeightChart(svgClass) {
 
   heightSvg.append("text")
   .attr("x", 550 + 25 + 10)
-  .attr("y", 20)
+  .attr("y", 25-7.5)
   .text("median height of male humec students")
+  .style("font-family", "Inconsolata")
+  .style("font-weight", "bold")
+  .style("alignment-baseline", "middle")
+  .style("font-size", "12px");
+  heightSvg.append("text")
+  .attr("x", 550 + 25 + 10)
+  .attr("y", 25+7.5)
+  .text("(humec is the \"tallest\" college)")
   .style("font-family", "Inconsolata")
   .style("font-weight", "bold")
   .style("alignment-baseline", "middle")
