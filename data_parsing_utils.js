@@ -28,7 +28,6 @@ function getSummary(data, str, prefix = "survey", isList = false) {
         }
       }
     }
-    
   }
 
   // reformat keys for race
@@ -110,6 +109,32 @@ function convertDemoDataToMap(data) {
     }
   }
   return finalMap;
+}
+
+function getWordsData(data, str, isFemale) {
+    let map = {};
+    let gender = isFemale ? "female" : "male";
+  
+    for (let i = 0; i < data.length; i++) {
+      if (checkOptInAndNull(data[i], "profile", "gender") 
+        && data[i]["profile"]["gender"] == gender
+        && checkOptInAndNull(data[i], "survey", str)) {
+
+          let keys = data[i]["survey"][str].split(",");
+          for (let j = 0; j < keys.length; j++) {
+            let key = keys[j].trim().toLowerCase();
+            if (key != "") { // remove unfinished surveys
+              if (!map[key]) {
+                map[key] = 1;
+              } else {
+                map[key] = map[key] + 1;
+              }
+            }
+          }
+      }
+    }
+
+    return map;
 }
 
 function checkOptInAndNull(data, prefix, str) {
@@ -537,7 +562,7 @@ function printSortMap(map) {
   });
   
   for (let i = 0; i < sortedMap.length; i++) {
-    // console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
+    console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
   }
 }
    
