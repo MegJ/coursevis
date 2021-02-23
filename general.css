@@ -1,0 +1,33 @@
+.tooltip {
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #F0F0F0;
+  color: #fff;
+  text-align: center;
+  /* text-anchor: middle; */
+  border-radius: 6px;
+  padding: 5px 0;
+  /* position: absolute; */
+  z-index: 1;
+  position: fixed;
+  bottom: 50;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  /* position: absolute; */
+  /* margin-left: -5px; */
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
