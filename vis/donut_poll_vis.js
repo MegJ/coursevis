@@ -7,7 +7,7 @@ function drawPollDonuts(svgClass) {
   let startOverData = createStartOverData();
   let timeMoneyData = createTimeMoneyData();
   let qualityData = createBestQualityData();
-  let plansData = createPlansData();
+  let plansData = createFriayPlansData();
   let productiveData = createProductiveData();
 
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
@@ -22,7 +22,7 @@ function drawPollDonuts(svgClass) {
   addPollText(pollSvg, 600, 600, outerRadius,"What quality do you value", "the most?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_quality", qualityData, 600, 600);
 
-  addPollText(pollSvg, 200, 1000, outerRadius,"Your plans get messed up", "for the day. You would…?");
+  addPollText(pollSvg, 200, 1000, outerRadius,"What would an average (post-covid)", "Friday night look like?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_plans", plansData, 200, 1000);
 
   addPollText(pollSvg, 600, 1000, outerRadius,"At what time of day are", "you most productive?");
@@ -40,6 +40,31 @@ function drawPollDonuts(svgClass) {
     .style("font-size", 12);
   pollSvg.append("path")
     .attr("d", "M 605 350 L 650 350 L 650 300")
+    .style("stroke", darkTextColor)
+    .style("stroke-width", 2)
+    .style("fill", "none");
+
+  // add annotation for "friday night" results
+  pollSvg.append("text")
+    .attr("x", 205)
+    .attr("y", 1165)
+    .text("Netflix party is always a covid-safe")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("text-anchor", "start")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 12);
+  pollSvg.append("text")
+    .attr("x", 205)
+    .attr("y", 1165+15)
+    .text("alternative for Friday nights.")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("text-anchor", "start")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 12);
+  pollSvg.append("path")
+    .attr("d", "M 210 1100 L 210 1155")
     .style("stroke", darkTextColor)
     .style("stroke-width", 2)
     .style("fill", "none");

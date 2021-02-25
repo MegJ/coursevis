@@ -245,13 +245,14 @@ function getPersonalityTotalData() {
   ];
 }
 
-function createFridayData() {
+function createFriayPlansData() {
   return [
-    {"key": "pjs & netflix", "total": 2119},
-    {"key": "mixer", "total": 1245},
-    {"key": "netflix & chill", "total": 773},
-    {"key": "bars", "total": 699},
-    {"key": "annex", "total": 416},
+    {"key": "pjs & netflix", "value": 1552},
+    {"key": "netflix & chill", "value": 593},
+    {"key": "mixer", "value": 795},
+    {"key": "bars", "value": 462},
+    {"key": "frat party", "value": 419},
+    {"key": "study", "value": 292}
   ];
 }
 
