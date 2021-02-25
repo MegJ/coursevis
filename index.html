@@ -109,8 +109,9 @@
 
 			let tempData = await d3.json("usersAnon.json");
 			console.log(tempData);
-			console.log(getHeightList(tempData, true));
-			console.log(getHeightList(tempData, false));
+			console.log(getHeightList(tempData, true))
+			console.log(recastSleepData(getSleepHabits(tempData, true), true));
+			// console.log(recastSleepData(getSleepHabits(tempData, false), false));
 
 			requestFinalData();			
 		};

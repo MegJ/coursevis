@@ -503,6 +503,10 @@ function getSleepHabits(data, isSleep) {
         time = "2"
       }
 
+      if (time == 5) {
+        console.log(data[i])
+      }
+
       if (Number.isInteger(+time) && +time < 13 && +time > 0) {
         if (!map[time]) {
           map[time] = 1;
