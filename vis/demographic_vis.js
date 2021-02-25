@@ -8,6 +8,8 @@ function drawBarChart(svgClass) {
   let activitiesData = convertDemoDataToMap(getSummary(jsonData, "activities", "survey", true));
   let collegeData = convertDemoDataToMap(getSummary(jsonData, "college", "survey"));
 
+  let ithacaData = convertDemoDataToMap(getSummary(jsonData, "in_ithaca", "survey"));
+
   let barSvg = d3.select(svgClass);
   
   // addTotalSignupText(barSvg)
@@ -29,7 +31,7 @@ function drawBarChart(svgClass) {
     drawTotalText(barSvg, x, y, genderData, barWidth, 5);
   
     // key for bar chart
-     let barLegend = ["gender", "year", "ethnicity", "college", "activities"];
+     let barLegend = ["gender", "year", "ethnicity", "college", "activities", "location"];
 
      // create legend
      d3.select(svgClass).append("g")
@@ -87,6 +89,13 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, activitiesData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, activitiesData, barWidth, 5);
+          redrawXAxis(barSvg, x, maxBarHeight, true);
+        } else if (d == "location"){
+          x = getBarX(ithacaData, firstSvgWidth, "key");
+          y = getBarY(ithacaData, firstSvgHeight);
+
+          drawBars(barSvg, x, y, ithacaData, maxBarHeight, barWidth, coralColor);
+          drawTotalText(barSvg, x, y, ithacaData, barWidth, 5);
           redrawXAxis(barSvg, x, maxBarHeight, true);
         }
       });
