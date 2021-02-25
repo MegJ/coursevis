@@ -440,8 +440,6 @@ function getHeightList(data, isFemale) {
     }
   }
 
-  console.log(map);
-
   let finalList = [];
   // convert map to list
   for (let i = minHeight; i < maxHeight; i++) {
@@ -501,10 +499,6 @@ function getSleepHabits(data, isSleep) {
         time = "7"
       } else if (time == "2.00") {
         time = "2"
-      }
-
-      if (time == 5) {
-        console.log(data[i])
       }
 
       if (Number.isInteger(+time) && +time < 13 && +time > 0) {
