@@ -146,35 +146,36 @@ function createWakeData() {
 
 function createMealData() {
   return [
-    {"key": "artist", "value": 2323},
-    {"key": "entrepreneur", "value": 820},
-    {"key": "actor", "value": 804},
-    {"key": "athlete", "value": 655},
-    {"key": "politician", "value": 510},
-    {"key": "scientist", "value": 506}
+    {"key": "artist", "value": 1791},
+    {"key": "entrepreneur", "value": 522},
+    {"key": "actor", "value": 553},
+    {"key": "athlete", "value": 435},
+    {"key": "politician", "value": 391},
+    {"key": "scientist", "value": 421}
   ];
 }
 
 function createBestQualityData() {
   return [
-    {"key": "reliability", "value": 1401},
-    {"key": "humor", "value": 1193},
-    {"key": "independence", "value": 363},
-    {"key": "thoughtfulness", "value": 2661}
+    {"key": "reliability", "value": 1106},
+    {"key": "humor", "value": 818},
+    {"key": "independence", "value": 279},
+    {"key": "thoughtfulness", "value": 1910}
   ];
 }
 
 function createTimeMoneyData() {
   return [
-    {"key": "time", "value": 3844},
-    {"key": "money", "value": 1774}
+    {"key": "time", "value": 2691},
+    {"key": "money", "value": 890},
+    {"key": "influence", "value": 532}
   ];
 }
 
 function createStartOverData() {
   return [
-    {"key": "yes", "value": 3460},
-    {"key": "no", "value": 2158}
+    {"key": "yes", "value": 1641},
+    {"key": "no", "value": 2472}
   ];
 }
 

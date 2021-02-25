@@ -3,10 +3,14 @@ function drawPollDonuts(svgClass) {
   let outerRadius = 120;
   let pollSvg = d3.select(svgClass);
 
-  let mealData = convertDemoDataToMap(getSummary(jsonData, "meal", "survey"));
-  let startOverData = convertDemoDataToMap(getSummary(jsonData, "startover", "survey"));
-  let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
-  let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
+  // let mealData = convertDemoDataToMap(getSummary(jsonData, "meal", "survey"));
+  // let startOverData = convertDemoDataToMap(getSummary(jsonData, "startover", "survey"));
+  // let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
+  // let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
+  let mealData = createMealData();
+  let startOverData = createStartOverData();
+  let timeMoneyData = createTimeMoneyData();
+  let qualityData = createBestQualityData();
 
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_meal", mealData, 200, 200);
@@ -21,11 +25,10 @@ function drawPollDonuts(svgClass) {
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_quality", qualityData, 600, 600);
 
   // add annotation for "start over" result increase
-  var math = (startOverData[0]["value"]/(startOverData[0]["value"] + startOverData[1]["value"]) - 0.384)*100;
   pollSvg.append("text")
     .attr("x", 600)
     .attr("y", 350)
-    .text("There is a " + math.toFixed(1) + "% increase from 2020. ")
+    .text("There is a " + 59 + "% increase from 2020. ")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("text-anchor", "end")

@@ -109,7 +109,10 @@
 
 			let tempData = await d3.json("usersAnon.json");
 			// console.log(tempData);
-			
+			console.log(getSummary(tempData, "meal", "survey"));
+			console.log(getSummary(tempData, "startover", "survey"));
+			console.log(getSummary(tempData, "timeormoney", "survey"));
+			console.log(getSummary(tempData, "quality", "survey"));
 			requestFinalData();			
 		};
 
