@@ -96,7 +96,7 @@ function drawBarChart(svgClass) {
 
           drawBars(barSvg, x, y, ithacaData, maxBarHeight, barWidth, coralColor);
           drawTotalText(barSvg, x, y, ithacaData, barWidth, 5);
-          redrawXAxis(barSvg, x, maxBarHeight, true);
+          redrawXAxis(barSvg, x, maxBarHeight);
         }
       });
 
