@@ -179,6 +179,39 @@ function createStartOverData() {
   ];
 }
 
+function createPlansData() {
+  return [
+    {"key": "cancel plans", "value": 40},
+    {"key": "go with the flow", "value": 2638},
+    {"key": "shift plans", "value": 1226},
+    {"key": "make new plans", "value": 209}
+  ];
+}
+
+function createInterestsData() {
+  return [
+    {"key": "food", "value": 2269},
+    {"key": "music", "value": 2158},
+    {"key": "travel", "value": 2147},
+    {"key": "tech", "value": 1662},
+    {"key": "film", "value": 1646},
+    {"key": "fitness", "value": 1294},
+    {"key": "sports", "value": 959},
+    {"key": "literature", "value": 958},
+    {"key": "games", "value": 798},
+    {"key": "art", "value": 713},
+  ];
+}
+
+function createProductiveData() {
+  return [
+    {"key": "nocturnal", "value": 634},
+    {"key": "morning", "value": 1007},
+    {"key": "afternoon", "value": 1032},
+    {"key": "evening", "value": 1440}
+  ];
+}
+
 function createPersonalityByCollegeData() {
   return {
     "aap": {"INTJ": 4, "INTP": 4, "ENTJ": 3, "ENTP": 17, "INFJ": 1, "INFP": 3, "ENFJ": 1, "ENFP": 3, "ISTP": 24, "ISFP": 8, "ESTP": 26, "ESFP": 10, "ISTJ": 9, "ISFJ": 3, "ESTJ": 6, "ESFJ": 2},

@@ -3,10 +3,12 @@ function drawPollDonuts(svgClass) {
   let outerRadius = 120;
   let pollSvg = d3.select(svgClass);
 
- let mealData = createMealData();
+  let mealData = createMealData();
   let startOverData = createStartOverData();
   let timeMoneyData = createTimeMoneyData();
   let qualityData = createBestQualityData();
+  let plansData = createPlansData();
+  let productiveData = createProductiveData();
 
   addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_meal", mealData, 200, 200);
@@ -19,6 +21,12 @@ function drawPollDonuts(svgClass) {
 
   addPollText(pollSvg, 600, 600, outerRadius,"What quality do you value", "the most?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_quality", qualityData, 600, 600);
+
+  addPollText(pollSvg, 200, 1000, outerRadius,"Your plans get messed up", "for the day. You would…?");
+  createSingleDonut(innerRadius, outerRadius, pollSvg, "path_plans", plansData, 200, 1000);
+
+  addPollText(pollSvg, 600, 1000, outerRadius,"At what time of day are", "you most productive?");
+  createSingleDonut(innerRadius, outerRadius, pollSvg, "path_productive", productiveData, 600, 1000);
 
   // add annotation for "start over" result increase
   pollSvg.append("text")
