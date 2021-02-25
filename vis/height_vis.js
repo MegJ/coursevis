@@ -1,8 +1,8 @@
 function drawHeightChart(svgClass) {
   let midwayPoint = secSvgHeight/2;
 
-  let femaleHeight = getHeightList(jsonData, true);
-  let maleHeight = getHeightList(jsonData, false);
+  let femaleHeight = createFemaleHeightData();
+  let maleHeight = createMaleHeightData();
 
   let x = d3.scaleLinear()
     .domain([minHeight, femaleHeight.length+minHeight])
@@ -78,11 +78,11 @@ function drawHeightChart(svgClass) {
     .style("text-anchor", "end");
 
   // annotation for % > 6ft
-  let tempMaleHeight = maleHeight.slice(21);
+  let tempMaleHeight = maleHeight.slice(17);
   var sixFeetMale = tempMaleHeight.reduce(function(a, b){ return a + b;}, 0);
   let totalMale = maleHeight.reduce(function(a, b){ return a + b;}, 0);
 
-  drawFunFact(svgClass, 100, 350, 20, ((sixFeetMale/totalMale)*100).toFixed(0), blueColor);
+  drawFunFact(svgClass, 100, 350, 20, 34, blueColor);
 
   heightSvg.append("text")
     .attr("x", 100 + 20 + 10)
@@ -126,43 +126,43 @@ function drawHeightChart(svgClass) {
 
 
   // no-hover tool tips - female median height comment
-  // var medianFemale = calculateMedianForHeight(femaleHeight);
-  // heightSvg.append("circle")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("cx", x(medianFemale))
-  //   .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
-  //   .attr("r", 4)
-  //   .style('stroke-width', 2)
-  //   .style('fill-opacity', 0)
-  //   .style("stroke", darkTextColor);
-  // heightSvg.append("text")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x", x(medianFemale)+10)
-  //   .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
-  //   .text("median height: " + (medianFemale) + " in")
-  //   .style("font-family", "Inconsolata")
-  //   .style("font-weight", "bold")
-  //   .style("font-size", "12px");
+  var medianFemale = calculateMedianForHeight(femaleHeight);
+  heightSvg.append("circle")
+    .attr("class", "nohover_tooltip")
+    .attr("cx", x(medianFemale))
+    .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
+    .attr("r", 4)
+    .style('stroke-width', 2)
+    .style('fill-opacity', 0)
+    .style("stroke", darkTextColor);
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(medianFemale)+10)
+    .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
+    .text("median height: " + (medianFemale) + " in")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("font-size", "12px");
 
   // male median height comment
-  // var medianMale = calculateMedianForHeight(maleHeight);
-  // heightSvg.append("circle")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("cx", x(medianMale))
-  //   .attr("cy", ymale(maleHeight[medianMale-minHeight]))
-  //   .attr("r", 4)
-  //   .style('stroke-width', 2)
-  //   .style('fill-opacity', 0)
-  //   .style("stroke", darkTextColor);
-  // heightSvg.append("text")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x", x(medianMale)-5)
-  //   .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
-  //   .text("median height: " + medianMale + " in")
-  //   .style("font-family", "Inconsolata")
-  //   .style("font-weight", "bold")
-  //   .style("text-anchor", "end")
-  //   .style("font-size", "12px");
+  var medianMale = calculateMedianForHeight(maleHeight);
+  heightSvg.append("circle")
+    .attr("class", "nohover_tooltip")
+    .attr("cx", x(medianMale))
+    .attr("cy", ymale(maleHeight[medianMale-minHeight]))
+    .attr("r", 4)
+    .style('stroke-width', 2)
+    .style('fill-opacity', 0)
+    .style("stroke", darkTextColor);
+  heightSvg.append("text")
+    .attr("class", "nohover_tooltip")
+    .attr("x", x(medianMale)-5)
+    .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
+    .text("median height: " + medianMale + " in")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("text-anchor", "end")
+    .style("font-size", "12px");
 
   // 6ft comment
   // heightSvg.append("circle")

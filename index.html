@@ -86,7 +86,8 @@
 		var thirdSvgHeight = 500;
 		var commitmentSvgHeight = 450;
 		
-		var minHeight = 51; 
+		var minHeight = 55;
+		var maxHeight = 81; 
 
 		var darkTextColor = "#505050";
 		var maroonColor = "#FF7882";
@@ -107,7 +108,9 @@
 			jsonData = await d3.json("users.json");
 
 			let tempData = await d3.json("usersAnon.json");
-			console.log(getSummary(tempData, "in_ithaca", "survey"));
+			console.log(tempData);
+			console.log(getHeightList(tempData, true));
+			console.log(getHeightList(tempData, false));
 
 			requestFinalData();			
 		};

@@ -415,7 +415,7 @@ function getHeightList(data, isFemale) {
   }
 
   // initialize map
-  for (let i = 50; i < 85; i++) {
+  for (let i = minHeight; i < maxHeight; i++) {
     map[i] = 0;
   }
 
@@ -426,13 +426,13 @@ function getHeightList(data, isFemale) {
         let height = data[i]["profile"]["height"];
 
         // convert feet to inches
-        if (height < 50) {
+        if (height < minHeight) {
           height = height * 12;
         }
 
         height = (+height).toFixed(0);
 
-        if (height < 85 && height > 50) {
+        if (height < maxHeight && height > minHeight) {
           map[height] = map[height] + 1;
         }
         
@@ -440,10 +440,12 @@ function getHeightList(data, isFemale) {
     }
   }
 
+  console.log(map);
+
   let finalList = [];
   // convert map to list
-  for (let i = 50; i < 85; i++) {
-    finalList[i-50] = map[i];
+  for (let i = minHeight; i < maxHeight; i++) {
+    finalList[i-minHeight] = map[i];
   }
 
   return finalList;

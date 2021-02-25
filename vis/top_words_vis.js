@@ -4,8 +4,6 @@ function drawTopWordsChart(svgClass, isDescribeSelf, uniqueKey) {
   let maleData = isDescribeSelf ? createMaleWordsForSelf() : createMaleWordsForPartner();
   let femaleData = isDescribeSelf ? createFemaleWordsForSelf() : createFemaleWordsForPartner();
 
-  // console.log(jsonData);
-  console.log(printSortMap(getWordsData(jsonData, "describepartner", true)));
   let wordSvg = d3.select(svgClass);
   let catData = isDescribeSelf ? ["Career", "Agreeableness", "Extraversion"] : ["Career", "Physical", "Agreeableness", "Extraversion"];
   
