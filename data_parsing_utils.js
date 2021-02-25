@@ -570,7 +570,7 @@ function printSortMap(map) {
   });
   
   for (let i = 0; i < sortedMap.length; i++) {
-    // console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
+    console.log(sortedMap[i][0] + ": " + sortedMap[i][1]);
   }
 }
    

@@ -32,10 +32,11 @@ function drawTopWordsChart(svgClass, isDescribeSelf, uniqueKey) {
       .attr("y", (d, i) => isDescribeSelf ? (chartHeight-(padding*12))/4*(i+1)+padding*6 : (chartHeight-(padding*12))/4*(i+1)+padding*6)
       .text((d) => d)
       .style("text-anchor", "middle")
+      .style("font-weight", "bold")
       .style("alignment-baseline", "middle")
       .style("font-family", "Inconsolata")
       .style("fill", (d,i) => (i==0) ? darkTextColor : lightGreyColor)
-      .style("font-size", "20px")
+      .style("font-size", "25px")
       .style("cursor", "pointer")
       .on("mouseover", function(d) {
         d3.selectAll(".categories"+uniqueKey).style("fill", lightGreyColor);
@@ -54,7 +55,7 @@ function drawTopWordsChart(svgClass, isDescribeSelf, uniqueKey) {
     .style("text-anchor", "middle")
     .style("alignment-baseline", "middle")
     .style("font-family", "Inconsolata")
-    .style("font-size", "20px");
+    .style("font-size", "25px");
 
   // add legend
   wordSvg.append("line")
@@ -90,6 +91,41 @@ function drawTopWordsChart(svgClass, isDescribeSelf, uniqueKey) {
     .style("font-family", "Inconsolata")
     .style("font-size", "12px");
 
+  // add annotation for partner vis
+  if (!isDescribeSelf) {
+    // The most common "physical" adjective used to describe an ideal male partner was \"athletic\" and an ideal female partner was \"cute\"
+    wordSvg.append("text")
+      .attr("x", padding)
+      .attr("y", chartHeight-60)
+      .text("The most common \"physical\" adjective used")
+      .style("fill", darkTextColor)
+      .style("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("alignment-baseline", "middle")
+      .style("font-family", "Inconsolata")
+      .style("font-size", "12px");
+    wordSvg.append("text")
+      .attr("x", padding)
+      .attr("y", chartHeight-45)
+      .text("to describe an ideal male partner was \"athletic\" ")
+      .style("fill", darkTextColor)
+      .style("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("alignment-baseline", "middle")
+      .style("font-family", "Inconsolata")
+      .style("font-size", "12px");
+    wordSvg.append("text")
+      .attr("x", padding)
+      .attr("y", chartHeight-30)
+      .text("and an ideal female partner was \"cute\"")
+      .style("fill", darkTextColor)
+      .style("font-weight", "bold")
+      .style("text-anchor", "start")
+      .style("alignment-baseline", "middle")
+      .style("font-family", "Inconsolata")
+      .style("font-size", "12px");
+  }
+
 }
 
 function drawCircleSet(svg, data, isFemale, uniqueKey) {
@@ -100,8 +136,8 @@ function drawCircleSet(svg, data, isFemale, uniqueKey) {
     .range([padding*7, chartHeight-(padding*7)]);
 
   let r = d3.scaleSqrt()
-    .domain([20, 500])
-    .range([padding/4, padding*4]);
+    .domain([40, 1300])
+    .range([padding/4, padding*4.25]);
 
   // draw circles for female data
   svg.selectAll(".femaleCircles")
@@ -154,12 +190,12 @@ function drawCircleSet(svg, data, isFemale, uniqueKey) {
       .attr("y", d => y(d.position))
       .text(d => d.adjective)
       .style("fill", darkTextColor)
+      .style("font-weight", "bold")
       .style("text-anchor", isFemale ? "end" : "start")
       .style("alignment-baseline", "middle")
       .style("font-family", "Inconsolata")
       .style("font-size", "12px");
 
-  console.log(chartWidth)
   // add header for circle set
   svg.append("text")
       .attr("x",  d => isFemale ? (padding*8) : (chartWidth - padding*8))

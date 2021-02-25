@@ -320,40 +320,40 @@ function createFemaleTopWordsToDescribeSelf(){
 function createFemaleWordsForSelf() {
   return {
     "Career": [
-      {"adjective":"smart","count":86,"position":5},
-      {"adjective":"creative","count":66,"position":8},
-      {"adjective":"passionate","count":58,"position":12},
-      {"adjective":"ambitious","count":39,"position":19},
-      {"adjective":"independent","count":38,"position":20}
+      {"adjective":"smart","count":222,"position":5},
+      {"adjective":"creative","count":152,"position":10},
+      {"adjective":"passionate","count":115,"position":14},
+      {"adjective":"ambitious","count":102,"position":16},
+      // {"adjective":"independent","count":38,"position":}
       // {"adjective":"curious","count":28,"position":27},
       // {"adjective":"hardworking","count":26,"position":29},
       // {"adjective":"driven","count":23,"position":30}
     ],
     "Physical": [],
     "Agreeableness": [
-      {"adjective":"kind","count":115,"position":2},
-      {"adjective":"caring","count":111,"position":3},
-      {"adjective":"thoughtful","count":97,"position":4},
-      {"adjective":"loyal","count":65,"position":9},
-      {"adjective":"empathetic","count":46,"position":15}
+      {"adjective":"kind","count":265,"position":3},
+      {"adjective":"caring","count":284,"position":2},
+      {"adjective":"thoughtful","count":236,"position":4},
+      {"adjective":"loyal","count":166,"position":8},
+      {"adjective":"empathetic","count":110,"position":15},
       // {"adjective":"compassionate","count":36,"position":22},
-      // {"adjective":"honest","count":33,"position":23},
+      {"adjective":"honest","count":89,"position":19},
       // {"adjective":"reliable","count":28,"position":25},
       // {"adjective":"sweet","count":28,"position":26},
       // {"adjective":"charming","count":26,"position":28}
     ],
     "Extraversion": [
-      {"adjective":"funny","count":271,"position":1}, 
-      {"adjective":"outgoing","count":83,"position":6},
-      {"adjective":"adventurous","count":81,"position":7},
-      {"adjective":"chill","count":64,"position":10},
-      {"adjective":"easygoing","count":63,"position":11},
-      {"adjective":"fun","count":56,"position":13},
-      {"adjective":"friendly","count":55,"position":14},
-      {"adjective":"witty","count":46,"position":16},
-      {"adjective":"spontaneous","count":42,"position":17},
-      {"adjective":"bubbly","count":40,"position":18}
-      // {"adjective":"sarcastic","count":38,"position":21},
+      {"adjective":"funny","count":668,"position":1}, 
+      {"adjective":"outgoing","count":188,"position":7},
+      {"adjective":"adventurous","count":202,"position":6},
+      {"adjective":"chill","count":162,"position":9},
+      {"adjective":"easygoing","count":141,"position":11},
+      {"adjective":"fun","count":126,"position":12},
+      {"adjective":"friendly","count":119,"position":13},
+      {"adjective":"witty","count":99,"position":17},
+      // {"adjective":"spontaneous","count":87,"position":20},
+      {"adjective":"bubbly","count":87,"position":20},
+      {"adjective":"sarcastic","count":97,"position":18},
       // {"adjective":"energetic","count":31,"position":24}
     ]
   }
@@ -362,12 +362,12 @@ function createFemaleWordsForSelf() {
 function createMaleWordsForSelf() {
   return {
     "Career": [
-      {"adjective":"smart","count":127,"position":2},
-      {"adjective":"ambitious","count":37,"position":13},
-      {"adjective":"passionate","count":34,"position":14},
-      {"adjective":"curious","count":28,"position":16},
-      {"adjective":"creative","count":27,"position":18},
-      {"adjective":"confident","count":22,"position":20}
+      {"adjective":"smart","count":302,"position":2},
+      {"adjective":"ambitious","count":76,"position":14},
+      {"adjective":"passionate","count":76,"position":13},
+      {"adjective":"curious","count":82,"position":11},
+      {"adjective":"creative","count":57,"position":16},
+      {"adjective":"confident","count":48,"position":20}
       // {"adjective":"independent","count":18,"position":24},
       // {"adjective":"driven","count":17,"position":25},
       // {"adjective":"charismatic","count":16,"position":26},
@@ -375,24 +375,26 @@ function createMaleWordsForSelf() {
     ],
     "Physical": [],
     "Agreeableness": [
-      {"adjective":"caring","count":89,"position":3},
-      {"adjective":"kind","count":65,"position":4},
-      {"adjective":"thoughtful","count":63,"position":5},
-      {"adjective":"charming","count":46,"position":10},
-      {"adjective":"honest","count":38,"position":11},
-      {"adjective":"loyal","count":38,"position":12},
-      {"adjective":"empathetic","count":27,"position":17},
-      {"adjective":"reliable","count":24,"position":19}
+      {"adjective":"caring","count":206,"position":3},
+      {"adjective":"kind","count":161,"position":5},
+      {"adjective":"thoughtful","count":182,"position":4},
+      {"adjective":"charming","count":116,"position":8},
+      {"adjective":"honest","count":71,"position":13},
+      {"adjective":"loyal","count":70,"position":15},
+      // {"adjective":"empathetic","count":47,"position":21},
+      {"adjective":"reliable","count":49,"position":19}
       // {"adjective":"compassionate","count":18,"position":23},
       // {"adjective":"calm","count":14,"position":29}
     ],
     "Extraversion": [
-      {"adjective":"funny","count":269,"position":1}, 
-      {"adjective":"chill","count":57,"position":6},
-      {"adjective":"witty","count":53,"position":7},
-      {"adjective":"adventurous","count":52,"position":8},
-      {"adjective":"easygoing","count":47,"position":9},
-      {"adjective":"outgoing","count":33,"position":15}
+      {"adjective":"funny","count":645,"position":1}, 
+      {"adjective":"chill","count":121,"position":6},
+      {"adjective":"witty","count":104,"position":10},
+      {"adjective":"adventurous","count":115,"position":9},
+      {"adjective":"easygoing","count":118,"position":7},
+      {"adjective":"outgoing","count":81,"position":12},
+      {"adjective":"friendly","count":52,"position":17},
+      {"adjective":"fun","count":51,"position":18},
       // {"adjective":"spontaneous","count":21,"position":21},
       // {"adjective":"sarcastic","count":20,"position":22},
       // {"adjective":"goofy","count":15,"position":27},
@@ -404,30 +406,33 @@ function createMaleWordsForSelf() {
 function createMaleWordsForPartner() {
   return {
     "Career": [
-      {"adjective":"smart","count":162,"position":2},
-      {"adjective":"passionate","count":48,"position":8},
-      {"adjective":"intelligent","count":32,"position":13},
-      {"adjective":"ambitious","count":30,"position":15},
-      {"adjective":"independent","count":25,"position":18},
-      {"adjective":"confident","count":25,"position":19}
+      {"adjective":"smart","count":415,"position":2},
+      {"adjective":"passionate","count":105,"position":9},
+      {"adjective":"intelligent","count":83,"position":12},
+      {"adjective":"ambitious","count":63,"position":16},
+      {"adjective":"independent","count":47,"position":19},
+      {"adjective":"confident","count":70,"position":14}
     ],
     "Physical": [
-      {"adjective":"cute","count":27,"position":16}
+      {"adjective":"cute","count":53,"position":16}
     ],
     "Agreeableness": [
-      {"adjective":"caring","count":115,"position":3},
-      {"adjective":"kind","count":114,"position":4},
-      {"adjective":"thoughtful","count":64,"position":5},
-      {"adjective":"honest","count":40,"position":10},
-      {"adjective":"loyal","count":31,"position":14},
-      {"adjective":"charming","count":26,"position":17}
+      {"adjective":"caring","count":253,"position":4},
+      {"adjective":"kind","count":285,"position":3},
+      {"adjective":"thoughtful","count":148,"position":6},
+      {"adjective":"honest","count":86,"position":11},
+      {"adjective":"loyal","count":73,"position":13},
+      {"adjective":"charming","count":66,"position":15},
+      {"adjective":"reliable","count":53,"position":17},
+      {"adjective":"sweet","count":49,"position":18},
     ],
     "Extraversion": [
-      {"adjective":"funny","count":297,"position":1}, 
-      {"adjective":"adventurous","count":60,"position":6},
-      {"adjective":"fun","count":51,"position":7},
-      {"adjective":"outgoing","count":48,"position":9},
-      {"adjective":"chill","count":37,"position":12}
+      {"adjective":"funny","count":711,"position":1}, 
+      {"adjective":"adventurous","count":149,"position":5},
+      {"adjective":"fun","count":124,"position":7},
+      {"adjective":"outgoing","count":116,"position":8},
+      {"adjective":"chill","count":86,"position":10},
+      {"adjective":"spontaneous","count":45,"position":20}
     ]
   }
 }
@@ -435,32 +440,34 @@ function createMaleWordsForPartner() {
 function createFemaleWordsForPartner() {
   return {
     "Career": [
-      {"adjective":"smart","count":168,"position":3},
-      {"adjective":"intelligent","count":53,"position":10},
-      {"adjective":"ambitious","count":48,"position":12},
-      {"adjective":"confident","count":35,"position":17},
-      {"adjective":"passionate","count":31,"position":18}
+      {"adjective":"smart","count":413,"position":3},
+      {"adjective":"intelligent","count":120,"position":11},
+      {"adjective":"ambitious","count":108,"position":12},
+      {"adjective":"confident","count":95,"position":13},
+      {"adjective":"passionate","count":87,"position":17}
     ],
     "Physical": [
-        {"adjective":"athletic","count":27,"position":20}
+        {"adjective":"athletic","count":76,"position":20}
     ],
     "Agreeableness": [
-      {"adjective":"kind","count":207,"position":2},
-      {"adjective":"caring","count":132,"position":4},
-      {"adjective":"thoughtful","count":104,"position":5},
-      {"adjective":"loyal","count":87,"position":6},
-      {"adjective":"honest","count":54,"position":9},
-      {"adjective":"charming","count":50,"position":11},
-      {"adjective":"reliable","count":37,"position":14},
-      {"adjective":"nice","count":33,"position":16}
+      {"adjective":"kind","count":468,"position":2},
+      {"adjective":"caring","count":291,"position":4},
+      {"adjective":"thoughtful","count":251,"position":5},
+      {"adjective":"loyal","count":187,"position":6},
+      {"adjective":"honest","count":145,"position":9},
+      {"adjective":"charming","count":124,"position":10},
+      {"adjective":"reliable","count":90,"position":15},
+      {"adjective":"considerate","count":68,"position":18},
+      {"adjective":"empathetic","count":59,"position":20},
+      // {"adjective":"nice","count":33,"position":16}
     ],
     "Extraversion": [
-      {"adjective":"funny","count":553,"position":1}, 
-      {"adjective":"outgoing","count":85,"position":7},
-      {"adjective":"adventurous","count":74,"position":8},
-      {"adjective":"chill","count":39,"position":13},
-      {"adjective":"fun","count":36,"position":15},
-      {"adjective":"spontaneous","count":29,"position":19}
+      {"adjective":"funny","count":1306,"position":1}, 
+      {"adjective":"outgoing","count":174,"position":8},
+      {"adjective":"adventurous","count":185,"position":7},
+      {"adjective":"chill","count":93,"position":14},
+      {"adjective":"fun","count":88,"position":16},
+      {"adjective":"spontaneous","count":63,"position":19}
     ]
   }
 }
