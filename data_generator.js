@@ -253,10 +253,10 @@ function createOldCommitmentData() {
 
 function createNewCommitmentData() {
   return [
-    {"key":"I plan to meet my matches", "value":415},
-    {"key":"I will potentially meet with my matches", "value":922},
-    {"key":"I just want to meet new people", "value":313},
-    {"key":"I am taking this for fun and will probably not make an effort to meet", "value":77},
+    {"key":"I plan to meet my matches", "value":840},
+    {"key":"I will potentially meet with my matches", "value":2267},
+    {"key":"I just want to meet new people", "value":746},
+    {"key":"I am taking this for fun and will probably not make an effort to meet", "value":260},
   ]
 }
 

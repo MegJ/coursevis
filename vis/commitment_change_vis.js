@@ -8,14 +8,6 @@ function drawCommitmentComparisonChart(svgClass) {
     let oldCommitmentData = createOldCommitmentData();
     let newCommitmentData = createNewCommitmentData();
     let data = [oldCommitmentData, newCommitmentData];
-
-    // let max = d3.max([
-    //     d3.max(data[0].map(function(d){
-    //         return (d.value);
-    //     })),
-    //     d3.max(data[1].map(function(d){
-    //         return(d.value);
-    //     }))]);
     
     let oldCommitmentTotal = d3.sum(oldCommitmentData, d => d.value);
     let newCommitmentTotal = d3.sum(newCommitmentData, d=> d.value);

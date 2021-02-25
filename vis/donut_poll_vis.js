@@ -14,7 +14,7 @@ function drawPollDonuts(svgClass) {
   addPollText(pollSvg, 600, 200, outerRadius,"If you could start college", "all over again, would you?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_start_over", startOverData, 600, 200);
 
-  addPollText(pollSvg, 200, 600, outerRadius,"Would you rather have more", "time or more money?");
+  addPollText(pollSvg, 200, 600, outerRadius,"Would you rather have more", "time, money, or influence?");
   createSingleDonut(innerRadius, outerRadius, pollSvg, "path_time_money", timeMoneyData, 200, 600);
 
   addPollText(pollSvg, 600, 600, outerRadius,"What quality do you value", "the most?");

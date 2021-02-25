@@ -27,8 +27,7 @@
 </head>
 <body bgcolor = "white" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 900;font-family: Montserrat; font-size: 20; font-weight: bold; color: #505050; text-align: center;">
-		<h4 style="text-align: left;"> This page will update every hour, and we will add more graphs periodically. Our full slate of data visualizations will be released with results, so be sure to sign up!</h4>
-		<h4 style="text-align: left;">Thanks for taking Perfect Match! Here is a look at the results of this years survey! (It might take a bit to load).</h4>
+		<h4 style="text-align: left;">Thank you for taking Perfect Match! This year, 4273 participants signed up to meet their Perfect Match. Here is a look at the results of this year's survey!</h4>
 		<svg height="500" width="800" class="generalBar"></svg>
 		
 		<h4 style="text-align: left; margin-top: 25px; margin-bottom: 30px;"> This year we asked participants to both rate their political tendencies on a scale of 1 to 10, with 1 being the farthest left and 10 being the most right, and rate their political activity on a scale of 1 to 5.</h4>
@@ -37,7 +36,7 @@
 		<h4 style="text-align: left; margin-top: 50px; margin-bottom: 30px;"> Participants also gave the minimum and maximum ages they would be willing to be matched with.  We expected men and women to answer differently, but we were not prepared for just how differently men and women responded. This is a look at how age preferences broke down by gender*.  </h4>
 		<svg height="425" width="800" class="agePrefChart"></svg>
 
-		<h4 style="text-align: left; margin-top: 30px;">According to self-reported height data, male respondents were 50% more likely to be over 6' this year 🤨</h4>
+		<h4 style="text-align: left; margin-top: 30px;">For better or worse, height is one of the first qualities that people evaluate when looking for a significant other. Interested to see how your height compares to other students' on campus?</h4>
 		<svg height="400" width="800" class="heightChart"></svg>
 
 		<h4 style="text-align: left; margin-bottom: 50px;">Need to know the best time to plan a date or make an impromptu phone call? Here is the aggregate data on when people are most likely to fall asleep and wake up. </h4>
@@ -49,14 +48,8 @@
 		<h4 style="text-align: left;">We also asked participants to describe their ideal partners. Did the adjectives you used to describe yourself make it to this list? </h4>
 		<svg height="800" width="900" class="describePartnerChart"></svg>
 
-
 		<!-- <h4 style="margin-top: 50px; margin-bottom: 50px;"> There's hope for people seeking partners of the same sex too. 14.7% of men and 14.6% of women who took perfect match indicated that they would like to be matched with a partner of the same sex.</h4>
 		<svg height="500" width="800" class="genderPrefChart"></svg> -->
-
-<!-- 		
-		<h4 style="margin-top: 25px;"> We have good news for people looking to get cuffed! We asked participants to give their commitment levels, and more than half of participants responded that they were willing to meet or planned to meet their matches. </h4>
-		<svg height="450" width="800" class="commitmentBar"></svg> -->
-
 
 		<h4 style="text-align: left; margin-bottom: 50px;">Answers to our controversial questions remained pretty consistent between 2021 and 2020.  The biggest change from last year's results was the share of participants who said they would not start college again if given the chance.</h4>
 		<svg height="800" width="800" class="polls"></svg>
@@ -64,10 +57,10 @@
 		<!-- <h4 style="margin-top: 50px;">Based on how they responded to our survery questions, We also categorized students into 1 of 16 personalities on the Myers Briggs Type Indicator. While the science behind personality compatibilities is lacking, it is still fun to compare MBTI results with your perfect match as well as to see how you compare to students within your college. </h4>
 		<svg height="500" width="800" class="heatmap"></svg> -->
 
-		<h4 style="text-align: left; margin-top: 25px;"> Finally, we have good news for people looking to get cuffed! Participants were 60% more likely to say they were willing to meet their matches in 2021 compared to 2020.</h4>
+		<h4 style="text-align: left; margin-top: 25px;"> Finally, we have good news for people looking to get cuffed! Participants were much more likely to say they were willing to meet their matches in 2021 compared to 2020.</h4>
 		<svg height="450" width="800" class="commitmentComparisonChart"></svg>
 
-		<h4 style="text-align: left;">Thanks for taking perfect match this year!  Be sure to keep checking this page; we will continue to update it as more students respond. </h4>
+		<h4 style="text-align: left;">Thanks for taking Perfect Match this year and don't be afraid to shoot your shot!</h4>
 
 	</div>
 	<div class="tooltip"> 👯
@@ -109,6 +102,9 @@
 
 			let tempData = await d3.json("usersAnon.json");
 			// console.log(tempData);
+			console.log(getSummary(tempData, "deal_breakers", "survey", true));
+			console.log(getSummary(tempData, "commitment", "survey"));
+
 			requestFinalData();			
 		};
 
