@@ -129,12 +129,12 @@ function  drawPoliticalDonut(svgClass) {
 
     svg.append("line")
           .attr("class", "political_label")
-          .attr("x1", outerRadius + xOffset - 50)
+          .attr("x1", outerRadius+xOffset-30)
           .attr("x2", outerRadius  + xOffset + 20)
           .attr("y1", yOffset)
           .attr("y2", yOffset)
           .style("stroke", darkTextColor)
-          .style("stroke-width", 2);
+          .style("stroke-width", 1);
     svg.append("text")
           .attr("class", "political_label")
           .attr("x", outerRadius + xOffset + 20)
@@ -144,7 +144,7 @@ function  drawPoliticalDonut(svgClass) {
           .style("font-weight", "bold")
               .style("font-size", "12px");
 
-    drawFunFact(svgClass, 50, 50, 20, "43");
+    drawFunFact(svgClass, 50, 50, 20, "39");
 
     svg.append("text")
         .attr("class", "political_label")

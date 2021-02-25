@@ -3,11 +3,7 @@ function drawPollDonuts(svgClass) {
   let outerRadius = 120;
   let pollSvg = d3.select(svgClass);
 
-  // let mealData = convertDemoDataToMap(getSummary(jsonData, "meal", "survey"));
-  // let startOverData = convertDemoDataToMap(getSummary(jsonData, "startover", "survey"));
-  // let timeMoneyData = convertDemoDataToMap(getSummary(jsonData, "timeormoney", "survey"));
-  // let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
-  let mealData = createMealData();
+ let mealData = createMealData();
   let startOverData = createStartOverData();
   let timeMoneyData = createTimeMoneyData();
   let qualityData = createBestQualityData();
