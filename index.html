@@ -105,6 +105,10 @@
 		/** Functions for building data structures **/
 		const requestInitialData = async () => {
 			jsonData = await d3.json("users.json");
+
+			let tempData = await d3.json("usersAnon.json");
+			console.log(getSummary(tempData, "in_ithaca", "survey"));
+
 			requestFinalData();			
 		};
 

@@ -1,14 +1,15 @@
 /** Functions for generating specific data **/
 
 function getTotalPeople() {
-  return 1359 + 1504 + 1267 + 1232 + 183 + 59 + 14;
+  return 1854 + 2381 + 5 + 28;
 }
 
 function createGenderData() {
   return [
-    {"key": "male", "value": 2182},
-    {"key": "female", "value": 3413},
-    {"key": "other", "value": 32}
+    {"key": "male", "value": 1854},
+    {"key": "female", "value": 2381},
+    {"key": "non-binary", "value": 28},
+    {"key": "other", "value": 5}
   ];
 }
 
@@ -17,53 +18,63 @@ function createGenderListData() {
 }
 function createYearData() {
   return [
-    {"key": "freshman", "value": 1359}, 
-    {"key": "sophomore", "value": 1504},
-    {"key": "junior", "value": 1267},
-    {"key": "senior", "value": 1232},
-    {"key": "masters", "value": 183},
-    {"key": "phd", "value": 59},
-    {"key": "faculty", "value": 14}
+    {"key": "freshman", "value": 659}, 
+    {"key": "sophomore", "value": 1156},
+    {"key": "junior", "value": 1208},
+    {"key": "senior", "value": 1020},
+    {"key": "masters", "value": 128},
+    {"key": "phd", "value": 91},
+    {"key": "faculty", "value": 6}
   ];
 }
 
 function createEthnicityData() {
   return [
-    {"key": "white", "value": 2476}, 
-    {"key": "east asian", "value": 1324},
-    {"key": "south asian", "value": 579},
-    {"key": "latino", "value": 394},
-    {"key": "black", "value": 361},
-    {"key": "other", "value": 484}
+    {"key": "white", "value": 2172}, 
+    {"key": "black", "value": 322},
+    {"key": "east asian", "value": 1252},
+    {"key": "south asian", "value": 517},
+    {"key": "hispanic or latino", "value": 480},
+    {"key": "native american", "value": 18},
+    {"key": "pacific islander", "value": 32},
+    {"key": "middle eastern", "value": 83},
+    {"key": "other", "value": 105}
   ];
 }
 
 function createActivitiesData() {
   return [
-    {"key": "prof. club", "value": 1427}, 
-    {"key": "social club", "value": 1659},
-    {"key": "cultural club", "value": 1182},
-    {"key": "greek life", "value": 1633},
-    {"key": "prof. fraternity", "value": 648},
-    {"key": "athlete", "value": 506},
-    {"key": "club sports", "value": 915},
-    {"key": "project team", "value": 900},
-    {"key": "ta", "value": 1073},
-    {"key": "ra", "value": 176},
-    {"key": "other clubs", "value": 2261},
-    {"key": "none", "value": 321},
+    {"key": "professional club", "value": 1089}, 
+    {"key": "social club", "value": 1229},
+    {"key": "cultural club", "value": 860},
+    {"key": "greek life", "value": 1019},
+    {"key": "professional fraternity", "value": 456},
+    {"key": "athlete", "value": 314},
+    {"key": "club sports", "value": 669},
+    {"key": "project team", "value": 820},
+    {"key": "ta", "value": 929},
+    {"key": "ra", "value": 72},
+    {"key": "other clubs", "value": 1531},
+    {"key": "none", "value": 337},
   ];
 }
 
 function createCollegeData() {
   return [
-    {"key": "aap", "value": 124}, 
-    {"key": "arts", "value": 1649},
-    {"key": "cals", "value": 1369},
-    {"key": "engineering", "value": 1331},
-    {"key": "hotel", "value": 311},
-    {"key": "humec", "value": 480},
-    {"key": "ilr", "value": 354}	
+    {"key": "aap", "value": 97}, 
+    {"key": "arts", "value": 1276},
+    {"key": "cals", "value": 916},
+    {"key": "engineering", "value": 1022},
+    {"key": "hotel", "value": 233},
+    {"key": "humec", "value": 332},
+    {"key": "ilr", "value": 237}	
+  ];
+}
+
+function createInIthacaData() {
+  return [
+    {"key": "in Ithaca", "value": 3834}, 
+    {"key": "not in Ithaca", "value": 279},	
   ];
 }
 

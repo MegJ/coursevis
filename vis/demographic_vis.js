@@ -2,13 +2,12 @@ function drawBarChart(svgClass) {
   let maxBarHeight = firstSvgHeight - padding*3;
   let barWidth = padding*2;
 
-  let genderData = convertDemoDataToMap(getSummary(jsonData, "gender", "profile"));
-  let yearData = convertDemoDataToMap(getSummary(jsonData, "year", "profile"));
-  let ethnicityData = convertDemoDataToMap(getSummary(jsonData, "race", "profile", true));
-  let activitiesData = convertDemoDataToMap(getSummary(jsonData, "activities", "survey", true));
-  let collegeData = convertDemoDataToMap(getSummary(jsonData, "college", "survey"));
-
-  let ithacaData = convertDemoDataToMap(getSummary(jsonData, "in_ithaca", "survey"));
+  let genderData = createGenderData();
+  let yearData = createYearData();
+  let ethnicityData = createEthnicityData();
+  let activitiesData = createActivitiesData();
+  let collegeData = createCollegeData();
+  let ithacaData = createInIthacaData();
 
   let barSvg = d3.select(svgClass);
   
