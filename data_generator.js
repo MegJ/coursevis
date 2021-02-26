@@ -563,6 +563,6 @@ function createPoliticalPreferences(){
 }
 
 let average_number_people_dated = 1.95;
-let percent_of_people_never_dated = 31;
+let percent_of_people_never_dated = 69;
 let percent_of_relationships_longer_than_one_year = 41;
 let median_relationship_length = 8;

@@ -3,7 +3,7 @@ function drawRelationshipInfographic(svgClass) {
     let innerRadius = 70;
     let outerRadius = 90;
 
-    let padding = 25;
+    let padding = 35;
 
     let pollSvg = d3.select(svgClass);
   
@@ -14,17 +14,26 @@ function drawRelationshipInfographic(svgClass) {
     // let qualityData = convertDemoDataToMap(getSummary(jsonData, "quality", "survey"));
   
     // addPollText(pollSvg, 200, 200, outerRadius,"Who would you most want", "to have a meal with?");
+    
+    addPollText(pollSvg, outerRadius + padding, 450, outerRadius,"Percentage of people who","have been in a relationship", "at least one person");
+    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "never_dated", percent_of_people_never_dated, outerRadius + padding, 150, [coralColor, lightGreyColor], percent_of_people_never_dated + "%");
+   
+    addPollText(pollSvg, outerRadius * 3  + padding * 2, 450, outerRadius,"Median length of longest", "relationship in months");
+     createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "median_relationship", 0, 2 * padding + outerRadius * 3, 150, [blueColor, lightGreyColor], median_relationship_length, false);
+   
+    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "dated_longer_than_one_year", percent_of_relationships_longer_than_one_year, outerRadius * 5 + padding * 3, 150, [blueColor, lightGreyColor], percent_of_relationships_longer_than_one_year + "%");
+    addPollText(pollSvg, outerRadius * 5  + padding * 3, 450, outerRadius,"Percentage of relationships", "that were longer than 1 year");
 
-    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "never_dated", percent_of_people_never_dated, 90, 200, [coralColor, lightGreyColor], percent_of_people_never_dated + "%");
-    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "median_relationship", 0, padding + outerRadius * 3, 200, [blueColor, lightGreyColor], median_relationship_length, false);
-    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "dated_longer_than_one_year", percent_of_relationships_longer_than_one_year, outerRadius * 5 + padding * 2, 200, [blueColor, lightGreyColor], percent_of_relationships_longer_than_one_year + "%");
-    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "average_people_dated", 0, outerRadius * 7 + padding * 3, 200, [blueColor, lightGreyColor], average_number_people_dated, false);
+    addPollText(pollSvg, outerRadius * 7  + padding * 4, 450, outerRadius,"the average number of", "previous relationships");
+    createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "average_people_dated", 0, outerRadius * 7 + padding * 4, 150, [blueColor, lightGreyColor], average_number_people_dated, false);
+
+
 
 
 
   }
   
-  function createCircleInfographic(innerRadius, outerRadius, innerCircle, svg, pieClass, percent, xOffset, yOffset, colors, text, is_percent = true) {
+  function createCircleInfographic(innerRadius, outerRadius, innerCircle, svg, pieClass, percent, xOffset, yOffset, colors, text, is_percent = true, font_size=40) {
       
     // let colors = [ coralColor, blueColor,greenColor,yellowColor,  pinkColor,purpleColor,  ];
 
