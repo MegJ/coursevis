@@ -64,7 +64,7 @@
 		<svg height="450" width="800" class="commitmentComparisonChart"></svg>
 
 		<h4 style="text-align: left; margin-top: 50px; margin-bottom: 30px;">Finally, don't sweat if you have never been in a relationship before.  We asked participants to give the both the number of people they had dated and the length of their longest relationship. The results were encouraging: 31% of people said they had never been in a relationship.</h4>
-		<svg height="400" width="900" class="relationshipInfographic"></svg>
+		<svg height="420" width="900" class="relationshipInfographic"></svg>
 
 		<h4 style="text-align: left;">Thanks for taking Perfect Match this year and don't be afraid to shoot your shot!</h4>
 
@@ -105,9 +105,7 @@
 		/** Functions for building data structures **/
 		const requestInitialData = async () => {
 			jsonData = await d3.json("users.json");
-
 			let tempData = await d3.json("usersAnon.json");
-
 			requestFinalData();			
 		};
 

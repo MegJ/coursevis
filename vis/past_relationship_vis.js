@@ -27,7 +27,25 @@ function drawRelationshipInfographic(svgClass) {
     addPollText(pollSvg, outerRadius * 7  + padding * 4, 450, outerRadius,"the average number of", "previous relationships");
     createCircleInfographic(innerRadius, outerRadius, innerCircle, pollSvg, "average_people_dated", 0, outerRadius * 7 + padding * 4, 150, [blueColor, lightGreyColor], average_number_people_dated, false);
 
+    drawFunFact(svgClass, 40, 380, 20, "36%", blueColor);
 
+    pollSvg.append("text")
+        .attr("x", 65)
+        .attr("y", 380)
+        .text("the percent of engineers who have never dated")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+        .style("alignment-baseline", "middle")
+        .style("font-size", "12px");
+
+        pollSvg.append("text")
+        .attr("x", 65)
+        .attr("y", 395)
+        .text("(the highest percent across all colleges!)")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+        .style("alignment-baseline", "middle")
+        .style("font-size", "12px");
 
 
 
@@ -131,32 +149,5 @@ function drawRelationshipInfographic(svgClass) {
         .style("font-weight", "bold")
         .style("font-size", 40);
 
-
   }
   
-
-
-  function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
-  
-  function addPollText(svg, x, y, outerRadius, text1, text2) {
-    svg.append("text")
-      .attr("x", x)
-      .attr("y", y-outerRadius-60)
-      .text(text1)
-      .style("fill", darkTextColor)
-      .style("alignment-baseline", "middle")
-      .style("text-anchor", "middle")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-            .style("font-size", 15);
-          svg.append("text")
-      .attr("x", x)
-      .attr("y", y-outerRadius-45)
-      .text(text2)
-      .style("fill", darkTextColor)
-      .style("alignment-baseline", "middle")
-      .style("text-anchor", "middle")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-            .style("font-size", 15);
-  }
