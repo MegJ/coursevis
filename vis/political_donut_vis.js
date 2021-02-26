@@ -144,13 +144,13 @@ function  drawPoliticalDonut(svgClass) {
           .style("font-weight", "bold")
               .style("font-size", "12px");
 
-    drawFunFact(svgClass, 50, 50, 20, "39");
+    drawFunFact(svgClass, 50, 50, 20, "39%");
 
     svg.append("text")
         .attr("class", "political_label")
         .attr("x", 50+20+10)
         .attr("y", 50)
-        .text("percentage of participants listed politics as a dealbreaker")
+        .text("the percent of people who said politics was a dealbreaker")
         .style("font-family", "Inconsolata")
         .style("alignment-baseline", "middle")
         .style("font-weight", "bold")
