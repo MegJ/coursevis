@@ -80,25 +80,7 @@ function drawRelationshipInfographic(svgClass) {
         })
         .attr("fill", function(d, i) { return colors[i]; })
         .attr("d", arc)
-        .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
-        .on("mouseover", function(d) {
-            svg.select("." + pieClass + "_text")
-            .text(d.data.value);
-    
-            d3.select(this)
-            .transition()
-            .duration(300)
-            .attr("d", newArc);
-        })
-        .on("mouseout", function() {
-            svg.select("." + pieClass + "_text")
-            .text("");
-    
-            d3.select(this)
-            .transition()
-            .duration(250)
-            .attr("d", arc);
-        });
+        .attr("transform", "translate(" + xOffset + "," + yOffset + ")");
     
         // add pie segment labels
         svg.datum(data).selectAll("#" + pieClass + "_label")
