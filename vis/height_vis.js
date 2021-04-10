@@ -1,19 +1,83 @@
-function drawHeightChart(svgClass) {
+function drawHeightChart(svgClass, maleData, femaleData) {
+
+  console.log(maleData)
+  console.log(femaleData)
+
+  let min_male_age = d3.min(maleData.map(x => +x["age"]))
+  let max_male_age = d3.max(maleData.map(x => +x["age"]))
+
+  let min_female_age = d3.min(femaleData.map(x => +x["age"]))
+  let max_female_age = d3.max(femaleData.map(x => +x["age"]))
+
+  let min_age = d3.min([min_male_age, min_female_age])
+  let max_age = d3.max([max_female_age, max_male_age])
+
+  console.log(femaleData.length)
+
+  let female_age_map = {}
+  for(let i = 0; i < femaleData.length; i++){
+    let age = femaleData[i]["age"]
+    if(age % 2 == 1){
+      age = age - 1
+    }
+    if(age in female_age_map){
+      female_age_map[age] = female_age_map[age] + 1;
+    } else {
+      female_age_map[age] = 1
+    }
+  }
+
+  let female_data = []
+  for (var key in female_age_map) {
+      female_data.push( [ key, female_age_map[key] ] );
+}
+
+let male_age_map = {}
+for(let i = 0; i < maleData.length; i++){
+  let age = maleData[i]["age"]
+  if(age % 2 == 1){
+    age = age - 1
+  }
+  if(age in male_age_map){
+    male_age_map[age] = male_age_map[age] + 1;
+  } else {
+    male_age_map[age] = 1
+  }
+}
+
+let male_data = []
+for (var key in male_age_map) {
+    male_data.push( [ key, male_age_map[key] ] );
+}
+
+console.log(female_data);
+
+
+  console.log(female_age_map);
+
+  console.log(min_male_age)
+  console.log(min_female_age)
+  console.log(max_male_age)
+  console.log(max_female_age)
+
+
+
+
   let midwayPoint = secSvgHeight/2;
 
   let femaleHeight = createFemaleHeightData();
   let maleHeight = createMaleHeightData();
 
   let x = d3.scaleLinear()
-    .domain([minHeight, femaleHeight.length+minHeight])
+    .domain([min_age, max_age])
     .range([padding*5, secSvgWidth-(padding*5)]);
 
   let yfemale = d3.scaleLinear()
-    .domain([0, d3.max([d3.max(femaleHeight), d3.max(maleHeight)])])
-    .range([midwayPoint, (padding*2)]);
+    .domain([0, 16])
+    .range([midwayPoint, (padding*1)]);
 
   let ymale = d3.scaleLinear()
-    .domain([0, d3.max([d3.max(femaleHeight), d3.max(maleHeight)])])
+    .domain([0, 16])
     .range([midwayPoint, secSvgHeight-(padding*2)]);
 
   let heightSvg = d3.select(svgClass);
@@ -21,27 +85,31 @@ function drawHeightChart(svgClass) {
   let tooltip = addTooltipToVis("heightSvg_tooltip");
 
   heightSvg.append("path")
-    .datum(femaleHeight)
+    .datum(female_data)
     .attr("class", "area")
     .attr("fill", coralColor)
     .attr("stroke", coralColor)
     .attr("stroke-width", "1")
     .attr("d", d3.area()
-      .x(function (d, i) {return x(i+minHeight);})
+      .x(function (d, i) {
+        console.log(+d[0]);
+        return x(+d[0]);})
       .y0(yfemale(0))
-      .y1(function (d) {return yfemale(d)})
-      .curve(d3.curveMonotoneX));
+      .y1(function (d) {
+        console.log(d);
+        return yfemale(d[1])})
+      .curve(d3.curveBasis));
 
   heightSvg.append("path")
-    .datum(maleHeight)
+    .datum(male_data)
     .attr("fill", blueColor)
     .attr("stroke", blueColor)
     .attr("stroke-width", "1")
     .attr("d", d3.area()
-      .x(function (d, i) {return x(i+minHeight);})
+      .x(function (d, i) {return x(+d[0]);})
       .y0(ymale(0))
-      .y1(function (d) {return ymale(d)})
-      .curve(d3.curveMonotoneX));
+      .y1(function (d) {return ymale(d[1])})
+      .curve(d3.curveCardinal));
 
   // add x axis
   heightSvg.append("g")
@@ -54,8 +122,8 @@ function drawHeightChart(svgClass) {
     .select(".domain").remove();
 
   heightSvg.append("text")
-    .attr("transform", "translate(" + (secSvgWidth-padding*5) + ", " + (midwayPoint) + ")")
-    .text("height (inches)")
+    .attr("transform", "translate(" + (secSvgWidth-padding*4.5) + ", " + (midwayPoint) + ")")
+    .text("years old")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("color", darkTextColor)
@@ -82,198 +150,176 @@ function drawHeightChart(svgClass) {
   var sixFeetMale = tempMaleHeight.reduce(function(a, b){ return a + b;}, 0);
   let totalMale = maleHeight.reduce(function(a, b){ return a + b;}, 0);
 
-  drawFunFact(svgClass, 100, 350, 20, 34, blueColor);
+   //add legend
 
-  heightSvg.append("text")
-    .attr("x", 100 + 20 + 10)
-    .attr("y", 350)
-    .text("percentage of men are 6ft or taller")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("alignment-baseline", "middle")
-    .style("font-size", "12px");
+   let color = d3.scaleOrdinal()
+   .domain([0, 1])
+   .range([coralColor, blueColor]);
 
-  drawFunFact(svgClass, 550, 25, 20, "6'0", coralColor);
+   let labels = ["actresses", "actors"]
+   heightSvg.append("g")
+       .selectAll("year_squares")
+       .data(labels)
+       .enter()
+       .append("rect")
+       .attr("class", "year_squares")
+       .attr('id', function(d, i) { return "key_" + d;})
 
-  heightSvg.append("text")
-  .attr("x", 550 + 25 + 10)
-  .attr("y", 25-7.5)
-  .text("median height of male humec students")
-  .style("font-family", "Inconsolata")
-  .style("font-weight", "bold")
-  .style("alignment-baseline", "middle")
-  .style("font-size", "12px");
-  heightSvg.append("text")
-  .attr("x", 550 + 25 + 10)
-  .attr("y", 25+7.5)
-  .text("(humec is the \"tallest\" college)")
-  .style("font-family", "Inconsolata")
-  .style("font-weight", "bold")
-  .style("alignment-baseline", "middle")
-  .style("font-size", "12px");
+       .attr("x", function(d) {return firstSvgWidth - (padding*3)})
+       .attr("y", function(d, i) {return 80 + i * 30;})
+       .attr("width", 15)
+       .attr("height", 15)
+       .style("fill", function (d, i) {
+           return color(i);
 
-  // drawFunFact(svgClass, 550, 70, 15, "5'9", blueColor);
+       })
+       .style('stroke', darkTextColor)
+       .style('stroke-width', 2);
 
-  // heightSvg.append("text")
-  // .attr("x", 550 + 25 + 10)
-  // .attr("y", 70)
-  // .text("median height of male aap students")
-  // .style("font-family", "Inconsolata")
-  // .style("font-weight", "bold")
-  // .style("alignment-baseline", "middle")
-  // .style("font-size", "12px");
+       d3.select(svgClass).append("g")
+       .selectAll('.key_labels')
+       .data(labels)
+           .enter()
+           .append('text')
+           .attr('x', function(d, i) { return firstSvgWidth-(padding*3) + 20;})
+           .attr('y', function(d, i) { return 90 + i*30;})
+           .text(function(d) {return d;})
+           .style('fill', darkTextColor)
+           .style("font-weight", "bold")
+           .style("font-family", "Inconsolata")
+           .style("font-size", "12px");
 
 
 
   // no-hover tool tips - female median height comment
-  var medianFemale = calculateMedianForHeight(femaleHeight);
+
+  let medianActressAge = d3.median(femaleData.map(x => +x["age"]))
+  let medianActorAge = d3.median(maleData.map(x => +x["age"]))
+
+
+  console.log(medianActressAge);
+  console.log(medianActorAge);
+
+  console.log(female_age_map)
+  console.log(male_age_map);
+
+
+
   heightSvg.append("circle")
     .attr("class", "nohover_tooltip")
-    .attr("cx", x(medianFemale))
-    .attr("cy", yfemale(femaleHeight[medianFemale-minHeight]))
+    .attr("cx", x(medianActressAge))
+    .attr("cy", yfemale(9))
     .attr("r", 4)
     .style('stroke-width', 2)
     .style('fill-opacity', 0)
-    .style("stroke", darkTextColor);
+    .style("stroke", "black");
   heightSvg.append("text")
     .attr("class", "nohover_tooltip")
-    .attr("x", x(medianFemale)+10)
-    .attr("y", yfemale(femaleHeight[medianFemale-minHeight])-10)
-    .text("median height: " + (medianFemale) + " in")
+    .attr("x", x(medianActressAge)+10)
+    .attr("y", yfemale(9)-10)
+    .text("median age: " + (medianActressAge) + " years old")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("font-size", "12px");
 
   // male median height comment
-  var medianMale = calculateMedianForHeight(maleHeight);
   heightSvg.append("circle")
     .attr("class", "nohover_tooltip")
-    .attr("cx", x(medianMale))
-    .attr("cy", ymale(maleHeight[medianMale-minHeight]))
+    .attr("cx", x(medianActorAge))
+    .attr("cy", ymale(10))
     .attr("r", 4)
     .style('stroke-width', 2)
     .style('fill-opacity', 0)
-    .style("stroke", darkTextColor);
+    .style("stroke", "black");
   heightSvg.append("text")
     .attr("class", "nohover_tooltip")
-    .attr("x", x(medianMale)-5)
-    .attr("y", ymale(maleHeight[medianMale-minHeight])+20)
-    .text("median height: " + medianMale + " in")
+    .attr("x", x(medianActorAge) + 170)
+    .attr("y", ymale(10))
+    .text("median age: " + medianActorAge + " years old")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("text-anchor", "end")
     .style("font-size", "12px");
 
-  // 6ft comment
-  // heightSvg.append("circle")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("cx", x(72))
-  //   .attr("cy", ymale(maleHeight[72-minHeight]))
-  //   .attr("r", 4)
-  //   .style('stroke-width', 2)
-  //   .style('fill-opacity', 0)
-  //   .style("stroke", darkTextColor);
-  // heightSvg.append("line")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x1", x(72)+4)
-  //   .attr("x2", x(75))
-  //   .attr("y2", ymale(maleHeight[72-minHeight]))
-  //   .attr("y1", ymale(maleHeight[72-minHeight]))
-  //   .style('stroke-width', 2)
-  //   .style("stroke", darkTextColor);
-  // heightSvg.append("text")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x", x(75)+4)
-  //   .attr("y", ymale(maleHeight[72-minHeight])-5)
-  //   .text("only ~30% of male participants are 6ft+")
-  //   .style("font-family", "Inconsolata")
-  //   .style("font-weight", "bold")
-  //   .style("font-size", "12px");
-  // heightSvg.append("text")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x", x(75)+4)
-  //   .attr("y", ymale(maleHeight[72-minHeight])+10)
-  //   .text("(but it's 2020 and it's time to forgo")
-  //   .style("font-family", "Inconsolata")
-  //   .style("font-weight", "bold")
-  //   .style("font-size", "12px");
-  // heightSvg.append("text")
-  //   .attr("class", "nohover_tooltip")
-  //   .attr("x", x(75)+4)
-  //   .attr("y", ymale(maleHeight[72-minHeight])+25)
-  //   .text("patriarchal standards 🎉)")
-  //   .style("font-family", "Inconsolata")
-  //   .style("font-weight", "bold")
-  //   .style("font-size", "12px");
+     heightSvg.append("line")
+      .attr("class", "heatmap_notes")
+      .attr("x1", x(21))
+      .attr("x2", x(21))
+      .attr("y1", yfemale(1))
+      .attr("y2", yfemale(1) - 90)
+      .style("stroke", darkTextColor)
+      .style("stroke-width", 2);
+    heightSvg.append("line")
+      .attr("class", "heatmap_notes")
+      .attr("x1", x(21))
+      .attr("x2", x(21) - 10)
+      .attr("y1", yfemale(1) - 90)
+      .attr("y2", yfemale(1) - 90)
+      .style("stroke", darkTextColor)
+      .style("stroke-width", 2);
+      // heightSvg.append("line")
+      // .attr("class", "heatmap_notes")
+      // .attr("x1", gridSize*1+2)
+      // .attr("x2", gridSize*2 - gridSpacing - 2)
+      // .attr("y1", gridSize*8 + 5)
+      // .attr("y2", gridSize*8 + 5)
+      // .style("stroke", darkTextColor)
+      // .style("stroke-width", 2);
+      // heatmapSvg.append("path")
+       
+      heightSvg.append("text")
+      .attr("class", "heatmap_notes")
+      .attr("x", x(21) - 115)
+      .attr("y", yfemale(1) - 90)
+      .text("Marlee Matlin, 21 ")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+          .style("font-size", "12px");
+      heightSvg.append("text")
+        .attr("class", "heatmap_notes")
+        .attr("x", x(21) - 115)
+        .attr("y", yfemale(1) - 75)
+        .text("was the youngest")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+            .style("font-size", "12px");
+        heightSvg.append("text")
+        .attr("class", "heatmap_notes")
+        .attr("x", x(21) - 115)
+        .attr("y", yfemale(1) - 60)
+        .text("best actress")
+        .style("font-family", "Inconsolata")
+        .style("font-weight", "bold")
+            .style("font-size", "12px");
 
-  d3.select(svgClass).on("mousemove", function() {
-    var offset = document.querySelector(svgClass).getBoundingClientRect();
 
-    hideTooltip(tooltip, ".height_tooltip");
+      heightSvg.append("line")
+            .attr("class", "heatmap_notes")
+            .attr("x1", x(80))
+            .attr("x2", x(80))
+            .attr("y1", yfemale(1))
+            .attr("y2", yfemale(1) + 10)
+            .style("stroke", darkTextColor)
+            .style("stroke-width", 2);
+      heightSvg.append("line")
+            .attr("class", "heatmap_notes")
+            .attr("x1", x(80))
+            .attr("x2", x(80) - 20)
+            .attr("y1", yfemale(1) + 90)
+            .attr("y2", yfemale(1) + 90)
+            .style("stroke", darkTextColor)
+            .style("stroke-width", 2);
 
-    // window for bar chart
-    if (d3.event.clientX - offset.x >= (padding*5)
-      && d3.event.clientX - offset.x < secSvgWidth-(padding*5)-10
-      && d3.event.clientY - offset.y > padding*2
-      && d3.event.clientY - offset.y < secSvgHeight-(padding*4)) {
 
-      d3.selectAll("#height_tooltip")
-        .transition()
-        .attr("opacity", 1);
+      
+      // heightSvg.append("text")
+      // .attr("class", "heatmap_notes")
+      // .attr("x", gridSize*3.5)
+      // .attr("y", gridSize*9.5 + 15)
+      // .text("they would date an 18 year old.")
+      // .style("font-family", "Inconsolata")
+      // .style("font-weight", "bold")
+      //     .style("font-size", "12px");
 
-      d3.selectAll(".nohover_tooltip").attr("opacity", 0);
 
-      var height = Math.round(x.invert(d3.event.clientX - offset.x));
-
-      // set tooltip attributes
-      var tooltipText = "<b>" + height + " inches | " + convertInToFeet((height)) + "</b>"
-      + "<br /><b>female count: </b> " + femaleHeight[(height-minHeight)]
-      + "<br /><b>male count: </b>" + maleHeight[(height-minHeight)];
-
-      // add tooltip to screen
-      updateToolTipText(tooltip, tooltipText, 10, 150);
-        
-      // add circles + line
-      heightSvg.append("circle")
-        .attr("class", "height_tooltip")
-        .attr("cx", x(height))
-        .attr("cy", yfemale(femaleHeight[height-minHeight]))
-        .attr("r", 4)
-        .style('stroke-width', 2)
-        .style('fill-opacity', 0)
-        .style("stroke", darkTextColor);
-      heightSvg.append("circle")
-        .attr("class", "height_tooltip")
-        .attr("cx", x(height))
-        .attr("cy", ymale(maleHeight[height-minHeight]))
-        .attr("r", 4)
-        .style('stroke-width', 2)
-        .style('fill-opacity', 0)
-        .style("stroke", darkTextColor);
-      // make sure that lines are not drawn when circles are too close
-      if (ymale(maleHeight[height-minHeight]) - yfemale(femaleHeight[height-minHeight]) >= 8) {
-        heightSvg.append("line")
-          .attr("class", "height_tooltip")
-          .attr("x1", x(height))
-          .attr("x2", x(height))
-          .attr("y2", ymale(maleHeight[height-minHeight])-4)
-          .attr("y1", yfemale(femaleHeight[height-minHeight])+4)
-          .style('stroke-width', 2)
-          .style("stroke", darkTextColor);
-      }
-          
-  } else {
-    hideTooltip(tooltip, ".height_tooltip");
-
-    d3.selectAll(".nohover_tooltip")
-      .attr("opacity", 1);
-    }
-
-  }).on("mouseleave", function () {
-    d3.selectAll(".nohover_tooltip").attr("opacity", 1);
-    
-    hideTooltip(tooltip, ".height_tooltip");
-  });
-
-    // drawFunFact(svgClass, 100, 350, 40, "6'1");
 }
