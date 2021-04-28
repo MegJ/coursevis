@@ -1,73 +1,34 @@
 <html>
 <head>
-	<title>Perfect Match 2020 Results</title>
+	<title>Data Vizualization</title>
 	<meta charset="UTF-8">
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,200i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="general.css">
-	<script type="text/javascript" src="data_generator.js"></script>
-	<!-- <script type="text/javascript" src="vis/height_vis.js"></script> -->
-	<script type="text/javascript" src="vis/political_donut_vis.js"></script>
-	<script type="text/javascript" src="vis/data_vis_helper.js"></script>
-	<script type="text/javascript" src="vis/fun_fact_vis.js"></script>
-	<script type="text/javascript" src="vis/data_vis_helper.js"></script>
-	<script type="text/javascript" src="vis/sleep_vis.js"></script>
-	<script type="text/javascript" src="data_parsing_utils.js"></script>
+	<script type="text/javascript" src="vis/courses_viz.js"></script>
 
-
-
-
-
-	
 </head>
 <body bgcolor = "white" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 900;font-family: Montserrat; font-size: 30; font-weight: bold; color: #505050; text-align: center;">
 		<h4 style="text-align: left;">What courses make up my degree?</h4>
 
-		<svg height="1500" width="1500" class="donutChart"></svg>
+		<svg height="1500" width="1500" class="courseViz"></svg>
 	</div>
 	<script>
-		var data;
-		var finalCSV;
-		var padding = 25;
-
-		var firstSvgWidth = 800;
-		var firstSvgHeight = 500;
-		var secSvgWidth = 800;
-		var secSvgHeight = 400;
-		var thirdSvgWidth = 800;
-		var thirdSvgHeight = 500;
-		var commitmentSvgHeight = 450;
-		
-		var minHeight = 55;
-		var maxHeight = 81; 
-
 		var darkTextColor = "#505050";
-		var maroonColor = "#FF7882";
-		var coralColor = "#8700F9";
-		var blueColor = "#00C4AA";
-		var greenColor = "#DCFFAD";
-		var yellowColor = "#FFFAAD";
-		var purpleColor = "#99A0FF";
-		var pinkColor = "#8700F9";
-		var deepPinkColor = "#FF7AC6"
-		var marineColor = "#85FFBA";
-		var whiteColor = "#fbfbfb";
 		var lightGreyColor = "#cdcdcd";
 		var jsonData; 
 
 		/** Functions for building data structures **/
 
-
 		const requestData = async () => {
 			Promise.all([
 				d3.csv("courses.csv")
 			]).then(function(files) {
-				drawPoliticalDonut(".donutChart", files[0])
+				drawCoursesChart(".courseViz", files[0])
 			})
 		}
-
 		requestData();
 
 		
