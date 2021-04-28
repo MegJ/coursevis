@@ -295,7 +295,7 @@ function  drawCoursesChart(svgClass, classes_data) {
        .append("circle")
        .attr("class", "year_squares")
        .attr('id', function(d, i) { return "key_" + d;})
-       .attr("cx", xOffset + outerRadius + 50)
+       .attr("cx", xOffset + outerRadius)
        .attr("cy", function(d, i) {return 80 + i * 30;})
        .attr("r", 10)
        .style("fill", function (d, i) {
@@ -311,13 +311,81 @@ function  drawCoursesChart(svgClass, classes_data) {
    .data(labels)
        .enter()
        .append('text')
-       .attr('x', xOffset + outerRadius + 50 + 20)
+       .attr('x', xOffset + outerRadius+ 20)
        .attr('y', function(d, i) { return 90 + i*30;})
        .text(function(d) {return d;})
        .style('fill', darkTextColor)
        .style("font-weight", "bold")
        .style("font-family", "Inconsolata")
        .style("font-size", "12px");
+
+      svg.append("text")
+       .attr("class", "political_label")
+       .attr("x", 20)
+       .attr("y", 20)
+       .text("how to read:")
+       .style('fill', darkTextColor)
+       .style("font-family", "Inconsolata")
+       .style("font-weight", "bold")
+       .style("font-family", "Inconsolata")
+       .style("font-size", "15px");
+
+       svg.append("text")
+       .attr("class", "political_label")
+       .attr("x", 0)
+       .attr("y", 70)
+       .text("# of credits")
+       .style('fill', darkTextColor)
+       .style("font-family", "Inconsolata")
+       .style("font-weight", "bold")
+       .style("font-family", "Inconsolata")
+       .style("font-size", "15px");
+
+      let credits = [1, 2, 3, 4];
+      svg.append("g")
+      .selectAll("credits_legend")
+      .data(credits)
+        .enter()
+        .append("path")
+        .attr('d', function(d) {
+            startX = 90 + 15 * d;
+            return ("M " + startX + " 40 L " + startX + " 90")})
+        .style("stroke", lightGreyColor)
+        .style("stroke-width", 2)
+        .style("fill", "none");
+
+      svg.append("g")
+      .selectAll("credits_legend")
+      .data(credits)
+        .enter()
+        .append("circle")
+        .attr('cx', function(d){
+          return (90 + 15 * d);
+        })
+        .attr('cy', function(d) {
+          return (30 + creditsScale(d));
+        })
+        .attr('r', 5)
+        .attr('fill', colors[0])
+        .style('stroke', darkTextColor)
+        .style('stroke-width', 1);
+
+      svg.append("g")
+        .selectAll("credits_legend")
+        .data(credits)
+          .enter()
+          .append("text")
+          .attr('x', function(d) {return (90 + 15 * d)})
+          .attr('y', 110)
+          .text(function(d) {return d;})
+          .style('fill', darkTextColor)
+          .style("font-weight", "bold")
+          .style("font-family", "Inconsolata")
+          .style("font-size", "12px");
+  
+
+    //addd legend for credits
+    
   }
   
   function findYearDivisions(data){
