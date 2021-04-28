@@ -139,9 +139,11 @@ function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffse
             .attr('dy', '.35em')
             .text(function(d) { return d.data.key;})
             .attr('transform', function(d) {
+                console.log(d.startAngle);
                 var pos = textArc.centroid(d);
-                var x = pos[0];
-                var y = pos[1];
+                console.log(pos);
+                var x = d.startAngle[0];
+                var y = d.startAngle[1];
                 var hyp = Math.sqrt(x*x + y*y);
                 return 'translate(' + (xOffset + x/hyp*(outerRadius+15)) + "," + (yOffset + y/hyp*(outerRadius+15))+ ')';
             })
@@ -152,7 +154,7 @@ function createSingleDonut(innerRadius, outerRadius, svg, pieClass, data, xOffse
       .style("font-weight", "bold")
         .style("font-size", "12px");
 }
-
+console.log("hi");
 function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
 
 function addPollText(svg, x, y, outerRadius, text1, text2) {

@@ -18,6 +18,9 @@ function  drawPoliticalDonut(svgClass, classes_data) {
     var color = d3.scaleOrdinal().domain([0, 7])
     .range(d3.schemeSet3);
 
+    let tooltip = addTooltipToVis("heightSvg_tooltip");
+
+
     let colors = ["#FCAB64", "#FCD29F", "#A1FCDF", "#7FD8BE", "#ADB7D1", "#BDAAC1", "#DE91A2", "#EF8592", coralColor, "#FF5C67"];
   
     let pie = d3.pie()
@@ -66,32 +69,8 @@ function  drawPoliticalDonut(svgClass, classes_data) {
       .innerRadius(innerRadius)
       .outerRadius(d => radiusScale(parseInt(d.data.key)));
 
-    // add total text in the middle of pie
-    svg.append("text")
-      .datum(data)
-      .attr("class", pieClass + "_text")
-      .attr("x", xOffset)
-      .attr("y", yOffset - 40)
-      .style("fill", darkTextColor)
-      .style("alignment-baseline", "middle")
-      .style("text-anchor", "middle")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-            .style("font-size", 50);
-        
-    //add political activity text
-    svg.append("text")
-        .datum(data)
-        .attr("class", pieClass + "_activity_text")
-        .attr("x", xOffset)
-        .attr("y", yOffset)
-        .style("fill", darkTextColor)
-        .style("alignment-baseline", "middle")
-        .style("text-anchor", "middle")
-        .style("font-family", "Inconsolata")
-        .style("font-weight", "bold")
-        .style("font-size", 16);
-  
+
+    //draw pie segments
     
     svg.datum(data).selectAll("." + pieClass)
         .data(pie)
@@ -120,13 +99,21 @@ function  drawPoliticalDonut(svgClass, classes_data) {
         }})
       .attr("d", arc)
       .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
-            .on("mouseover", function(d) {
+      .on("mouseover", function(d) {
+        console.log(d.data.Name);
+        var name = d.data.Name;
+        console.log(name);
         d3.select(this)
           .transition()
           .duration(300)
           .attr("d", newArc);
+          var tooltipText = "<b>" + d.data.Prefix + " " + d.data.Number + " " + " </br>" + name;
+   
+         updateToolTipText(tooltip, tooltipText, -20, 110);
       })
       .on("mouseout", function() {
+        hideTooltip(tooltip, "testing");
+
         svg.select("." + pieClass + "_text")
           .text("");
 
@@ -139,7 +126,10 @@ function  drawPoliticalDonut(svgClass, classes_data) {
           .attr("d", arc);
       });
 
-  // draw pie segments
+
+
+
+  // draw year divisions
 
   svg.datum(yearDivisions).selectAll("." + "yearDivisions")
   .data(pie2)
@@ -151,6 +141,31 @@ function  drawPoliticalDonut(svgClass, classes_data) {
     .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
     .attr("fill", lightGreyColor)
     .attr("d", term_arc);
+
+  //add year division labels
+  svg.datum(yearDivisions).selectAll("#yearDivisions_label")
+        .data(pie).enter()
+        .append('text')
+            .attr('dy', '.35em')
+            .text(function(d) { return d.data.key;})
+            .attr('transform', function(d) {
+                var pos = term_arc.centroid(d);
+                console.log(pos);
+                var x = pos[0];
+                var y = pos[1];
+                var hyp = Math.sqrt(x*x + y*y);
+                return 'translate(' + (xOffset + x/hyp*(innerRadius-100)) + "," + (yOffset + y/hyp*(innerRadius-100))+ ')';
+            })
+            .style('text-anchor', function(d) {
+                return (midAngle(d)) < Math.PI ? 'end' : 'start';
+            })
+            .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+        .style("font-size", "12px");
+
+
+
+
 
     //add radial lines
       svg.datum(data).selectAll("#" + pieClass + "_label")
@@ -211,39 +226,8 @@ function  drawPoliticalDonut(svgClass, classes_data) {
             }})
         .style('stroke', darkTextColor)
         .style('stroke-width', 1);
-
-      // .append('text')
-      //       .attr('dy', '.35em')
-      //       .text(function(d) { return d.data.key;})
-      //       .attr('transform', function(d) {
-      //           var pos = innerArc.centroid(d);
-      //           console.log(pos);
-      //           var x = pos[0];
-      //           var y = pos[1];
-      //           var hyp = Math.sqrt(x*x + y*y);
-      //           return 'translate(' + (xOffset + x/hyp*(innerRadius-15)) + "," + (yOffset + y/hyp*(innerRadius-15))+ ')';
-      //       })
-      //       .style('text-anchor', function(d) {
-      //           return (midAngle(d)) < Math.PI ? 'start' : 'end';
-      //       })
-      //       .style("font-family", "Inconsolata")
-      // .style("font-weight", "bold")
-      //   .style("font-size", "12px");
-      // svg.datum(data).selectAll(".spokes")
-      // .data(pie)
-      // .enter().append("path")
-      // .attr("class", pieClass)
-      // .attr("id", function(d) {
-      //   console.log(d);
-      //   return "spoke" + "_" + parseInt(d.data.key);
-      // })
-      // .attr("fill", lightGreyColor)
-      // .attr("d", innerArc)
-      // .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
-      // .append("path")
-
-
-    
+      
+         
 
     //add class level labels
     svg.append("text")
@@ -259,7 +243,7 @@ function  drawPoliticalDonut(svgClass, classes_data) {
       svg.append("text")
       .attr("class", "political_label")
       .attr("x", xOffset)
-      .attr("y", yOffset - outerRadius + 33 - 8)
+      .attr("y", yOffset - outerRadius + 30 - 8)
       .text("3000 level")
       .style("font-family", "Inconsolata")
       .style("alignment-baseline", "middle")
@@ -269,7 +253,7 @@ function  drawPoliticalDonut(svgClass, classes_data) {
       svg.append("text")
       .attr("class", "political_label")
       .attr("x", xOffset)
-      .attr("y", yOffset - outerRadius + 68 - 8)
+      .attr("y", yOffset - outerRadius + 60 - 8)
       .text("2000 level")
       .style("font-family", "Inconsolata")
       .style("alignment-baseline", "middle")
@@ -279,7 +263,7 @@ function  drawPoliticalDonut(svgClass, classes_data) {
     svg.append("text")
       .attr("class", "political_label")
       .attr("x", xOffset)
-      .attr("y", yOffset - outerRadius + 124 - 8)
+      .attr("y", yOffset - outerRadius + 100 - 8)
       .text("1000 level")
       .style("font-family", "Inconsolata")
       .style("alignment-baseline", "middle")
