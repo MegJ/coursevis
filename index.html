@@ -7,7 +7,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,200i&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="general.css">
 	<script type="text/javascript" src="data_generator.js"></script>
-	<script type="text/javascript" src="vis/height_vis.js"></script>
+	<!-- <script type="text/javascript" src="vis/height_vis.js"></script> -->
+	<script type="text/javascript" src="vis/political_donut_vis.js"></script>
 	<script type="text/javascript" src="vis/data_vis_helper.js"></script>
 	<script type="text/javascript" src="vis/fun_fact_vis.js"></script>
 	<script type="text/javascript" src="vis/data_vis_helper.js"></script>
@@ -22,9 +23,9 @@
 </head>
 <body bgcolor = "white" style="text-align: center; margin-top: 50; color: #505050;">
 	<div style="margin: 0 auto; width: 900;font-family: Montserrat; font-size: 30; font-weight: bold; color: #505050; text-align: center;">
-		<h4 style="text-align: left;">Age Distribution of All Best Actor / Best Actress Winners</h4>
+		<h4 style="text-align: left;">What courses make up my degree?</h4>
 
-		<svg height="400" width="800" class="heightChart"></svg>
+		<svg height="1500" width="1500" class="donutChart"></svg>
 	</div>
 	<script>
 		var data;
@@ -61,10 +62,9 @@
 
 		const requestData = async () => {
 			Promise.all([
-				d3.csv("actors_ages.csv"),
-				d3.csv("actress_ages.csv")
+				d3.csv("courses.csv")
 			]).then(function(files) {
-				drawHeightChart(".heightChart", files[0], files[1])
+				drawPoliticalDonut(".donutChart", files[0])
 			})
 		}
 
