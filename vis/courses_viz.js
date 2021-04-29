@@ -31,7 +31,7 @@ function  drawCoursesChart(svgClass, classes_data) {
 
     let creditsScale = d3.scaleLinear()
       .domain([0, 4])
-      .range([10, 60])
+      .range([60, 10])
   
     let newArc = d3.arc()
       .innerRadius(innerRadius+7.5)
