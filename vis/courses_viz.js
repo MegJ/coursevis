@@ -5,7 +5,7 @@ function  drawCoursesChart(svgClass, classes_data) {
     let pieClass = "path_courses";
     let yearDivisions = findYearDivisions(classes_data);
 
-    xOffset = 500;
+    xOffset = 600;
     yOffset = 550;
 
     let data = classes_data
@@ -382,11 +382,81 @@ function  drawCoursesChart(svgClass, classes_data) {
           .style("font-weight", "bold")
           .style("font-family", "Inconsolata")
           .style("font-size", "12px");
-  
 
-    //addd legend for credits
+      svg.append("path")
+        .attr("d", "M 470 1000 L 470 1100 L 800 1100")
+        .style("stroke", darkTextColor)
+        .style("stroke-width", 3)
+        .style("fill", "none");
+      
+      svg.append("text")
+      .attr("x", 820)
+      .attr("y", 1080)
+      .text("In the fall of 2020, I studied abroad")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+      .style("alignment-baseline", "middle")
+      .style("font-size", 16);
+
+      svg.append("text")
+      .attr("x", 820)
+      .attr("y", 1105)
+      .text("at the University of Edinburgh in Scotland.")
+      .style("font-family", "Inconsolata")
+      .style("font-weight", "bold")
+      .style("alignment-baseline", "middle")
+      .style("font-size", 16);
+
+    //add annotations
+    svg.append("path")
+    .attr("d", "M 200 930 L 150 930 L 150 1070")
+    .style("stroke", darkTextColor)
+    .style("stroke-width", 3)
+    .style("fill", "none");
     
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 1105)
+    .text("Transfered from Engineering to A&S")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 16);
+
+    svg.append("text")
+    .attr("x", 0)
+    .attr("y", 220)
+    .text("Added English major")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 16);
+
+    svg.append("path")
+    .attr("d", "M 90 550 L 40 550 L 40 250")
+    .style("stroke", darkTextColor)
+    .style("stroke-width", 3)
+    .style("fill", "none");
+
+    svg.append("text")
+    .attr("x", 1200)
+    .attr("y", 800)
+    .text("Added CS major")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("alignment-baseline", "middle")
+    .style("font-size", 16);
+
+    svg.append("path")
+    .attr("d", "M 1080 750 L 1250 750 L 1250 780")
+    .style("stroke", darkTextColor)
+    .style("stroke-width", 3)
+    .style("fill", "none");
+    
+
   }
+
+  
   
   function findYearDivisions(data){
     let term_list = [];
