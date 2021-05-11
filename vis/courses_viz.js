@@ -1,12 +1,12 @@
 function  drawCoursesChart(svgClass, classes_data) {
-    let innerRadius = 300;
-    let outerRadius = 500;
+    let innerRadius = 150;
+    let outerRadius = 250;
     let svg = d3.select(svgClass);
     let pieClass = "path_courses";
     let yearDivisions = findYearDivisions(classes_data);
 
-    xOffset = 550;
-    yOffset = 550;
+    xOffset = 450;
+    yOffset = 280;
 
     let data = classes_data
     
@@ -31,14 +31,14 @@ function  drawCoursesChart(svgClass, classes_data) {
 
     let creditsScale = d3.scaleLinear()
       .domain([0, 4])
-      .range([60, 10])
+      .range([30, 5])
   
     let newArc = d3.arc()
       .innerRadius(innerRadius+7.5)
       .outerRadius(function(d){
         let class_number = d.data.Number;
         class_number = parseInt(class_number.substring(0, 1));
-        return radiusScale(class_number) + 20;
+        return radiusScale(class_number) + 10;
       })
   
     let arc = d3.arc()
@@ -54,8 +54,8 @@ function  drawCoursesChart(svgClass, classes_data) {
       .outerRadius(innerRadius - 20);
     
     let term_arc = d3.arc()
-      .innerRadius(innerRadius - 80)
-      .outerRadius(innerRadius - 90);
+      .innerRadius(innerRadius - 40)
+      .outerRadius(innerRadius - 45);
 
     //draw pie segments    
     svg.datum(data).selectAll("." + pieClass)
@@ -134,14 +134,14 @@ function  drawCoursesChart(svgClass, classes_data) {
                 var x = pos[0];
                 var y = pos[1];
                 var hyp = Math.sqrt(x*x + y*y);
-                return 'translate(' + (xOffset + x/hyp*(innerRadius-100)) + "," + (yOffset + y/hyp*(innerRadius-100))+ ')';
+                return 'translate(' + (xOffset + x/hyp*(innerRadius-50)) + "," + (yOffset + y/hyp*(innerRadius-50))+ ')';
             })
             .style('text-anchor', function(d) {
                 return (midAngle(d)) < Math.PI ? 'end' : 'start';
             })
             .style("font-family", "Inconsolata")
       .style("font-weight", "bold")
-        .style("font-size", "12px");
+        .style("font-size", "8px");
 
 
     //add radial lines
@@ -153,10 +153,10 @@ function  drawCoursesChart(svgClass, classes_data) {
             var x = pos[0];
             var y = pos[1];
             var hyp = Math.sqrt(x*x + y * y);
-            var startx = Math.round(xOffset + x/hyp*(innerRadius-10))
-            var starty = Math.round(yOffset + y/hyp*(innerRadius - 10))
-            var endx = Math.round(xOffset + x/hyp*(innerRadius-60))
-            var endy = Math.round(yOffset + y/hyp*(innerRadius - 60))
+            var startx = Math.round(xOffset + x/hyp*(innerRadius-5))
+            var starty = Math.round(yOffset + y/hyp*(innerRadius - 5))
+            var endx = Math.round(xOffset + x/hyp*(innerRadius-30))
+            var endy = Math.round(yOffset + y/hyp*(innerRadius - 30))
             return ("M " + startx + " " + starty + "L " + endx + " " + endy)
           })
           .style("stroke", lightGreyColor)
@@ -182,7 +182,7 @@ function  drawCoursesChart(svgClass, classes_data) {
             var hyp = Math.sqrt(x*x + y * y);
             return (Math.round(yOffset + y/hyp*(innerRadius-creditsScale(parseInt(d.data.credits)))));
           })
-          .attr('r', "5")
+          .attr('r', "3")
           .attr("fill", function(d) { 
             if(d.data.Category == "Engineering Distribution"){
               return colors[0]
@@ -214,37 +214,37 @@ function  drawCoursesChart(svgClass, classes_data) {
         .style("font-family", "Inconsolata")
         .style("alignment-baseline", "middle")
         .style("font-weight", "bold")
-        .style("font-size", "14px");
+        .style("font-size", "10px");
+
+      svg.append("text")
+      .attr("class", "political_label")
+      .attr("x", xOffset)
+      .attr("y", yOffset - outerRadius + 15 - 8)
+      .text("3000 level")
+      .style("font-family", "Inconsolata")
+      .style("alignment-baseline", "middle")
+      .style("font-weight", "bold")
+      .style("font-size", "10px");
 
       svg.append("text")
       .attr("class", "political_label")
       .attr("x", xOffset)
       .attr("y", yOffset - outerRadius + 30 - 8)
-      .text("3000 level")
-      .style("font-family", "Inconsolata")
-      .style("alignment-baseline", "middle")
-      .style("font-weight", "bold")
-      .style("font-size", "14px");
-
-      svg.append("text")
-      .attr("class", "political_label")
-      .attr("x", xOffset)
-      .attr("y", yOffset - outerRadius + 60 - 8)
       .text("2000 level")
       .style("font-family", "Inconsolata")
       .style("alignment-baseline", "middle")
       .style("font-weight", "bold")
-      .style("font-size", "14px");
+      .style("font-size", "10px");
 
     svg.append("text")
       .attr("class", "political_label")
       .attr("x", xOffset)
-      .attr("y", yOffset - outerRadius + 100 - 8)
+      .attr("y", yOffset - outerRadius + 50 - 8)
       .text("1000 level")
       .style("font-family", "Inconsolata")
       .style("alignment-baseline", "middle")
       .style("font-weight", "bold")
-      .style("font-size", "14px");
+      .style("font-size", "10px");
 
       svg.append("circle")
       .attr('cx', xOffset)
@@ -252,8 +252,18 @@ function  drawCoursesChart(svgClass, classes_data) {
       .attr("r", outerRadius)
       .attr("stroke", lightGreyColor)
       .style("fill", "none")
-      .style('stroke-width', '5px')
-      .style('stroke-dasharray', '6, 5');
+      .style('stroke-width', '3px')
+      .style('stroke-dasharray', '3, 3');
+
+
+      svg.append("circle")
+      .attr('cx', xOffset)
+      .attr('cy', yOffset)
+      .attr("r", outerRadius - 15)
+      .attr("stroke", lightGreyColor)
+      .style("fill", "none")
+      .style('stroke-width', '3px')
+      .style('stroke-dasharray', '3, 3');
 
 
       svg.append("circle")
@@ -262,27 +272,17 @@ function  drawCoursesChart(svgClass, classes_data) {
       .attr("r", outerRadius - 30)
       .attr("stroke", lightGreyColor)
       .style("fill", "none")
-      .style('stroke-width', '5px')
-      .style('stroke-dasharray', '6, 5');
-
-
-      svg.append("circle")
-      .attr('cx', xOffset)
-      .attr('cy', yOffset)
-      .attr("r", outerRadius - 60)
-      .attr("stroke", lightGreyColor)
-      .style("fill", "none")
-      .style('stroke-width', '5px')
-      .style('stroke-dasharray', '6, 5');
+      .style('stroke-width', '3px')
+      .style('stroke-dasharray', '3, 3');
 
     svg.append("circle")
       .attr('cx', xOffset)
       .attr('cy', yOffset)
-      .attr("r", outerRadius - 100)
+      .attr("r", outerRadius - 50)
       .attr("stroke", lightGreyColor)
       .style("fill", "none")
-      .style('stroke-width', '5px')
-      .style('stroke-dasharray', '6, 5');
+      .style('stroke-width', '3px')
+      .style('stroke-dasharray', '3, 3');
 
    //add legend
    let labels = ["Engineering Distribution", "Computer Science", "CS Distribution",
@@ -296,14 +296,14 @@ function  drawCoursesChart(svgClass, classes_data) {
        .attr("class", "year_squares")
        .attr('id', function(d, i) { return "key_" + d;})
        .attr("cx", xOffset + outerRadius)
-       .attr("cy", function(d, i) {return 80 + i * 30;})
-       .attr("r", 10)
+       .attr("cy", function(d, i) {return 40 + i * 15;})
+       .attr("r", 5)
        .style("fill", function (d, i) {
            return colors[i];
 
        })
        .style('stroke', darkTextColor)
-       .style('stroke-width', 2);
+       .style('stroke-width', 1);
    
    //create legend labels
    d3.select(svgClass).append("g")
@@ -312,12 +312,12 @@ function  drawCoursesChart(svgClass, classes_data) {
        .enter()
        .append('text')
        .attr('x', xOffset + outerRadius+ 20)
-       .attr('y', function(d, i) { return 90 + i*30;})
+       .attr('y', function(d, i) { return 43 + i*15;})
        .text(function(d) {return d;})
        .style('fill', darkTextColor)
        .style("font-weight", "bold")
        .style("font-family", "Inconsolata")
-       .style("font-size", "12px");
+       .style("font-size", "8px");
 
       svg.append("text")
        .attr("class", "political_label")
@@ -384,73 +384,60 @@ function  drawCoursesChart(svgClass, classes_data) {
           .style("font-size", "12px");
 
       svg.append("path")
-        .attr("d", "M 470 1000 L 470 1100 L 800 1100")
+        .attr("d", "M 450 510 L 450 540 L 550 540")
         .style("stroke", darkTextColor)
-        .style("stroke-width", 3)
+        .style("stroke-width", 2)
         .style("fill", "none");
       
       svg.append("text")
-      .attr("x", 820)
-      .attr("y", 1080)
-      .text("In the fall of 2020, I studied abroad")
+      .attr("x", 555)
+      .attr("y", 540)
+      .text("Studied abroad at the University of Edinburgh")
       .style("font-family", "Inconsolata")
       .style("font-weight", "bold")
       .style("alignment-baseline", "middle")
-      .style("font-size", 16);
-
-      svg.append("text")
-      .attr("x", 820)
-      .attr("y", 1105)
-      .text("at the University of Edinburgh in Scotland.")
-      .style("font-family", "Inconsolata")
-      .style("font-weight", "bold")
-      .style("alignment-baseline", "middle")
-      .style("font-size", 16);
+      .style("font-size", 10);
 
     //add annotations
     svg.append("path")
-    .attr("d", "M 200 930 L 150 930 L 150 1070")
+    .attr("d", "M 330 490 L 330 500 L 230 500")
     .style("stroke", darkTextColor)
-    .style("stroke-width", 3)
+    .style("stroke-width", 2)
     .style("fill", "none");
     
     svg.append("text")
     .attr("x", 50)
-    .attr("y", 1105)
+    .attr("y", 505)
     .text("Transfered from Engineering to A&S")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
-    .style("alignment-baseline", "middle")
-    .style("font-size", 16);
+    .style("alignment-baseline", "left")
+    .style("font-size", 10);
 
     svg.append("text")
-    .attr("x", 0)
-    .attr("y", 220)
-    .text("Added English major")
+    .attr("x", 50)
+    .attr("y", 515)
+    .text("and added English major")
+    .style("font-family", "Inconsolata")
+    .style("font-weight", "bold")
+    .style("alignment-baseline", "left")
+    .style("font-size", 10);
+
+ 
+
+    svg.append("text")
+    .attr("x", 745)
+    .attr("y", 300)
+    .text("Declared CS major")
     .style("font-family", "Inconsolata")
     .style("font-weight", "bold")
     .style("alignment-baseline", "middle")
-    .style("font-size", 16);
+    .style("font-size", 10);
 
     svg.append("path")
-    .attr("d", "M 90 550 L 40 550 L 40 250")
+    .attr("d", "M 690 300 L 740 300")
     .style("stroke", darkTextColor)
-    .style("stroke-width", 3)
-    .style("fill", "none");
-
-    svg.append("text")
-    .attr("x", 1100)
-    .attr("y", 800)
-    .text("Added CS major")
-    .style("font-family", "Inconsolata")
-    .style("font-weight", "bold")
-    .style("alignment-baseline", "middle")
-    .style("font-size", 16);
-
-    svg.append("path")
-    .attr("d", "M 990 750 L 1150 750 L 1150 780")
-    .style("stroke", darkTextColor)
-    .style("stroke-width", 3)
+    .style("stroke-width", 2)
     .style("fill", "none");
     
 
