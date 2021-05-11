@@ -5,7 +5,7 @@ function  drawCoursesChart(svgClass, classes_data) {
     let pieClass = "path_courses";
     let yearDivisions = findYearDivisions(classes_data);
 
-    xOffset = 600;
+    xOffset = 550;
     yOffset = 550;
 
     let data = classes_data
@@ -439,7 +439,7 @@ function  drawCoursesChart(svgClass, classes_data) {
     .style("fill", "none");
 
     svg.append("text")
-    .attr("x", 1200)
+    .attr("x", 1100)
     .attr("y", 800)
     .text("Added CS major")
     .style("font-family", "Inconsolata")
@@ -448,7 +448,7 @@ function  drawCoursesChart(svgClass, classes_data) {
     .style("font-size", 16);
 
     svg.append("path")
-    .attr("d", "M 1080 750 L 1250 750 L 1250 780")
+    .attr("d", "M 990 750 L 1150 750 L 1150 780")
     .style("stroke", darkTextColor)
     .style("stroke-width", 3)
     .style("fill", "none");
