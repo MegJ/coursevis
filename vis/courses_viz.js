@@ -87,12 +87,12 @@ function  drawCoursesChart(svgClass, classes_data) {
       .attr("d", arc)
       .attr("transform", "translate(" + xOffset + "," + yOffset + ")")
       .on("mouseover", function(d) {
-        var name = d.data.Name;
+        let name = d.data.Name;
         d3.select(this)
           .transition()
           .duration(300)
           .attr("d", newArc);
-          var tooltipText = "<b>" + d.data.Prefix + " " + d.data.Number + " " + " </br>" + name;
+          let tooltipText = "<b>" + d.data.Prefix + " " + d.data.Number + " " + " </br>" + name;
    
          updateToolTipText(tooltip, tooltipText, -20, 110);
       })
@@ -131,10 +131,10 @@ function  drawCoursesChart(svgClass, classes_data) {
             .attr('dy', '.35em')
             .text(function(d) { return d.data.key;})
             .attr('transform', function(d) {
-                var pos = term_arc.centroid(d);
-                var x = pos[0];
-                var y = pos[1];
-                var hyp = Math.sqrt(x*x + y*y);
+                let pos = term_arc.centroid(d);
+                let x = pos[0];
+                let y = pos[1];
+                let hyp = Math.sqrt(x*x + y*y);
                 return 'translate(' + (xOffset + x/hyp*(innerRadius-50)) + "," + (yOffset + y/hyp*(innerRadius-50))+ ')';
             })
             .style('text-anchor', function(d) {
@@ -150,14 +150,14 @@ function  drawCoursesChart(svgClass, classes_data) {
       .data(pie).enter()
         .append('path')
           .attr('d', function(d) {
-            var pos = innerArc.centroid(d);
-            var x = pos[0];
-            var y = pos[1];
-            var hyp = Math.sqrt(x*x + y * y);
-            var startx = Math.round(xOffset + x/hyp*(innerRadius-5))
-            var starty = Math.round(yOffset + y/hyp*(innerRadius - 5))
-            var endx = Math.round(xOffset + x/hyp*(innerRadius-30))
-            var endy = Math.round(yOffset + y/hyp*(innerRadius - 30))
+            let pos = innerArc.centroid(d);
+            let x = pos[0];
+            let y = pos[1];
+            let hyp = Math.sqrt(x*x + y * y);
+            let startx = Math.round(xOffset + x/hyp*(innerRadius-5))
+            let starty = Math.round(yOffset + y/hyp*(innerRadius - 5))
+            let endx = Math.round(xOffset + x/hyp*(innerRadius-30))
+            let endy = Math.round(yOffset + y/hyp*(innerRadius - 30))
             return ("M " + startx + " " + starty + "L " + endx + " " + endy)
           })
           .style("stroke", lightGreyColor)
@@ -169,18 +169,18 @@ function  drawCoursesChart(svgClass, classes_data) {
     .data(pie).enter()
       .append('circle')
           .attr('cx', function(d) {
-            var pos = innerArc.centroid(d);
-            var x = pos[0];
-            var y = pos[1];
-            var hyp = Math.sqrt(x*x + y * y);
-            var n = (Math.round(xOffset + x/hyp*(innerRadius-creditsScale(parseInt(d.data.credits)))));
+            let pos = innerArc.centroid(d);
+            let x = pos[0];
+            let y = pos[1];
+            let hyp = Math.sqrt(x*x + y * y);
+            let n = (Math.round(xOffset + x/hyp*(innerRadius-creditsScale(parseInt(d.data.credits)))));
             return (Math.round(xOffset + x/hyp*(innerRadius-creditsScale(parseInt(d.data.credits)))));
           })
           .attr('cy', function(d) {
-            var pos = innerArc.centroid(d);
-            var x = pos[0];
-            var y = pos[1];
-            var hyp = Math.sqrt(x*x + y * y);
+            let pos = innerArc.centroid(d);
+            let x = pos[0];
+            let y = pos[1];
+            let hyp = Math.sqrt(x*x + y * y);
             return (Math.round(yOffset + y/hyp*(innerRadius-creditsScale(parseInt(d.data.credits)))));
           })
           .attr('r', "3")
@@ -443,15 +443,13 @@ function  drawCoursesChart(svgClass, classes_data) {
     
 
   }
-
-  
   
   function findYearDivisions(data){
     let term_list = [];
-    var courses_taken = 0;
+    let courses_taken = 0;
     let term = "";
-    for(var i = 0; i < data.length; i++){
-      var current_term = data[i].term;
+    for(let i = 0; i < data.length; i++){
+      let current_term = data[i].term;
       if(current_term != term || i == (data.length - 1)){
         if(courses_taken > 0){
           term_list.push({
