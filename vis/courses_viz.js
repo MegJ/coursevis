@@ -363,7 +363,7 @@ function  drawCoursesChart(svgClass, classes_data) {
           return (90 + 15 * d);
         })
         .attr('cy', function(d) {
-          return (30 + creditsScale(d));
+          return (30 + 13 * (d));
         })
         .attr('r', 5)
         .attr('fill', colors[0])
