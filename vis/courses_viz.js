@@ -1,7 +1,8 @@
 function  drawCoursesChart(svgClass, classes_data) {
     let innerRadius = 150;
     let outerRadius = 250;
-    let svg = d3.select(svgClass);
+    let svg = d3.select(svgClass)
+    .attr("viewBox", `0 0 900 550`);
     let pieClass = "path_courses";
     let yearDivisions = findYearDivisions(classes_data);
 
